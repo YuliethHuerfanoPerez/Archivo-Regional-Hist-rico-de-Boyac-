@@ -23,8 +23,8 @@
   #baguetteBox-overlay .full-image {
     display: inline-block;
     position: relative;
-    width: 100%;
-    height: 100%;
+    width: 50%;
+    height: 50%;
     text-align: center; }
     #baguetteBox-overlay .full-image figure {
       display: inline;

@@ -132,8 +132,8 @@ transition: all 0.35s ease 0s;
     color: orange;
 }
 .header-btn {
-    border: 2px solid #fff;
-    color: #fff;
+    border: 2px solid #000;
+    color: #000;
     display: block;
     font-size: 22px;
     line-height: 42px;
@@ -142,25 +142,35 @@ transition: all 0.35s ease 0s;
     width: 235px;
 	transition: all 0.35s ease 0s;
 }
+
 .header-btn:hover {
-    border: 2px solid #ff6000;
-    color: #ff6000;
+    border: 2px solid orange;
+    color:orange;
 	text-decoration:none;
 	transition: all 0.35s ease 0s;
 }
 .btn-ornge {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    color: #27AE60;
+    
     border: 2px solid;
     border-radius: 0;
     width: 250px;
 	font-size:18px;
 	transition: all 0.35s ease 0s;
+
+}
+.btn-ornge a{
+    color: #27AE60;
 }
 .btn-ornge:hover {   
-    border: 2px solid #ffae00;    
-	color:#ffae00;
+    border: 2px solid orange;    
+	color: orange;
 	background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
 	transition: all 0.35s ease 0s;
+}
+.btn-ornge:hover a{
+    color: orange;
 }
 
 #about {
