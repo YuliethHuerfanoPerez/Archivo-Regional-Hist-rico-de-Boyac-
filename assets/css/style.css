@@ -92,6 +92,10 @@ color:#fff;
     border-bottom: 10px solid #1EA078;
     color: #fff;
 }
+
+
+
+
 .affix
 {
  background: rgba(0, 0, 0, 0.9) none repeat scroll 0 0 !important;
@@ -215,6 +219,23 @@ transition: all 0.35s ease 0s;
 	padding:100px 0 220px;
     transition: all 0.35s ease 0s;
 }
+#biography {
+    background-color:#000 ;
+     color: #fff;
+     overflow: hidden;
+     padding:100px 0 220px;
+     transition: all 0.35s ease 0s;
+}
+#login {
+    background-color:#27AE60 ;
+     color: #47525E;
+     overflow: hidden;
+     padding:100px 0 220px;
+     transition: all 0.35s ease 0s;
+}
+#log{
+    background-color: #fff;
+}
 .t-box {
     background: #fff none repeat scroll 0 0;
     color: #000;
@@ -241,7 +262,26 @@ margin:20px 0 0 0px;
 .t-box .social-links a:hover {
     color: #333;
 }
+
+.t-box .option-lo > li {
+    display: inline;
+    font-size: 12px;
+    padding: 5px;
+}
+.t-box .option-lo a {
+    color: #333;
+    
+}
+.t-box .option-lo a:hover {
+    color: #27AE60;
+}
+
+
 .timg {
+    position: relative;
+	  transition: all 0.35s ease 0s;
+}
+.timg2 {
     position: relative;
 	  transition: all 0.35s ease 0s;
 }
