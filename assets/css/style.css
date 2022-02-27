@@ -281,6 +281,20 @@ margin:20px 0 0 0px;
     position: relative;
 	  transition: all 0.35s ease 0s;
 }
+
+.timgPh {
+    position: relative;
+	  transition: all 0.35s ease 0s;
+      height: 430px;
+      width: 360px;
+}
+
+.timgAuthor {
+    position: relative;
+	  transition: all 0.35s ease 0s;
+      height: 165px;
+      width: 165px;
+}
 .timg2 {
     position: relative;
 	  transition: all 0.35s ease 0s;
