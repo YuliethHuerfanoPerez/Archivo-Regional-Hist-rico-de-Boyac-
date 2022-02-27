@@ -39,6 +39,19 @@ a {
 	padding-bottom: 70px;
 	position: relative;
 }
+.titleadmin {
+    text-align: center;
+	padding-bottom: 15px;
+	position: relative;
+}
+.izq{
+    border-style: solid;
+    border-radius: 5px;
+    border-color: #27AE60;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+}
 .header {
     background:linear-gradient( rgba(0, 0, 0, 0.6),rgba(0, 0, 0, 0.6)), url("../img/header.jpg") repeat fixed center 0 / cover  ;
     color: #fff;
