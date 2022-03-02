@@ -84,6 +84,7 @@ nav {
 font-size:45px;
 color:#fff;
 }
+
 .navbar-nav {
     float: left;
     font-size: 16px;
@@ -189,7 +190,11 @@ transition: all 0.35s ease 0s;
 .btn-ornge:hover a{
     color: orange;
 }
-
+.nav-color{
+    background-color: #27AE60;
+    color: #27AE60;
+    height: auto;
+}
 #about {
     overflow: hidden;
 }
