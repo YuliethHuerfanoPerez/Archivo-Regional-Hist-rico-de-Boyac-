@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>ARHB</title>
+    <!-- =============== Bootstrap Core CSS =============== -->
+    <link rel="stylesheet" href="viejo/estilos/bootstrap.min.css" type="text/css">
+    <!-- =============== fonts awesome =============== -->
+    <link rel="stylesheet" href="assets/font/css/font-awesome.min.css" type="text/css">
+    <!-- =============== Plugin CSS =============== -->
+    <link rel="stylesheet" href="assets/css/animate.min.css" type="text/css">
+    <!-- =============== Custom CSS =============== -->
+    <link rel="stylesheet" href="assets/css/style.css" type="text/css">
+    <!-- =============== Owl Carousel Assets =============== -->
+    <link href="assets/owl-carousel/owl.carousel.css" rel="stylesheet">
+    <link href="assets/owl-carousel/owl.theme.css" rel="stylesheet">
+	
+	<link rel="stylesheet" href="assets/css/isotope-docs.css" media="screen">
+	<link rel="stylesheet" href="assets/css/baguetteBox.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	
+</head>
+
+<body>
+    <!-- =============== Preloader =============== -->
+    <div id="preloader">
+        <div id="loading">
+		<img width="256" height="32" src="assets/img/loading-cylon-red.svg">	
+        </div>
+    </div>
+    <!-- =============== nav =============== -->
+    <nav id="mainNav" class="navbar navbar-expand-lg navbar-default">
+        <div class="container nav-color">
+            <a class="navbar-brand" href="index.html"><img src="assets/img/logo.png" alt="Logo" width="45%" >
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="files.html">Documentos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#personal">Personal</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#investigador">Investigadores</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#noticias">Noticias</a>
+              </li>
+              <li  class="nav-item">
+                <a class="nav-link" href="login.html">Iniciar Sesion</a>
+            </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <section style="border: 2px solid #27AE60; border-radius: 10px; margin-block: 10px; padding: 10px;">
+                        <h5 style="text-align: center;">PUBLICADOS</h5>
+                        <form class="form-inline" style="margin: 10px;">
+                            <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Buscar"
+                              aria-label="Search">
+                            <i><img src="assets/img/search.svg" alt="" srcset=" " aria-hidden="true"></i>
+                        </form>
+                        
+                        <div style="border: 1px solid #27AE60; border-radius: 10px; padding: 40px;">
+                            <div class="col">
+                                <h4> libro 1</h4>
+                                <i style="float: left"><img src="assets/img/trash.png" alt="" srcset=""><img src="assets/img/arrow-repeat.jpg"  alt="" srcset=""></i>
+                            </div>
+                            
+                            
+                        </div>
+                        <div style="border: 1px solid #27AE60; border-radius: 10px; padding: 40px;">
+                            <div class="col">
+                                <h4> libro 2</h4>
+                                <i style="float: left"><img src="assets/img/trash.png" alt="" srcset=""><img src="assets/img/arrow-repeat.jpg"  alt="" srcset=""></i>
+                            </div>                          
+                            
+                            
+                        </div>
+                    </section>
+                </div>
+                <br>
+                <div class="col-sm-6">
+                    <section style="padding: 10px;">
+                        <h5 style="text-align: center;">GESTIONAR</h5>
+                        <form>
+                            <div class="row">
+                                <label for="id" class="form-label">Identificacion: </label>
+                                <input type="text" class="form-control" id="id" name="id">
+                            </div>
+                            <div class="row">
+                                <label for="titulo" class="form-label">Titulo:</label>
+                                <input type="text" class="form-control" id="titulo" name="titulo" required>
+                            </div>
+                            <div class="row">
+                                <label for="Descripcion" class="form-label">Descripcion:</label>
+                                <textarea  type="text" class="form-control" id="Descripcion" name="Descripcion"></textarea>
+                            </div>
+                            <div class="row">
+                                <label for="fecha" class="form-label">Fecha de publicacion:</label>
+                                <input type="date" class="form-control" id="fecha">
+                            </div>
+                            <div class="row" style="padding: 5%;">
+                                <select class="form-select" name="tipoDocumento" required>
+                                    <option selected disabled value="">Tipo de Documento...</option>
+                                    <option value="1">Cedula de ciudadania</option>
+                                    <option value="2">Tarjeta de identidad</option>
+                                    <option value="3">Cedula de extranjeria</option>
+                                    <option value="4">Pasaporte</option>
+                                  </select>
+                            </div>
+                            <div class="row" style="margin: auto; padding: 5%;">
+                                <div class="col">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="publico" value="publico">
+                                        <label class="form-check-label" for="publico">Público</label>
+                                      </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="privado" value="privado">
+                                        <label class="form-check-label" for="privado">Privado</label>
+                                      </div>
+                                </div>
+                                  
+                            </div>
+                            <div class="row">
+                                <input type="file" class="form-control" name="archivo" required>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <center>
+                                    <button class="btn" type="submit" style="background-color: #27AE60; color: white;">Crear</button>
+                                </center>
+                                
+                            </div>
+                          </form>
+                        
+                    </section>
+                </div>
+            </div>
+        </div>
+        
+    <br>
+		<!-- Footer -->
+		<footer id="footer">
+            <!-- =============== container =============== -->
+            <div class="container">
+                        <div class="row">
+                        <div class="col-12">
+        
+                            <ul class="social-links">
+                                <li><a class="wow fadeInUp animated" href="index.html#" style="visibility: visible; animation-name: fadeInUp;" title="facebook"><i class="fa fa-facebook"></i></a></li>
+                                <li><a data-wow-delay=".1s" class="wow fadeInUp animated" href="https://www.boyaca.gov.co/" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;" title="Gorbernaci&oacute;n de Boyac&aacute;"><img src="assets/img/footer/gobernacion.png"></i></a></li>
+                                <li><a data-wow-delay=".2s" class="wow fadeInUp animated" href="https://academia-boyacense-de-historia.webnode.es/" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;" title="Academia de historia de Boyac&aacute;"><img src="assets/img/footer/academia.png"></i></a></li>
+                                <li><a data-wow-delay=".4s" class="wow fadeInUp animated" href="https://www.uptc.edu.co/sitio/portal/" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;" title="UPTC"><img src="assets/img/footer/uptc.png"></i></a></li>
+                                <li><a data-wow-delay=".5s" class="wow fadeInUp animated" href="https://www.banrep.gov.co/" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;" title="banco de la rep&uacute;blica"><img src="assets/img/footer/banrep.png"></i></a></li>
+                            </ul>
+        
+                            <p class="copyright">
+                                &copy; 2022 Be. Created By <a href="http://templatestock.co">Template Stock</a>
+                            </p>
+        
+                        </div>
+                
+                    </div>
+            </div><!-- =============== container end =============== -->
+            </footer> 
+            <!-- Bootsrap Boondle js-->
+            <script src="viejo/js/bootstrap.bundle.min.js"></script>
+        <!-- =============== jQuery =============== -->
+        <script src="assets/js/jquery.js"></script>
+         <script src="assets/js/isotope-docs.min.js"></script>
+        <!-- =============== Bootstrap Core JavaScript =============== -->
+        <script src="assets/js/bootstrap.min.js"></script>
+        <!-- =============== Plugin JavaScript =============== -->
+        <script src="assets/js/jquery.easing.min.js"></script>
+        <script src="assets/js/jquery.fittext.js"></script>
+        <script src="assets/js/wow.min.js"></script> 
+        <!-- =============== owl carousel =============== -->
+        <script src="assets/owl-carousel/owl.carousel.js"></script>  
+        <!-- Isotope does NOT require jQuery. But it does make things easier -->
+    
+    <script src="assets/js/baguetteBox.js" async></script>
+    <script src="assets/js/plugins.js" async></script>
+     
+        <!-- =============== Custom Theme JavaScript =============== -->
+        <script src="assets/js/creative.js">	</script> 
+    <script src="assets/js/jquery.nicescroll.min.js"></script>
+    
+    <script>
+      $(document).ready(function() {
+      
+        var nice = $("html").niceScroll();  // The document page (body)
+        
+        $("#div1").html($("#div1").html()+' '+nice.version);
+        
+        $("#boxscroll").niceScroll({cursorborder:"",cursorcolor:"#00F",boxzoom:true}); // First scrollable DIV
+    
+        $("#boxscroll2").niceScroll("#contentscroll2",{cursorcolor:"#F00",cursoropacitymax:0.7,boxzoom:true,touchbehavior:true});  // Second scrollable DIV
+        $("#boxframe").niceScroll("#boxscroll3",{cursorcolor:"#0F0",cursoropacitymax:0.7,boxzoom:true,touchbehavior:true});  // This is an IFrame (iPad compatible)
+        
+        $("#boxscroll4").niceScroll("#boxscroll4 .wrapper",{boxzoom:true});  // hw acceleration enabled when using wrapper
+        
+      });
+    </script>
+    <script>
+    window.onload = function() {
+        if(typeof oldIE === 'undefined' && Object.keys)
+            hljs.initHighlighting();
+    
+        baguetteBox.run('.baguetteBoxOne');
+        baguetteBox.run('.baguetteBoxTwo');
+        baguetteBox.run('.baguetteBoxThree', {
+            animation: 'fadeIn'
+        });
+        baguetteBox.run('.baguetteBoxFour', {
+            buttons: false
+        });
+        baguetteBox.run('.baguetteBoxFive', {
+            captions: function(element) {
+                return element.getElementsByTagName('img')[0].alt;
+            }
+        });
+    };
+    </script>
+    </body>
+    </html>
