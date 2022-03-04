@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>ARHB</title>
+    <title>admin</title>
     <!-- =============== Bootstrap Core CSS =============== -->
-    <link rel="stylesheet" href="viejo/estilos/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css">
     <!-- =============== fonts awesome =============== -->
     <link rel="stylesheet" href="assets/font/css/font-awesome.min.css" type="text/css">
     <!-- =============== Plugin CSS =============== -->
@@ -38,207 +38,249 @@
         </div>
     </div>
     <!-- =============== nav =============== -->
-    <nav id="mainNav" class="navbar navbar-expand-lg navbar-default">
-        <div class="container nav-color">
-            <a class="navbar-brand" href="index.html"><img src="assets/img/logo.png" alt="Logo" width="45%" >
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="files.html">Documentos</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#personal">Personal</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#investigador">Investigadores</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#noticias">Noticias</a>
-              </li>
-              <li  class="nav-item">
-                <a class="nav-link" href="login.html">Iniciar Sesion</a>
-            </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    <section style="border: 2px solid #27AE60; border-radius: 10px; margin-block: 10px; padding: 10px;">
-                        <h5 style="text-align: center;">PUBLICADOS</h5>
-                        <form class="form-inline" style="margin: 10px;">
-                            <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Buscar"
-                              aria-label="Search">
-                            <i><img src="assets/img/search.svg" alt="" srcset=" " aria-hidden="true"></i>
-                        </form>
-                        
-                        <div style="border: 1px solid #27AE60; border-radius: 10px; padding: 40px;">
-                            <div class="col">
-                                <h4> libro 1</h4>
-                                <i style="float: left"><img src="assets/img/trash.png" alt="" srcset=""><img src="assets/img/arrow-repeat.jpg"  alt="" srcset=""></i>
-                            </div>
-                            
-                            
-                        </div>
-                        <div style="border: 1px solid #27AE60; border-radius: 10px; padding: 40px;">
-                            <div class="col">
-                                <h4> libro 2</h4>
-                                <i style="float: left"><img src="assets/img/trash.png" alt="" srcset=""><img src="assets/img/arrow-repeat.jpg"  alt="" srcset=""></i>
-                            </div>                          
-                            
-                            
-                        </div>
-                    </section>
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top" >
+        <div class="container" >
+            <div class="container-fluid" style="background-color: #1EA078;"> 
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html#home"><img src="assets/img/logo.png" alt="Logo" width="45%">
+                    </a>
                 </div>
-                <br>
-                <div class="col-sm-6">
-                    <section style="padding: 10px;">
-                        <h5 style="text-align: center;">GESTIONAR</h5>
-                        <form>
-                            <div class="row">
-                                <label for="id" class="form-label">Identificacion: </label>
-                                <input type="text" class="form-control" id="id" name="id">
-                            </div>
-                            <div class="row">
-                                <label for="titulo" class="form-label">Titulo:</label>
-                                <input type="text" class="form-control" id="titulo" name="titulo" required>
-                            </div>
-                            <div class="row">
-                                <label for="Descripcion" class="form-label">Descripcion:</label>
-                                <textarea  type="text" class="form-control" id="Descripcion" name="Descripcion"></textarea>
-                            </div>
-                            <div class="row">
-                                <label for="fecha" class="form-label">Fecha de publicacion:</label>
-                                <input type="date" class="form-control" id="fecha">
-                            </div>
-                            <div class="row" style="padding: 5%;">
-                                <select class="form-select" name="tipoDocumento" required>
-                                    <option selected disabled value="">Tipo de Documento...</option>
-                                    <option value="1">Cedula de ciudadania</option>
-                                    <option value="2">Tarjeta de identidad</option>
-                                    <option value="3">Cedula de extranjeria</option>
-                                    <option value="4">Pasaporte</option>
-                                  </select>
-                            </div>
-                            <div class="row" style="margin: auto; padding: 5%;">
-                                <div class="col">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="publico" value="publico">
-                                        <label class="form-check-label" for="publico">Público</label>
-                                      </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="privado" value="privado">
-                                        <label class="form-check-label" for="privado">Privado</label>
-                                      </div>
-                                </div>
-                                  
-                            </div>
-                            <div class="row">
-                                <input type="file" class="form-control" name="archivo" required>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <center>
-                                    <button class="btn" type="submit" style="background-color: #27AE60; color: white;">Crear</button>
-                                </center>
-                                
-                            </div>
-                          </form>
-                        
-                    </section>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+						<li>
+                            <a class="page-scroll" href="admin-news.html">Noticias</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="admin-documents.html">Documentos</a>
+                        </li>
+                        <li>
+							<a class="page-scroll" href="admin-investigator.html">Investigadores</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="admin-workers.html">Personal</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="">Sesion</a>
+                        </li>
+                    </ul>
                 </div>
+                <!-- =============== navbar-collapse =============== -->
+
             </div>
         </div>
-        
-    <br>
-		<!-- Footer -->
-		<footer id="footer">
-            <!-- =============== container =============== -->
-            <div class="container">
-                        <div class="row">
-                        <div class="col-12">
-        
-                            <ul class="social-links">
-                                <li><a class="wow fadeInUp animated" href="index.html#" style="visibility: visible; animation-name: fadeInUp;" title="facebook"><i class="fa fa-facebook"></i></a></li>
-                                <li><a data-wow-delay=".1s" class="wow fadeInUp animated" href="https://www.boyaca.gov.co/" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;" title="Gorbernaci&oacute;n de Boyac&aacute;"><img src="assets/img/footer/gobernacion.png"></i></a></li>
-                                <li><a data-wow-delay=".2s" class="wow fadeInUp animated" href="https://academia-boyacense-de-historia.webnode.es/" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;" title="Academia de historia de Boyac&aacute;"><img src="assets/img/footer/academia.png"></i></a></li>
-                                <li><a data-wow-delay=".4s" class="wow fadeInUp animated" href="https://www.uptc.edu.co/sitio/portal/" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;" title="UPTC"><img src="assets/img/footer/uptc.png"></i></a></li>
-                                <li><a data-wow-delay=".5s" class="wow fadeInUp animated" href="https://www.banrep.gov.co/" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;" title="banco de la rep&uacute;blica"><img src="assets/img/footer/banrep.png"></i></a></li>
-                            </ul>
-        
-                            <p class="copyright">
-                                &copy; 2022 Be. Created By <a href="http://templatestock.co">Template Stock</a>
-                            </p>
-        
+        <!-- =============== container-fluid =============== -->
+    </nav>
+    <BR></BR>
+    <BR></BR>
+    <BR></BR>
+    <BR></BR>
+    <Section id="workers-pri">
+        <div class="container">            
+			<div class="row">
+				
+				    <div class="col-sm-6 izq wow fadeInDown animated" data-wow-delay=".1s">
+                        <div class="titleadmin"> 
+                            <div class="row">
+                                <div class="col-xs-10 form-group wow fadeInUp animated">
+                                    <h2>DOCUMENTOS PUBLICADOS</h2>
+                                </div>
+                                <div class="col-xs-2 form-group wow fadeInUp animated">
+                                    <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"onclick="window.location.href='admin-workers.html'"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                           
+                            
                         </div>
-                
-                    </div>
-            </div><!-- =============== container end =============== -->
-            </footer> 
-            <!-- Bootsrap Boondle js-->
-            <script src="viejo/js/bootstrap.bundle.min.js"></script>
-        <!-- =============== jQuery =============== -->
-        <script src="assets/js/jquery.js"></script>
-         <script src="assets/js/isotope-docs.min.js"></script>
-        <!-- =============== Bootstrap Core JavaScript =============== -->
-        <script src="assets/js/bootstrap.min.js"></script>
-        <!-- =============== Plugin JavaScript =============== -->
-        <script src="assets/js/jquery.easing.min.js"></script>
-        <script src="assets/js/jquery.fittext.js"></script>
-        <script src="assets/js/wow.min.js"></script> 
-        <!-- =============== owl carousel =============== -->
-        <script src="assets/owl-carousel/owl.carousel.js"></script>  
-        <!-- Isotope does NOT require jQuery. But it does make things easier -->
-    
-    <script src="assets/js/baguetteBox.js" async></script>
-    <script src="assets/js/plugins.js" async></script>
-     
-        <!-- =============== Custom Theme JavaScript =============== -->
-        <script src="assets/js/creative.js">	</script> 
-    <script src="assets/js/jquery.nicescroll.min.js"></script>
-    
-    <script>
-      $(document).ready(function() {
-      
-        var nice = $("html").niceScroll();  // The document page (body)
+                        <div>
+                            <form action="#" method="post">
+                                <div class="ajax-hidden">
+                                    <div class="col-xs-8 form-group wow fadeInUp animated">
+                                        <label for="c_name" class="sr-only">Buscar</label>
+                                        <input type="text" placeholder="Nombre" name="name" class="form-control" id="name" required="">
+                                    </div>
+                                    <div class="col-xs-4 form-group wow fadeInUp animated">
+                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                                <div class="ajax-response"></div>
+                            </form>
+                        </div>
+                        <div class="col-sm-12 izq wow fadeInDown animated" data-wow-delay=".1s">
+                            <form action="#" method="post">
+                                <br>
+                                <div class="ajax-hidden">
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label >Documento 1</label> 
+                                    </div>
+                                    <div class="col-xs-4 form-group wow fadeInUp animated">
+                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-trash"></i></button>
+                                    </div>
+                                    <div class="col-xs-4 form-group wow fadeInUp animated">
+                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-refresh"></i></button>
+                                    </div>
+                                </div>
+                                <div class="ajax-response"></div>
+                            </form>
+                        </div>
+                        <div class="col-sm-12 izq wow fadeInDown animated" data-wow-delay=".1s">
+                            <form action="#" method="post">
+                                <br>
+                                <div class="ajax-hidden">
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label >Documento 2</label> 
+                                    </div>
+                                    <div class="col-xs-4 form-group wow fadeInUp animated">
+                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-trash"></i></button>
+                                    </div>
+                                    <div class="col-xs-4 form-group wow fadeInUp animated">
+                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-refresh"></i></button>
+                                    </div>
+                                </div>
+                                <div class="ajax-response"></div>
+                            </form>
+                        </div>
+                        <div class="col-sm-12 izq wow fadeInDown animated" data-wow-delay=".1s">
+                            <form action="#" method="post">
+                                <br>
+                                <div class="ajax-hidden">
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label >Documento 3</label> 
+                                    </div>
+                                    <div class="col-xs-4 form-group wow fadeInUp animated">
+                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-trash"></i></button>
+                                    </div>
+                                    <div class="col-xs-4 form-group wow fadeInUp animated">
+                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-refresh"></i></button>
+                                    </div>
+                                </div>
+                                <div class="ajax-response"></div>
+                            </form>
+                        </div>
+                      
+				    </div>
+				    <div class="col-sm-6 wow fadeInUp animated" data-wow-delay=".2s">
+                        <div class="titleadmin"> 
+                            <h2>GESTIONAR</h2>
+                        </div>
+                        <div class="col-xs-12 wow bounceIn animated" data-wow-delay=".1s">
+                            <form action="#" method="post">
+                                <div class="ajax-hidden">
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label for="d_name" class="sr-only">Codigo</label>
+                                        <input type="text" placeholder="Codigo" name="name" class="form-control" id="d_name" required="">
+                                    </div>
+            
+                                    <div data-wow-delay=".1s" class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label for="c_title" class="sr-only">Titulo</label>
+                                        <input type="text" placeholder="Nombre" name="email" class="form-control" id="title"  required="">
+                                    </div>
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label for="d_desc" class="sr-only">descripción</label>
+                                        <textarea type="" placeholder="Descripción" name="name" class="form-control" id="d_desc" required=""></textarea>
+                                    </div>
+                                    <div data-wow-delay=".1s" class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label for="d_date" class="sr-only">Fecha de puclicación</label>
+                                        <input type="date" placeholder="Nombre" name="email" class="form-control" id="d_date"  required="">
+                                    </div>
+                                    <div class="col-xs-4 form-group wow fadeInUp animated">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="d_type" id="d_type">
+                                            <label class="form-check-label" for="d_typePub">Público</label>
+                                          </div>
+                                    </div>
+                                    <div class="col-xs-4 form-group wow fadeInUp animated">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="d_typePriv" id="d_typePriv">
+                                            <label class="form-check-label" for="d_typePriv">Privado</label>
+                                          </div>
+                                    </div>
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label for="formFile" class="form-label">Archivo</label>
+                                        <input class="form-control" type="file" id="formFile">
+                                    </div>
+                                    <div class="col-xs-6 form-group wow fadeInUp animated">
+                                        <button type="button" class="btn" id="btn-add">Crear</button>
+                                    </div>
+                                </div>
+                                <div class="ajax-response"></div>
+                            </form>
+                        </div>				   
+				     </div>
+				                  
+				
+			</div>
+		</div>
+    </Section>
+
         
-        $("#div1").html($("#div1").html()+' '+nice.version);
-        
-        $("#boxscroll").niceScroll({cursorborder:"",cursorcolor:"#00F",boxzoom:true}); // First scrollable DIV
+
+
+	   
+	<!-- =============== jQuery =============== -->
+    <script src="assets/js/jquery.js"></script>
+	 <script src="assets/js/isotope-docs.min.js"></script>
+    <!-- =============== Bootstrap Core JavaScript =============== -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- =============== Plugin JavaScript =============== -->
+    <script src="assets/js/jquery.easing.min.js"></script>
+    <script src="assets/js/jquery.fittext.js"></script>
+    <script src="assets/js/wow.min.js"></script> 
+	<!-- =============== owl carousel =============== -->
+    <script src="assets/owl-carousel/owl.carousel.js"></script>  
+	<!-- Isotope does NOT require jQuery. But it does make things easier -->
+
+<script src="assets/js/baguetteBox.js" async></script>
+<script src="assets/js/plugins.js" async></script>
+ 
+    <!-- =============== Custom Theme JavaScript =============== -->
+    <script src="assets/js/creative.js">	</script> 
+<script src="assets/js/jquery.nicescroll.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+  
+	var nice = $("html").niceScroll();  // The document page (body)
+	
+	$("#div1").html($("#div1").html()+' '+nice.version);
     
-        $("#boxscroll2").niceScroll("#contentscroll2",{cursorcolor:"#F00",cursoropacitymax:0.7,boxzoom:true,touchbehavior:true});  // Second scrollable DIV
-        $("#boxframe").niceScroll("#boxscroll3",{cursorcolor:"#0F0",cursoropacitymax:0.7,boxzoom:true,touchbehavior:true});  // This is an IFrame (iPad compatible)
-        
-        $("#boxscroll4").niceScroll("#boxscroll4 .wrapper",{boxzoom:true});  // hw acceleration enabled when using wrapper
-        
-      });
-    </script>
-    <script>
-    window.onload = function() {
-        if(typeof oldIE === 'undefined' && Object.keys)
-            hljs.initHighlighting();
+    $("#boxscroll").niceScroll({cursorborder:"",cursorcolor:"#00F",boxzoom:true}); // First scrollable DIV
+
+    $("#boxscroll2").niceScroll("#contentscroll2",{cursorcolor:"#F00",cursoropacitymax:0.7,boxzoom:true,touchbehavior:true});  // Second scrollable DIV
+    $("#boxframe").niceScroll("#boxscroll3",{cursorcolor:"#0F0",cursoropacitymax:0.7,boxzoom:true,touchbehavior:true});  // This is an IFrame (iPad compatible)
+	
+    $("#boxscroll4").niceScroll("#boxscroll4 .wrapper",{boxzoom:true});  // hw acceleration enabled when using wrapper
     
-        baguetteBox.run('.baguetteBoxOne');
-        baguetteBox.run('.baguetteBoxTwo');
-        baguetteBox.run('.baguetteBoxThree', {
-            animation: 'fadeIn'
-        });
-        baguetteBox.run('.baguetteBoxFour', {
-            buttons: false
-        });
-        baguetteBox.run('.baguetteBoxFive', {
-            captions: function(element) {
-                return element.getElementsByTagName('img')[0].alt;
-            }
-        });
-    };
-    </script>
-    </body>
-    </html>
+  });
+</script>
+<script>
+window.onload = function() {
+    if(typeof oldIE === 'undefined' && Object.keys)
+        hljs.initHighlighting();
+
+    baguetteBox.run('.baguetteBoxOne');
+    baguetteBox.run('.baguetteBoxTwo');
+    baguetteBox.run('.baguetteBoxThree', {
+        animation: 'fadeIn'
+    });
+    baguetteBox.run('.baguetteBoxFour', {
+        buttons: false
+    });
+    baguetteBox.run('.baguetteBoxFive', {
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+        }
+    });
+};
+</script>
+</body>
+</html>
