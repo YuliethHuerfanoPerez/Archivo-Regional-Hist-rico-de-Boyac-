@@ -1,3 +1,23 @@
+<?php
+
+require 'database.php';
+    session_start();
+
+    
+
+    if(isset($_SESSION['user_id'])){
+        $records = $conn->prepare('SELECT id, usuario, password FROM users WHERE id = :id ');
+        $records->bindParam(':id', $_SESSION['user_id']);
+        $records->execute();
+        $results = $records->fetch(PDO::FETCH_ASSOC);
+
+        $user = null;
+
+        if (count($results) > 0) {
+            $user = $results;
+        }
+    }
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -31,6 +51,8 @@
 </head>
 
 <body>
+    <!-- si esta registrado el usuario, muestra esto -->
+  <?php if(!empty($user)):?>
     <!-- =============== Preloader =============== -->
     <div id="preloader">
         <div id="loading">
@@ -58,19 +80,20 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
 						<li class="active">
-                            <a class="page-scroll" href="admin-news.html">Noticias</a>
+                            <a class="page-scroll" href="admin-news.php">Noticias</a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="admin-documents.html">Documentos</a>
+                            <a class="page-scroll" href="admin-documents.php">Documentos</a>
                         </li>
                         <li>
-							<a class="page-scroll" href="admin-investigator.html">Investigadores</a>
+							<a class="page-scroll" href="admin-investigator.php">Investigadores</a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="admin-workers.html">Personal</a>
+                            <a class="page-scroll" href="admin-workers.php">Personal</a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="">Sesion</a>
+                        Bienvenido <?= $user['usuario'] ?>
+                            <a href="logout.php" class="page-scroll">Cerrar Sesión</a>
                         </li>
                     </ul>
                 </div>
@@ -336,5 +359,12 @@ window.onload = function() {
     });
 };
 </script>
+<!-- si no esta registrado el usuario muestra esto -->
+<?php else: ?>
+  <?php 
+      require 'index.html';
+      ?>
+    <?php endif; ?>
+
 </body>
 </html>

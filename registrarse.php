@@ -1,3 +1,29 @@
+<?php
+    require 'database.php';
+
+    $message='';
+
+    if (!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['emailConfirm'])) {
+        if($_POST['email'] == $_POST['emailConfirm']){
+            $sql = "INSERT INTO users (usuario, password) VALUES (:usuario, :password)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':usuario', $_POST['name']);
+            $password = password_hash($_POST['email'], PASSWORD_BCRYPT);
+            $stmt->bindParam(':password', $password);
+
+            if ($stmt->execute()) {
+                $message = 'Usuario Creado Satisfactoriamente!';
+            } else {
+                $message = 'Lamentablemente no se pudeo crear el Usuario!';
+            }
+        }else{
+            $message = 'Las Contraseñas no coinciden!';
+        }
+        
+
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,7 +32,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>noticia ARHB</title>
+    <title>Registrarse</title>
     <!-- =============== Bootstrap Core CSS =============== -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css">
     <!-- =============== fonts awesome =============== -->
@@ -31,6 +57,15 @@
 </head>
 
 <body>
+    <?php
+        if(!empty($message)):
+    ?>
+    <script> alert("<?= $message
+        ?>"); </script>
+    <p>
+    </p>
+    <?php endif; ?>
+
     <!-- =============== Preloader =============== -->
     <div id="preloader">
         <div id="loading">
@@ -49,7 +84,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#"><img src="assets/img/logo.png" alt="Logo" width="200%" height="300%">
+                    <a class="navbar-brand" href="#"><img src="assets/img/logo.png" alt="Logo" width="45%">
                     </a>
                 </div>
 
@@ -90,42 +125,47 @@
         </div>
         <!-- =============== container-fluid =============== -->
     </nav>
-    <section>	
-        <div class="container marg50">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="classic-blog blog-single">
-                        <div class="bs-blog-img"><img alt="" src="assets/img/blog3.JPG"></div>
-                        <div class="bs-blog-naz">
-                            <div class="bs-blog-type"><i class="fa fa-pencil-square-o"></i></div>
-                            <div class="bs-blog-name"><a href="#">El presidente de Estados Unidos, Joe Biden, ha aceptado la propuesta francesa de mantener una cumbre con su homólogo ruso, Vladímir Putin, siempre que éste no invada Ucrania, confirmó este domingo la Casa Blanca</a></div>
-                            <div class="bs-blog-detail">10 February 2014 - 11:32, by <a href="#">Dankov</a>, in <a href="#">Envato</a>, <a href="#">25 comments</a></div>
-                            <div class="bs-blog-text"> La portavoz de la Casa Blanca, Jen Psaki, subrayó sin embargo en un comunicado que, "ahora mismo, Rusia parece seguir con los preparativos para (lanzar) muy pronto un ataque a gran escala contra Ucrania".
+    <section id="login">
+        <div class="container">            
+			<div class="row">
+                <br>
+				<div class="col-sm-6 col-sm-offset-3 wow fadeInDown animated" id="log" data-wow-delay=".1s">
+                    <div class="title">
+                        <h2>Bienvenido</h2>
+                        <p>Por favor, registrese </p> 
+                        <div class="t-box">
+                            <div class="timg2"><img src="assets/img/logo.png" style="max-width: 20%;"/></div>
+                            <br>
+                            <form action="registrarse.php" method="POST">
+                                <div class="ajax-hidden">
+                                    <div class="col-xs-12 col-sm-6 col-sm-offset-3 form-group wow fadeInUp animated">
+                                        <label for="c_name" class="sr-only">Usuario</label>
+                                        <input type="text" placeholder="Usuario" name="name" class="form-control" id="name" required>
+                                    </div>
+            
+                                    <div data-wow-delay=".1s" class="col-xs-6 col-sm-6 col-sm-offset-3 form-group wow fadeInUp animated">
+                                        <label for="c_email" class="sr-only">Contraseña</label>
+                                        <input type="password" placeholder="Contraseña" name="email" class="form-control" id="email"  required>
+                                    </div>
+                                    <div data-wow-delay=".1s" class="col-xs-6 col-sm-6 col-sm-offset-3 form-group wow fadeInUp animated">
+                                        <label for="c_emailConfirm" class="sr-only">Confirme Contraseña</label>
+                                        <input type="password" placeholder="Confirme Contraseña" name="emailConfirm" class="form-control" id="emailConfirm"  required>
+                                    </div>
+                                    <button data-wow-delay=".3s" class="btn btn-primary btn-lg btn-ornge wow bounceIn animated" class="hbtn" type="submit">Registrar</button>
 
-                                Biden "ha aceptado en principio reunirse con el presidente Putin" después de que sus respectivos titulares de Exteriores se entrevisten en Europa el próximo jueves, "siempre y cuando Rusia no siga adelante con una acción militar", indicó Psaki.
-                                
-                                Poco antes, el palacio del Elíseo había asegurado que el presidente de Francia, Emmanuel Macron, había propuesto tanto a Biden como a Putin que mantuvieran una cumbre sobre la seguridad en Europa, y que ambos habían aceptado.
-                                
-                                Tras conversar una vez por teléfono con Biden y dos con Putin, el presidente francés propuso que se celebre primero una cumbre entre Putin y Biden "y después con todas las partes implicadas" sobre la seguridad y la estabilidad estratégica en Europa, según el Elíseo.
-                                
-                                Psaki aseguró que Biden está "comprometido con la vía diplomática hasta el momento en el que empiece una invasión", pero que también está "preparado para imponer consecuencias rápidas y graves si Rusia elige en cambio la guerra".
-                                
-                                La portavoz alertó que todo apunta a que Rusia sigue inclinándose por esa opción, y Biden dijo el viernes que está "convencido" de que Putin ya ha tomado la decisión de invadir Ucrania.
-                                
-                                Según información de inteligencia estadounidense citada por varios medios, el Kremlin ha dado incluso la orden a sus comandantes de que se preparen para una invasión, y el secretario de Estado de EE.UU., Antony Blinken, advirtió este domingo de que puede ser inminente.
-                                
-                                "Todo lo que estamos viendo apunta a que esto va completamente en serio, a que están a punto de invadir", dijo Blinken en una entrevista con la cadena televisiva CNN.
-                                
-                                El jefe de la diplomacia estadounidense citó como indicios las hostilidades en el este de Ucrania y la decisión de Moscú de prolongar su presencia militar en Bielorrusia más tiempo del anunciado originalmente.
-                                
-                                Blinken insistió, sin embargo, en que aún hay tiempo para la diplomacia y dijo que, si no hay una invasión antes, él sigue dispuesto a reunirse esta semana en Europa con su homólogo ruso, Serguéi Lavrov.
-                                
-                                "Hasta que los tanques estén rodando y los aviones volando, usaremos cada oportunidad y cada minuto que tengamos para ver si la diplomacia todavía puede disuadir al presidente Putin de llevar esto a cabo", subrayó. </div> 
+                                </div>
+                                <div class="ajax-response"></div>
+                            </form>
+                            <ul class="option-lo">
+                                <li><a data-wow-delay=".1s" class="wow fadeInUp animated" href="#"><p>Olvido su contraseña</p></a></li>
+                            </ul>
                         </div>
-                    </div>
+				    </div>  
                 </div>
-            </div>
-        </div>
+			</div>
+		</div>
+
+
     </section>	
 		<footer id="footer">
 		<!-- =============== container =============== -->
@@ -142,7 +182,7 @@
 						</ul>
 	
 						<p class="copyright">
-							&copy; 2016 Be. Created By <a href="http://templatestock.co">Template Stock</a>
+							&copy; 2022 Be. Created By <a href="http://templatestock.co">Template Stock</a>
 						</p>
 	
 					</div>
@@ -212,4 +252,3 @@ window.onload = function() {
 </script>
 </body>
 </html>
-

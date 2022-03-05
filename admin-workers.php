@@ -1,3 +1,23 @@
+<?php
+
+require 'database.php';
+    session_start();
+
+    
+
+    if(isset($_SESSION['user_id'])){
+        $records = $conn->prepare('SELECT id, usuario, password FROM users WHERE id = :id ');
+        $records->bindParam(':id', $_SESSION['user_id']);
+        $records->execute();
+        $results = $records->fetch(PDO::FETCH_ASSOC);
+
+        $user = null;
+
+        if (count($results) > 0) {
+            $user = $results;
+        }
+    }
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -31,6 +51,8 @@
 </head>
 
 <body>
+    <!-- si esta registrado el usuario, muestra esto -->
+  <?php if(!empty($user)):?>
     <!-- =============== Preloader =============== -->
     <div id="preloader">
         <div id="loading">
@@ -58,19 +80,20 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
 						<li>
-                            <a class="page-scroll" href="admin-news.html">Noticias</a>
+                            <a class="page-scroll" href="admin-news.php">Noticias</a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="admin-documents.html">Documentos</a>
+                            <a class="page-scroll" href="admin-documents.php">Documentos</a>
+                        </li>
+                        <li>
+							<a class="page-scroll" href="admin-investigator.php">Investigadores</a>
                         </li>
                         <li class="active">
-							<a class="page-scroll" href="admin-investigator.html">Investigadores</a>
+                            <a class="page-scroll" href="admin-workers.php">Personal</a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="admin-workers.html">Personal</a>
-                        </li>
-                        <li>
-                            <a class="page-scroll" href="">Sesion</a>
+                            Bienvenido <?= $user['usuario'] ?>
+                            <a href="logout.php" class="page-scroll">Cerrar Sesión</a>
                         </li>
                     </ul>
                 </div>
@@ -87,14 +110,18 @@
     <Section id="workers-pri">
         <div class="container">            
 			<div class="row">
-				    <div class="col-sm-12 izq wow fadeInDown animated" data-wow-delay=".1s">
+				
+				    <div class="col-sm-6 izq wow fadeInDown animated" data-wow-delay=".1s">
                         <div class="titleadmin"> 
                             <div class="row">
                                 <div class="col-xs-10 form-group wow fadeInUp animated">
-                                    <h2>INVESTIGADORES</h2>
+                                    <h2>FUNCIONARIOS</h2>
                                 </div>
-                                
-                            </div>  
+                                <div class="col-xs-2 form-group wow fadeInUp animated">
+                                    <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"onclick="window.location.href='admin-workers.html'"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                           
                             
                         </div>
                         <div>
@@ -111,98 +138,95 @@
                                 <div class="ajax-response"></div>
                             </form>
                         </div>
-                        <div class="col-sm-6 izq wow fadeInDown animated" data-wow-delay=".1s">
+                        <div class="col-sm-12 izq wow fadeInDown animated" data-wow-delay=".1s">
                             <form action="#" method="post">
                                 <br>
                                 <div class="ajax-hidden">
                                     <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <label >investigador 1</label> 
+                                        <label >Funcionario 1</label> 
                                     </div>
                                     <div class="col-xs-4 form-group wow fadeInUp animated">
                                         <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-trash"></i></button>
                                     </div>
-                                   
+                                    <div class="col-xs-4 form-group wow fadeInUp animated">
+                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-refresh"></i></button>
+                                    </div>
                                 </div>
                                 <div class="ajax-response"></div>
                             </form>
                         </div>
-                        <div class="col-sm-6 izq wow fadeInDown animated" data-wow-delay=".1s">
+                        <div class="col-sm-12 izq wow fadeInDown animated" data-wow-delay=".1s">
                             <form action="#" method="post">
                                 <br>
                                 <div class="ajax-hidden">
                                     <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <label >Investigador 1</label> 
+                                        <label >Funcionario 1</label> 
                                     </div>
                                     <div class="col-xs-4 form-group wow fadeInUp animated">
                                         <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-trash"></i></button>
                                     </div>
-                                    
+                                    <div class="col-xs-4 form-group wow fadeInUp animated">
+                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-refresh"></i></button>
+                                    </div>
                                 </div>
                                 <div class="ajax-response"></div>
                             </form>
                         </div>
-                        <div class="col-sm-6 izq wow fadeInDown animated" data-wow-delay=".1s">
+                        <div class="col-sm-12 izq wow fadeInDown animated" data-wow-delay=".1s">
                             <form action="#" method="post">
                                 <br>
                                 <div class="ajax-hidden">
                                     <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <label >Investigador 1</label> 
+                                        <label >Funcionario 1</label> 
                                     </div>
                                     <div class="col-xs-4 form-group wow fadeInUp animated">
                                         <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-trash"></i></button>
                                     </div>
-                                   
-                                </div>
-                                <div class="ajax-response"></div>
-                            </form>
-                        </div>
-                        <div class="col-sm-6 izq wow fadeInDown animated" data-wow-delay=".1s">
-                            <form action="#" method="post">
-                                <br>
-                                <div class="ajax-hidden">
-                                    <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <label >Investigador 1</label> 
-                                    </div>
                                     <div class="col-xs-4 form-group wow fadeInUp animated">
-                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-trash"></i></button>
+                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-refresh"></i></button>
                                     </div>
-                                   
-                                </div>
-                                <div class="ajax-response"></div>
-                            </form>
-                        </div>
-                        <div class="col-sm-6 izq wow fadeInDown animated" data-wow-delay=".1s">
-                            <form action="#" method="post">
-                                <br>
-                                <div class="ajax-hidden">
-                                    <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <label >Investigador 1</label> 
-                                    </div>
-                                    <div class="col-xs-4 form-group wow fadeInUp animated">
-                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-trash"></i></button>
-                                    </div>
-                                   
-                                </div>
-                                <div class="ajax-response"></div>
-                            </form>
-                        </div>
-                        <div class="col-sm-6 izq wow fadeInDown animated" data-wow-delay=".1s">
-                            <form action="#" method="post">
-                                <br>
-                                <div class="ajax-hidden">
-                                    <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <label >Investigador 1</label> 
-                                    </div>
-                                    <div class="col-xs-4 form-group wow fadeInUp animated">
-                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-trash"></i></button>
-                                    </div>
-                                   
                                 </div>
                                 <div class="ajax-response"></div>
                             </form>
                         </div>
                       
 				    </div>
+				    <div class="col-sm-6 wow fadeInUp animated" data-wow-delay=".2s">
+                        <div class="titleadmin"> 
+                            <h2>GESTIONAR</h2>
+                        </div>
+                        <div class="col-xs-12 wow bounceIn animated" data-wow-delay=".1s">
+                            <form action="#" method="post">
+                                <div class="ajax-hidden">
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label for="c_name" class="sr-only">Codig</label>
+                                        <input type="text" placeholder="Codigo" name="name" class="form-control" id="name" required="">
+                                    </div>
+            
+                                    <div data-wow-delay=".1s" class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label for="c_email" class="sr-only">Nombre</label>
+                                        <input type="text" placeholder="Nombre" name="email" class="form-control" id="email"  required="">
+                                    </div>
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label for="c_name" class="sr-only">Cedula</label>
+                                        <input type="number" placeholder="Cedula" name="name" class="form-control" id="name" required="">
+                                    </div>
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        
+                                        <select name="" id="">
+                                            <option value="">Cargo</option>
+                                            <option value="">Administrador</option>
+                                            <option value="">Funcionario</option>
+                                        </select>
+                                    </div>
+                                    <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit" style="background-color: #1EA078; color: white;">Añadir</button>
+                                </div>
+                                <div class="ajax-response"></div>
+                            </form>
+                        </div>				   
+				     </div>
+				                  
+				
 			</div>
 		</div>
     </Section>
@@ -267,5 +291,11 @@ window.onload = function() {
     });
 };
 </script>
+<!-- si no esta registrado el usuario muestra esto -->
+<?php else: ?>
+  <?php 
+      require 'index.html';
+      ?>
+    <?php endif; ?>
 </body>
 </html>
