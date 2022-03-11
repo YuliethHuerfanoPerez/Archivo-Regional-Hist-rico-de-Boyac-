@@ -112,7 +112,7 @@
                                         <label for="c_password" class="sr-only">Contraseña</label>
                                         <input type="password" placeholder="Contraseña" name="password" class="form-control" id="password"  required>
                                     </div>
-                                    <button data-wow-delay=".3s" class="btn btn-primary btn-lg btn-ornge wow bounceIn animated" class="hbtn" type="submit">Ingresar</button>
+                                    <button data-wow-delay=".3s" class="btn btn-primary btn-lg btn-ornge wow bounceIn animated" class="hbtn" type="submit" value="login">Ingresar</button>
                                 </div>
                                 <div class="ajax-response"></div>
                             </form>
