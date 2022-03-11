@@ -101,16 +101,16 @@
                         <div class="t-box">
                             <div class="timg2"><img src="../assets/img/logo.png" style="max-width: 20%;"/></div>
                             <br>
-                            <form action="" method="POST">
+                            <form action="../logic/login.php" method="POST">
                                 <div class="ajax-hidden">
                                     <div class="col-xs-12 col-sm-6 col-sm-offset-3 form-group wow fadeInUp animated">
-                                        <label for="c_name" class="sr-only">Usuario</label>
-                                        <input type="text" placeholder="Usuario" name="name" class="form-control" id="name" required>
+                                        <label for="c_user" class="sr-only">Usuario</label>
+                                        <input type="text" placeholder="Usuario" name="user" class="form-control" id="user" required>
                                     </div>
             
                                     <div data-wow-delay=".1s" class="col-xs-6 col-sm-6 col-sm-offset-3 form-group wow fadeInUp animated">
-                                        <label for="c_email" class="sr-only">Contraseña</label>
-                                        <input type="password" placeholder="Contraseña" name="email" class="form-control" id="email"  required>
+                                        <label for="c_password" class="sr-only">Contraseña</label>
+                                        <input type="password" placeholder="Contraseña" name="password" class="form-control" id="password"  required>
                                     </div>
                                     <button data-wow-delay=".3s" class="btn btn-primary btn-lg btn-ornge wow bounceIn animated" class="hbtn" type="submit">Ingresar</button>
                                 </div>

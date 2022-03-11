@@ -1,14 +1,21 @@
 <?php
-
-$server = 'localhost:3308';
-$username = 'root';
-$password = '';
-$database = 'archivoregionalboyaca';
-
-try {
-  $conn = new PDO("mysql:host=$server;dbname=$database;", $username, $password);
-} catch (PDOException $e) {
-  die('Conexion Fallida: ' . $e->getMessage());
+private $host;
+private $dbName;
+private $user;
+private $pass;
+public function __contruct(){
+  $this->host = 'bnnrakaprj68etyfgeup-mysql.services.clever-cloud.com:3308';
+  $this ->dbName = 'bnnrakaprj68etyfgeup';
+  $this ->user = 'uzbgrzyqtao9owkh';
+  $this ->pass = 'SDaJjPgYPuoS5GLqSeL6';
 }
-
+function connection(){
+  try {
+    $datadb = "mysql:host= $this->host ;dbname = $this->dbName";
+    $conn = new PDO($datadb, $username, $password);
+    return $conn
+  } catch (PDOException $e) {
+    die('Conexion Fallida: ' . $e->getMessage());
+  }
+}
 ?>
