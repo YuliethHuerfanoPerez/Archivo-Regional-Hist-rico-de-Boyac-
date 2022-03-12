@@ -73,7 +73,7 @@
                         </li>
                         <li>
     
-                            <a href="logout.php" class="page-scroll">Cerrar Sesión</a>
+                            <a href="../logic/logout.php" class="page-scroll">Cerrar Sesión</a>
                         </li>
                     </ul>
                 </div>

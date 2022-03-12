@@ -6,8 +6,7 @@
 
     #$controllsessions->goodbye();
     if (isset($_SESSION['rolUser'])){
-        echo $_SESSION['rolUser'];
-        if($SESS_ION['rolUser'] == "101"){
+        if($_SESSION['rolUser'] == "101"){
             include_once 'admin-workers.php';
         }else if($_SESSION['rolUser'] == "102"){
             include_once 'admin-news.php';
