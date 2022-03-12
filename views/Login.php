@@ -32,8 +32,10 @@
               include_once 'Loginv.php';  
             }
        }else{
-            include_once 'Loginv.php';
             $response = "Credenciales invalidas, Por favor intentalo nuevamente";
+            global $response;    
+            include_once 'Loginv.php';
+            
        }    
     }else{
         include_once 'loginv.php';

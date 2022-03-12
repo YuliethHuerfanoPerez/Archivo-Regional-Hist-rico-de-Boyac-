@@ -114,7 +114,7 @@
                                     </div>
                                     <button data-wow-delay=".3s" class="btn btn-primary btn-lg btn-ornge wow bounceIn animated" class="hbtn" type="submit" value="login">Ingresar</button>
                                 </div>
-                                <div class="ajax-response"><?php if(isset($response)){echo $response;}?></div>
+                                <div class="ajax-response"><?php if(isset($GLOBALS['response'])){echo $GLOBALS['response'];}?></div>
                             </form>
                             <ul class="option-lo">
                                 <li><a class="wow fadeInUp animated" href="#"><p>Solicitar cuenta</p></a></li>
