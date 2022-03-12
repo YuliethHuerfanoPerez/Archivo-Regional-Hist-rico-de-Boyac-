@@ -1,23 +1,3 @@
-<?php
-
-require 'database.php';
-    session_start();
-
-    
-
-    if(isset($_SESSION['user_id'])){
-        $records = $conn->prepare('SELECT id, usuario, password FROM users WHERE id = :id ');
-        $records->bindParam(':id', $_SESSION['user_id']);
-        $records->execute();
-        $results = $records->fetch(PDO::FETCH_ASSOC);
-
-        $user = null;
-
-        if (count($results) > 0) {
-            $user = $results;
-        }
-    }
-?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -28,19 +8,19 @@ require 'database.php';
     <meta name="author" content="">
     <title>admin</title>
     <!-- =============== Bootstrap Core CSS =============== -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" type="text/css">
     <!-- =============== fonts awesome =============== -->
-    <link rel="stylesheet" href="assets/font/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="../assets/font/css/font-awesome.min.css" type="text/css">
     <!-- =============== Plugin CSS =============== -->
-    <link rel="stylesheet" href="assets/css/animate.min.css" type="text/css">
+    <link rel="stylesheet" href="../assets/css/animate.min.css" type="text/css">
     <!-- =============== Custom CSS =============== -->
-    <link rel="stylesheet" href="assets/css/style.css" type="text/css">
+    <link rel="stylesheet" href="../assets/css/style.css" type="text/css">
     <!-- =============== Owl Carousel Assets =============== -->
-    <link href="assets/owl-carousel/owl.carousel.css" rel="stylesheet">
-    <link href="assets/owl-carousel/owl.theme.css" rel="stylesheet">
+    <link href="../assets/owl-carousel/owl.carousel.css" rel="stylesheet">
+    <link href="../assets/owl-carousel/owl.theme.css" rel="stylesheet">
 	
-	<link rel="stylesheet" href="assets/css/isotope-docs.css" media="screen">
-	<link rel="stylesheet" href="assets/css/baguetteBox.css">
+	<link rel="stylesheet" href="../assets/css/isotope-docs.css" media="screen">
+	<link rel="stylesheet" href="../assets/css/baguetteBox.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -51,12 +31,10 @@ require 'database.php';
 </head>
 
 <body>
-    <!-- si esta registrado el usuario, muestra esto -->
-  <?php if(!empty($user)):?>
     <!-- =============== Preloader =============== -->
     <div id="preloader">
         <div id="loading">
-		<img width="256" height="32" src="assets/img/loading-cylon-red.svg">	
+		<img width="256" height="32" src="../assets/img/loading-cylon-red.svg">	
         </div>
     </div>
     <!-- =============== nav =============== -->
@@ -71,7 +49,7 @@ require 'database.php';
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#"><img src="assets/img/logo.png" alt="Logo" width="45%">
+                    <a class="navbar-brand" href="#"><img src="../assets/img/logo.png" alt="Logo" width="45%">
                     </a>
                 </div>
 
@@ -92,7 +70,7 @@ require 'database.php';
                             <a class="page-scroll" href="admin-workers.php">Personal</a>
                         </li>
                         <li>
-                        Bienvenido <?= $user['usuario'] ?>
+                        
                             <a href="logout.php" class="page-scroll">Cerrar Sesión</a>
                         </li>
                     </ul>
@@ -304,24 +282,24 @@ require 'database.php';
 
 	   
 	<!-- =============== jQuery =============== -->
-    <script src="assets/js/jquery.js"></script>
-	 <script src="assets/js/isotope-docs.min.js"></script>
+    <script src="../assets/js/jquery.js"></script>
+	 <script src="../assets/js/isotope-docs.min.js"></script>
     <!-- =============== Bootstrap Core JavaScript =============== -->
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
     <!-- =============== Plugin JavaScript =============== -->
-    <script src="assets/js/jquery.easing.min.js"></script>
-    <script src="assets/js/jquery.fittext.js"></script>
-    <script src="assets/js/wow.min.js"></script> 
+    <script src="../assets/js/jquery.easing.min.js"></script>
+    <script src="../assets/js/jquery.fittext.js"></script>
+    <script src="../assets/js/wow.min.js"></script> 
 	<!-- =============== owl carousel =============== -->
-    <script src="assets/owl-carousel/owl.carousel.js"></script>  
+    <script src="../assets/owl-carousel/owl.carousel.js"></script>  
 	<!-- Isotope does NOT require jQuery. But it does make things easier -->
 
-<script src="assets/js/baguetteBox.js" async></script>
-<script src="assets/js/plugins.js" async></script>
+<script src="../assets/js/baguetteBox.js" async></script>
+<script src="../assets/js/plugins.js" async></script>
  
     <!-- =============== Custom Theme JavaScript =============== -->
-    <script src="assets/js/creative.js">	</script> 
-<script src="assets/js/jquery.nicescroll.min.js"></script>
+    <script src="../assets/js/creative.js">	</script> 
+<script src="../assets/js/jquery.nicescroll.min.js"></script>
 
 <script>
   $(document).ready(function() {
@@ -359,12 +337,5 @@ window.onload = function() {
     });
 };
 </script>
-<!-- si no esta registrado el usuario muestra esto -->
-<?php else: ?>
-  <?php 
-      require 'index.html';
-      ?>
-    <?php endif; ?>
-
 </body>
 </html>
