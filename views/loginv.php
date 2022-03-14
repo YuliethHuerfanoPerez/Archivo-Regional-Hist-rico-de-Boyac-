@@ -117,7 +117,7 @@
                                 <div class="ajax-response"><?php if(isset($GLOBALS['response'])){echo $GLOBALS['response'];}?></div>
                             </form>
                             <ul class="option-lo">
-                                <li><a class="wow fadeInUp animated" href="#"><p>Solicitar cuenta</p></a></li>
+                                <li><a class="wow fadeInUp animated" href="registrarse.php"><p>Solicitar cuenta</p></a></li>
                                 <li><a data-wow-delay=".1s" class="wow fadeInUp animated" href="#"><p>Olvido su contraseña</p></a></li>
                             </ul>
                         </div>
