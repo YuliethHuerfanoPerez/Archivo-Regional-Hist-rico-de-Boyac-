@@ -11,15 +11,14 @@
                     return true;
                 }
             }
-            return false;
-            
+            return false;  
         }
         public function getuserInfor($user){
             $query = $this->connection()->prepare('SELECT * FROM funcionario where email= :user');
             $query->execute(['user'=> $user]);
             if($query->rowCount()){
                 foreach($query as $i){
-                    return array("name"=>$i['nombre'],"lastname"=>$i['apellido'], "rol"=>$i['cargo']);
+                    return array("id"=>$i['cedula'],"name"=>$i['nombre'],"lastname"=>$i['apellido'], "rol"=>$i['cargo']);
                 }
             }else{
                 return false;

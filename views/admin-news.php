@@ -1,3 +1,57 @@
+<?php
+    include '../logic/controlNews.php';
+    session_start();
+    $update=false;
+    $controlnews= new controlNews();
+    $news = $controlnews->searchNews(); 
+
+    if (isset($_POST['form1'])){
+        
+        $name = $_POST['title'];
+        $description = $_POST["description"];
+        $content = $_POST["content"];
+        $autorname = $_POST["autorname"];
+        $autorlastname = $_POST["autorlastname"];
+        $date = $_POST["date"];
+        $idUser = $_SESSION['id'];
+        if(empty($name) || empty($description) || empty($content) || empty($autorname) || empty($autorlastname) || empty($date)){
+            $newsempty = "Credenciales invalidas, Por favor intentalo nuevamente"; 
+        }else{
+            $newsempty= $controlnews->addNews($name,$description,$content,$autorname,$autorlastname,$date,$idUser);
+        }
+    }
+    if (isset($_POST['form2t'])){
+        $delete = $controlnews->deleteNew($_POST['idnews']);
+        $newsempty=$delete;
+    }
+
+    if (isset($_POST['form2r'])){
+        $update=true;
+        $idupdate=$_POST['idnews'];
+        $newUpdate= $controlnews->searchNewId($idupdate);
+        foreach($newUpdate as $i){
+            $newname= $i['nombre'];
+            $newdesc= $i['descripcion'];
+            $newcont= $i['contenido'];
+            $newdate= $i['fecha'];
+        }
+    }
+    if (isset($_POST['form3'])){
+        $id=$_POST['id'];
+        $name = $_POST['title'];
+        $description = $_POST["description"];
+        $content = $_POST["content"];
+        $date = $_POST["date"];
+        $idUser = $_SESSION['id'];
+        if(empty($name) || empty($description) || empty($content) || empty($date)){
+            $newsempty = "Credenciales invalidas, Por favor intentalo nuevamente"; 
+        }else{
+            $newsempty= $controlnews->uptadeNew($id,$name,$description,$content,$date,$idUser);
+            include_once 'admin-news.php';
+        }
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -101,13 +155,11 @@
                                 <div class="col-xs-2 form-group wow fadeInUp animated">
                                     <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit" onclick="window.location.href='#actualizar'"><i class="fa fa-plus"></i></button>
                                 </div>
-                            </div>
-                           
-                            
+                            </div>  
                         </div>
                         <div>
                             <div>
-                                <form action="#" method="post">
+                                <form action="" method="GET">
                                     <div class="ajax-hidden">
                                         <div class="col-xs-8 form-group wow fadeInUp animated">
                                             <label for="c_name" class="sr-only">Buscar</label>
@@ -120,170 +172,125 @@
                                     <div class="ajax-response"></div>
                                 </form>
                             </div>
-                        
+                            <?php
+                                foreach($news as $i){
+                            ?>
                             <div class="col-sm-12 izq wow fadeInDown animated" data-wow-delay=".1s">
-                                <form action="#" method="post">
+                                <form action="" method="POST">
                                     <br>
                                     <div class="ajax-hidden">
                                         <div class="col-xs-12 form-group wow fadeInUp animated">
-                                            <label >Documento 1</label> 
+                                            <label ><?php echo ($i['nombre'])?></label> 
+                                        </div>
+                                        <div class="col-xs-12 form-group wow fadeInUp animated">
+                                            <label ><?php echo ($i['descripcion'])?></label> 
+                                        </div>
+                                        <input id="idNews" name="idnews" type="hidden" value="<?php echo ($i['idNoticias'])?>">
+                                        <div class="col-xs-4 form-group wow fadeInUp animated">
+                                            <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit" name="form2t" ><i class="fa fa-trash" ></i></button>
                                         </div>
                                         <div class="col-xs-4 form-group wow fadeInUp animated">
-                                            <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-trash"></i></button>
-                                        </div>
-                                        <div class="col-xs-4 form-group wow fadeInUp animated">
-                                            <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-refresh"></i></button>
+                                            <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit" name="form2r"><i class="fa fa-refresh"></i></button>
                                         </div>
                                     </div>
                                     <div class="ajax-response"></div>
                                 </form>
                             </div>
-                            <div class="col-sm-12 izq wow fadeInDown animated" data-wow-delay=".1s">
-                                <form action="#" method="post">
-                                    <br>
-                                    <div class="ajax-hidden">
-                                        <div class="col-xs-12 form-group wow fadeInUp animated">
-                                            <label >Documento 2</label> 
-                                        </div>
-                                        <div class="col-xs-4 form-group wow fadeInUp animated">
-                                            <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-trash"></i></button>
-                                        </div>
-                                        <div class="col-xs-4 form-group wow fadeInUp animated">
-                                            <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-refresh"></i></button>
-                                        </div>
-                                    </div>
-                                    <div class="ajax-response"></div>
-                                </form>
-                            </div>
-                            <div class="col-sm-12 izq wow fadeInDown animated" data-wow-delay=".1s">
-                                <form action="#" method="post">
-                                    <br>
-                                    <div class="ajax-hidden">
-                                        <div class="col-xs-12 form-group wow fadeInUp animated">
-                                            <label >Documento 3</label> 
-                                        </div>
-                                        <div class="col-xs-4 form-group wow fadeInUp animated">
-                                            <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-trash"></i></button>
-                                        </div>
-                                        <div class="col-xs-4 form-group wow fadeInUp animated">
-                                            <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-refresh"></i></button>
-                                        </div>
-                                    </div>
-                                    <div class="ajax-response"></div>
-                                </form>
-                            </div>
-                 </div>
-                
+                            <?php
+                                }
+                            ?>
+                 </div>   
      </div>
      <div class="col-sm-6 wow fadeInUp animated" data-wow-delay=".2s">
         <div class="titleadmin"> 
             <h2>GESTIONAR</h2>
         </div>
         <div class="col-xs-12 wow bounceIn animated" data-wow-delay=".1s">
-            <form action="#" method="post">
+            
+            <form action="" method="POST">
                 <div class="ajax-hidden">
-                    <div class="col-xs-12 form-group wow fadeInUp animated">
-                        <input type="text" class="form-control" id="id" name="id" placeholder="Numero" required>
-                    </div>
+                    <?php
+                        if($update){
+                    ?>
+                    <input type="hidden" class="form-control" id="id" name="id" placeholder="Titulo" value = "<?php echo ($idupdate)?>" required="">
 
                     <div data-wow-delay=".1s" class="col-xs-12 form-group wow fadeInUp animated">
-                        <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Titulo" required>
+                        <input type="text" class="form-control" id="titulo" name="title" placeholder="Titulo" value = "<?php echo ($newname)?>" required="">
                     </div>
                     <div class="col-xs-12 form-group wow fadeInUp animated">
-                        <textarea  type="text" class="form-control" id="Descripcion" placeholder="Descripcion" name="Descripcion"></textarea>
+                        <textarea  type="text" class="form-control" id="Descripcion" placeholder="Descripcion" name="description" required=""><?php echo ($newdesc)?></textarea>
                     </div>
-                    <div data-wow-delay=".1s" class="col-xs-12 form-group wow fadeInUp animated">
-                        <input type="text" class="form-control" placeholder="Autor" id="autor" required>
+                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                        <textarea  type="text" class="form-control" id="contenido" placeholder="Contenido" name="content" required=""><?php echo ($newcont)?></textarea>
                     </div>
+                    <!--
+                    <div data-wow-delay=".1s" class="col-xs-6 form-group wow fadeInUp animated">
+                        <input type="text" class="form-control" placeholder="nombre del autor" id="autorname" name="autorname" required="">
+                    </div>
+                    <div data-wow-delay=".1s" class="col-xs-6 form-group wow fadeInUp animated">
+                        <input type="text" class="form-control" placeholder="Apellido del autor" id="autorlastname" name="autorlastname" required="">
+                    </div>
+                        -->
                     <div data-wow-delay=".1s" class="col-xs-12 form-group wow fadeInUp animated">
                         <label for="fecha" class="form-label">Fecha de publicacion:</label>
-                        <input type="date" class="form-control" id="fecha" required>
+                        <input type="date" class="form-control" id="fecha" name="date" required="" value = "<?php echo ($newdate)?>">
                     </div>
-                    
-                    <div class="col-xs-4 form-group wow fadeInUp animated">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="d_type" id="d_type">
-                            <label class="form-check-label" for="d_typePub">Público</label>
-                          </div>
-                    </div>
-                    <div class="col-xs-4 form-group wow fadeInUp animated">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="d_typePriv" id="d_typePriv">
-                            <label class="form-check-label" for="d_typePriv">Privado</label>
-                          </div>
-                    </div>
+                    <!-- 
                     <div class="col-xs-12 form-group wow fadeInUp animated">
                         <input type="image" class="form-control" id="imagen" alt="Imagen" name="imagen">
                     </div>
+                    -->
                     <div class="col-xs-6 form-group wow fadeInUp animated">
-                        <button type="button" class="btn" id="btn-add">Crear</button>
+                        <button class="btn" id="btn-add" type="submit" name="form3">Actualizar</button>
                     </div>
                 </div>
-                <div class="ajax-response"></div>
+                <div class="col-xs-12 form-group wow fadeInUp animated">
+                    <div class="ajax-response"><?php if(isset($newsempty)){echo $newsempty;}?></div>
+                </div>
+                <?php
+                    }else{
+                ?>
+                    <div data-wow-delay=".1s" class="col-xs-12 form-group wow fadeInUp animated">
+                        <input type="text" class="form-control" id="titulo" name="title" placeholder="Titulo"  required="">
+                    </div>
+                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                        <textarea  type="text" class="form-control" id="Descripcion" placeholder="Descripcion" name="description" required=""></textarea>
+                    </div>
+                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                        <textarea  type="text" class="form-control" id="contenido" placeholder="Contenido" name="content" required=""></textarea>
+                    </div>
+                    <div data-wow-delay=".1s" class="col-xs-6 form-group wow fadeInUp animated">
+                        <input type="text" class="form-control" placeholder="nombre del autor" id="autorname" name="autorname" required="">
+                    </div>
+                    <div data-wow-delay=".1s" class="col-xs-6 form-group wow fadeInUp animated">
+                        <input type="text" class="form-control" placeholder="Apellido del autor" id="autorlastname" name="autorlastname" required="">
+                    </div>
+                    <div data-wow-delay=".1s" class="col-xs-12 form-group wow fadeInUp animated">
+                        <label for="fecha" class="form-label">Fecha de publicacion:</label>
+                        <input type="date" class="form-control" id="fecha" name="date" required="">
+                    </div>
+                    <!-- 
+                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                        <input type="image" class="form-control" id="imagen" alt="Imagen" name="imagen">
+                    </div>
+                    -->
+                    <div class="col-xs-6 form-group wow fadeInUp animated">
+                        <button class="btn" id="btn-add" type="submit" name="form1">Crear</button>
+                    </div>
+                </div>
+                <div class="col-xs-12 form-group wow fadeInUp animated">
+                    <div class="ajax-response"><?php if(isset($newsempty)){echo $newsempty;}?></div>
+                </div>
+                <?php 
+                    }
+                ?>
             </form>
         </div>	
     </div>
-     </section>
-      <section id="actualizar">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="titleadmin"> 
-                        <h2>ACTUALIZAR</h2>
-                    </div>
-                    <div class="col-xs-12 wow bounceIn animated" data-wow-delay=".1s">
-                        <form action="#" method="post">
-                            <div class="ajax-hidden">
-                                <div class="col-xs-12 form-group wow fadeInUp animated">
-                                 <input type="text" class="form-control" id="id" name="id" placeholder="Numero">
-                                </div>
-                            </div>
-                            <div data-wow-delay=".1s" class="col-xs-12 form-group wow fadeInUp animated">
-                                <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Titulo" required>
-                            </div>
-                            <div data-wow-delay=".1s" class="col-xs-12 form-group wow fadeInUp animated">
-                                <textarea  type="text" class="form-control" id="Descripcion" placeholder="Descripcion" name="Descripcion"></textarea>
-                            </div>
-                            <div data-wow-delay=".1s" class="col-xs-12 form-group wow fadeInUp animated">
-                                <input type="text" class="form-control" placeholder="Autor" id="autor" required>
-                            </div>
-                            <div data-wow-delay=".1s" class="col-xs-12 form-group wow fadeInUp animated">
-                                <label for="fecha" class="form-label">Fecha de publicacion:</label>
-                                <input type="date" class="form-control" id="fecha" required>
-                            </div>
-                            <div class="col-xs-4 form-group wow fadeInUp animated">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="d_type" id="d_type">
-                                    <label class="form-check-label" for="d_typePub">Público</label>
-                                  </div>
-                            </div>
-                            <div class="col-xs-4 form-group wow fadeInUp animated">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="d_typePriv" id="d_typePriv">
-                                    <label class="form-check-label" for="d_typePriv">Privado</label>
-                                  </div>
-                            </div>
-                            <div class="col-xs-12 form-group wow fadeInUp animated">
-                                <input type="image" class="form-control" id="imagen" alt="Imagen" name="imagen">
-                            </div>
-                            <br>
-                            <div class="col-xs-6 form-group wow fadeInUp animated">
-                                    <button type="button" class="btn" id="actualizar" style="background-color: #1EA078; color: white;">Actualizar</button>
-                            </div>
-                          </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-      </section>
-
-        
-
-
-	   
+    </section>
 	<!-- =============== jQuery =============== -->
     <script src="../assets/js/jquery.js"></script>
-	 <script src="../assets/js/isotope-docs.min.js"></script>
+	<script src="../assets/js/isotope-docs.min.js"></script>
     <!-- =============== Bootstrap Core JavaScript =============== -->
     <script src="../assets/js/bootstrap.min.js"></script>
     <!-- =============== Plugin JavaScript =============== -->
