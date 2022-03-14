@@ -1,8 +1,7 @@
 <?php
 
 include_once '../db/database.php';
-include_once '../logic/controlAutor.php';
-$autor = new controlAutor();
+
 
 class controlNews extends Database{
 
@@ -46,9 +45,9 @@ class controlNews extends Database{
         $query1 = $this->connection()->prepare('SELECT * FROM noticias');
         $query1 ->execute();
         if($query1-> rowCount()){
-            foreach($query1 as $i){
+            #foreach($query1 as $i){
                 return $query1->fetchAll();
-            }
+            #}
         }else{
             return false;
         }

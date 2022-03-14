@@ -1,3 +1,10 @@
+<?php
+    include '../logic/controlNews.php';
+    
+	#$controlnews= new controlNews();
+    #$news = $controlnews->searchNews(); 
+    #echo $news;
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -67,15 +74,15 @@
 							<a class="page-scroll" href="#contact">Contactenos</a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="news.html">Noticias</a>
+                            <a class="page-scroll" href="views/news.php">Noticias</a>
                         </li>
                         <li>
 							<li class="nav-item dropdown">
 								<a class="page-scroll nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Archivos</a>
 								<ul class="dropdown-menu">
-								  <li><a class="page-scroll dropdown-item" href="files.html">Archivos públicos</a></li>
+								  <li><a class="page-scroll dropdown-item" href="views/files.php">Archivos públicos</a></li>
 								  <li class="dropdown-divider"></li>
-								  <li><a class="page-scroll dropdown-item" href="records.html">Fondos</a></li>
+								  <li><a class="page-scroll dropdown-item" href="views/records.php">Fondos</a></li>
 								</ul>
                         	</li>
 						</li>
@@ -96,30 +103,28 @@
         <div class="container">
             <div class="header-content row">
 				<div id="owl-demo" class="owl-carousel header1">
-				  <div>
-				  <div class="col-xs-12 col-sm-6 col-md-6 header-text">
-                    <h2 class="wow bounceIn animated" data-wow-delay=".40s">Embargarán a conductores morosos</h2>
-                    <h3 class="wow bounceIn animated" data-wow-delay=".50s">20 febrero, 2022 </h3>
-                    <p class="wow bounceIn animated" data-wow-delay=".60s">A raíz del incumplimiento en el pago de las multas de tránsito que han presentado algunos conductores</p>
-                    <p>
-                        <div class="btn btn-primary btn-lg btn-ornge wow bounceIn animated" data-wow-delay="1s"><i class="hbtn"></i> <span>Ver mas</span></i>
-                        </div>
-                    </p>
-					</div>               
-				</div>
-				 <div>
-				  <div class="col-xs-12 col-sm-6 col-md-6 header-text">
-                    <h2 class="wow bounceIn animated" data-wow-delay=".40s">Embargarán a conductores morosos</h2>
-                    <h3 class="wow bounceIn animated" data-wow-delay=".50s">20 febrero, 2022 </h3>
-                    <p class="wow bounceIn animated" data-wow-delay=".60s">A raíz del incumplimiento en el pago de las multas de tránsito que han presentado algunos conductores</p>
-                    <p>
-                        <div class="btn btn-primary btn-lg btn-ornge wow bounceIn animated" data-wow-delay="1s"><i class="hbtn"></i> <span>Ver mas</span></i>
-                        </div>
-                    </p>
-					</div>               
-				</div>
+					<div>
+						<div class="col-xs-12 col-sm-6 col-md-6 header-text">
+							<h2 class="wow bounceIn animated" data-wow-delay=".40s">Embargarán a conductores morosos</h2>
+							<h3 class="wow bounceIn animated" data-wow-delay=".50s">20 febrero, 2022 </h3>
+							<p class="wow bounceIn animated" data-wow-delay=".60s">A raíz del incumplimiento en el pago de las multas de tránsito que han presentado algunos conductores</p>
+							<p>
+								<div class="btn btn-primary btn-lg btn-ornge wow bounceIn animated" data-wow-delay="1s"><i class="hbtn"></i> <span>Ver mas</span></i></div>
+							</p>
+						</div>               
+					</div>
+				 	<div>
+						<div class="col-xs-12 col-sm-6 col-md-6 header-text">
+							<h2 class="wow bounceIn animated" data-wow-delay=".40s">Embargarán a conductores morosos</h2>
+							<h3 class="wow bounceIn animated" data-wow-delay=".50s">20 febrero, 2022 </h3>
+							<p class="wow bounceIn animated" data-wow-delay=".60s">A raíz del incumplimiento en el pago de las multas de tránsito que han presentado algunos conductores</p>
+							<p>
+								<div class="btn btn-primary btn-lg btn-ornge wow bounceIn animated" data-wow-delay="1s"><i class="hbtn"></i> <span>Ver mas</span></i></div>
+							</p>
+						</div>               
+					</div>
 				</div>				 
-				</div>          
+			</div>          
         </div>
 		<!-- =============== container end =============== -->
     </header>

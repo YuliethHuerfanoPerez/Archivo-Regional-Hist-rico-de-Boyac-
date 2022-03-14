@@ -223,14 +223,7 @@
                     <div class="col-xs-12 form-group wow fadeInUp animated">
                         <textarea  type="text" class="form-control" id="contenido" placeholder="Contenido" name="content" required=""><?php echo ($newcont)?></textarea>
                     </div>
-                    <!--
-                    <div data-wow-delay=".1s" class="col-xs-6 form-group wow fadeInUp animated">
-                        <input type="text" class="form-control" placeholder="nombre del autor" id="autorname" name="autorname" required="">
-                    </div>
-                    <div data-wow-delay=".1s" class="col-xs-6 form-group wow fadeInUp animated">
-                        <input type="text" class="form-control" placeholder="Apellido del autor" id="autorlastname" name="autorlastname" required="">
-                    </div>
-                        -->
+        
                     <div data-wow-delay=".1s" class="col-xs-12 form-group wow fadeInUp animated">
                         <label for="fecha" class="form-label">Fecha de publicacion:</label>
                         <input type="date" class="form-control" id="fecha" name="date" required="" value = "<?php echo ($newdate)?>">
