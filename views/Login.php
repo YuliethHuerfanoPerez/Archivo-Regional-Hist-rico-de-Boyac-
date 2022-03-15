@@ -7,7 +7,7 @@
     #$controllsessions->goodbye();
     if (isset($_SESSION['rolUser'])){
         if($_SESSION['rolUser'] == "101"){
-            include_once 'admin-workers.php';
+            include_once 'admin-news.php';
         }else if($_SESSION['rolUser'] == "102"){
             include_once 'admin-news.php';
         }else if($_SESSION['rolUser'] == "103"){
@@ -22,7 +22,7 @@
             $controllsessions->updateSessionInfo($user,$userInfo);
             if (isset($_SESSION['rolUser'])){
                 if($_SESSION['rolUser'] == "101"){
-                    include_once 'admin-workers.php';
+                    include_once 'admin-news.php';
                 }else if($_SESSION['rolUser'] == "102"){
                     include_once 'admin-news.php';
                 }else{

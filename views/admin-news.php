@@ -1,12 +1,12 @@
 <?php
     include '../logic/controlNews.php';
-    session_start();
+    #session_start();
     $update=false;
     $controlnews= new controlNews();
     $news = $controlnews->searchNews(); 
 
     if (isset($_POST['form1'])){
-        
+        session_start();
         $name = $_POST['title'];
         $description = $_POST["description"];
         $content = $_POST["content"];
