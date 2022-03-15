@@ -3,7 +3,6 @@
     include '../logic/controlNews.php';
     $controlnews= new controlNews();
     $news = $controlnews->searchNews();
-    #$news = array(); 
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -56,7 +55,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html"><img src="../assets/img/logo.png" alt="Logo" width="45%" >
+                    <a class="navbar-brand" href="index.php"><img src="../assets/img/logo.png" alt="Logo" width="45%" >
                     </a>
                 </div>
 
@@ -74,15 +73,15 @@
 							<a class="page-scroll" href="#contact">Contactenos</a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="views/news.php">Noticias</a>
+                            <a class="page-scroll" href="news.php">Noticias</a>
                         </li>
                         <li>
 							<li class="nav-item dropdown">
 								<a class="page-scroll nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Archivos</a>
 								<ul class="dropdown-menu">
-								  <li><a class="page-scroll dropdown-item" href="views/files.php">Archivos públicos</a></li>
+								  <li><a class="page-scroll dropdown-item" href="files.php">Archivos públicos</a></li>
 								  <li class="dropdown-divider"></li>
-								  <li><a class="page-scroll dropdown-item" href="views/records.php">Fondos</a></li>
+								  <li><a class="page-scroll dropdown-item" href="records.php">Fondos</a></li>
 								</ul>
                         	</li>
 						</li>
@@ -132,11 +131,13 @@
         ?>
                     <div>
 						<div class="col-xs-12 col-sm-6 col-md-6 header-text">
-							<h2 class="wow bounceIn animated" data-wow-delay=".40s"><?php echo $n['nombre']?></h2>
-							<h3 class="wow bounceIn animated" data-wow-delay=".50s"><?php echo $dateparts[2]." de ".$mes .", ". $dateparts[0]?></h3>
+							<h3 class="wow bounceIn animated" data-wow-delay=".40s"><?php echo $n['nombre']?></h3>
+							<h4 class="wow bounceIn animated" data-wow-delay=".50s"><?php echo $dateparts[2]." de ".$mes .", ". $dateparts[0]?></h4>
 							<p class="wow bounceIn animated" data-wow-delay=".60s"><?php echo $n['descripcion']?></p>
 							<p>
-								<div class="btn btn-primary btn-lg btn-ornge wow bounceIn animated" data-wow-delay="1s"><i class="hbtn"></i> <span>Ver mas</span></i></div>
+							<form action="new.php" method="POST">
+                                <button data-wow-delay=".3s" class="btn btn-primary btn-lg btn-ornge wow bounceIn animated"  name="NewVar" type="submit" value="<?php echo $n['idNoticias']?>">Leer mas</button>
+                            </form>
 							</p>
 						</div>               
 					</div>
@@ -151,11 +152,13 @@
 
                     <div>
 						<div class="col-xs-12 col-sm-6 col-md-6 header-text">
-							<h2 class="wow bounceIn animated" data-wow-delay=".40s"><?php echo $news[$i-1]['nombre']?></h2>
-							<h3 class="wow bounceIn animated" data-wow-delay=".50s"><?php echo $dateparts[2]." de ".$mes .", ". $dateparts[0]?> </h3>
+							<h3 class="wow bounceIn animated" data-wow-delay=".40s"><?php echo $news[$i-1]['nombre']?></h4>
+							<h4 class="wow bounceIn animated" data-wow-delay=".50s"><?php echo $dateparts[2]." de ".$mes .", ". $dateparts[0]?> </h4>
 							<p class="wow bounceIn animated" data-wow-delay=".60s"><?php echo $news[$i-1]['descripcion']?></p>
 							<p>
-								<div class="btn btn-primary btn-lg btn-ornge wow bounceIn animated" data-wow-delay="1s"><i class="hbtn"></i> <span>Ver mas</span></i></div>
+							<form action="new.php" method="POST">
+                                <button data-wow-delay=".3s" class="btn btn-primary btn-lg btn-ornge wow bounceIn animated" name="NewVar" type="submit" value="<?php echo $news[$i-1]['idNoticias']?>">Leer mas</button>
+                            </form>
 							</p>
 						</div>               
 					</div>
@@ -165,8 +168,6 @@
                 }
 
         ?>
-
-
 				</div>				 
 			</div>          
         </div>
@@ -228,7 +229,7 @@
 						del Archivo Nacional de Colombia, creado el 17 de enero de 1868.</p>
 
 						<p>
-							<a href="Reseña.html">
+							<a href="reseña.php">
 								<div class="btn btn-primary btn-lg btn-ornge wow bounceIn animated" data-wow-delay="1s"><i class="hbtn"></i> <span >Ver mas</span></i></div>
 							</a>
 						</p>
@@ -257,18 +258,18 @@
 					<div class="t-box">
 				   	<h3>Dr. Jorge Palacios Preciado</h3>
 				   	<p>
-					<a href="biography_Jorge.html">
+					<a href="biography_Jorge.php">
 						<div class="btn btn-primary btn-lg btn-ornge wow bounceIn animated" data-wow-delay="0s"><i class="hbtn"></i> <span >Ver Biografia</span></i></div>
 					</a>
 					</p>
 				   </div>
 				  </div>
 				  <div class="col-sm-4 wow fadeInUp animated" data-wow-delay=".2s">
-					<div class="timg"><img class="timgPh" src="../assets/img/Biography/Bio_rosula.jpg"/></div>
+					<div class="timg"><img class="timgPh" src="../assets/img/Biography/Bio_myriam.png"/></div>
 				   <div class="t-box">
 				   <h3>Miryam Báez Osorio</h3>
 				   <p>
-					<a href="biography_Myriam.html">
+					<a href="biography_Myriam.php">
 						<div class="btn btn-primary btn-lg btn-ornge wow bounceIn animated" data-wow-delay="0s"><i class="hbtn"></i> <span >Ver Biografia</span></i></div>
 					</a>
 					</p>
@@ -279,7 +280,7 @@
 				   <div class="t-box">
 				   <h3>María Rósula Vargas De Castañeda</h3>
 				   <p>
-					<a href="biography_Rosula.html">
+					<a href="biography_Rosula.php">
 						<div class="btn btn-primary btn-lg btn-ornge wow bounceIn animated" data-wow-delay="0s"><i class="hbtn"></i> <span >Ver Biografia</span></i></div>
 					</a>
 					</p>
@@ -315,7 +316,7 @@
 								<a data-wow-delay=".2s" class="wow fadeInUp animated" href="index.html#"><i class="fa fa-envelope"></i></a>
 							</div>
 							<div class="col-xs-6 col-sm-6 col-md-8 wow fadeInUp animated">
-								<label for="c_name" >archivo.historico@gmail.com</label>
+								<label for="c_name" >ahrbtunja@gmail.com</label>
 							</div>
 							<div class="col-xs-6 col-sm-6 col-md-1 col-sm-offset-3 wow fadeInUp animated">
 								<a data-wow-delay=".1s" class="wow fadeInUp animated" href="https://wa.me/573101234567"><i class="fa fa-whatsapp"></i></a>	
@@ -369,10 +370,10 @@
 					<h2>Visitanos</h2>
 					<h3>Para nosotros es un placer ayudarte, puedes visistar nuestras instalaciones</h1>
 					<h3>Tunja, Boyacá, Colombia</h1>
-					<h3>Calle 20 No. 9 - 90 Casa de la Torre</h1>
+					<h3>Carrera 10 No. 20-45</h1>
 				</div>
 				<div class="col-xs-12 col-sm-8 col-md-8 wow bounceIn animated" data-wow-delay=".1s">
-					<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3971.229214695234!2d-73.36166732254785!3d5.53297976519331!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e6a7c2d2185b0f1%3A0xde3a81a2fddeac4c!2sCl.%2020%20%239-90%2C%20Tunja%2C%20Boyac%C3%A1!5e0!3m2!1ses!2sco!4v1645411201217!5m2!1ses!2sco" width="800" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+					<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3971.2233395416292!2d-73.36388428600218!3d5.533854735412481!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e6a7c2d1c3d91cd%3A0xe624ece220335639!2zQ3JhLiAxMCAjMjAsIFR1bmphLCBCb3lhY8Oh!5e0!3m2!1ses!2sco!4v1647314980064!5m2!1ses!2sco" width="800" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>	
 				</div>
 			</div>
 		</section>

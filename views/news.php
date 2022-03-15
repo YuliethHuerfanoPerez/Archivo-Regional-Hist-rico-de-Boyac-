@@ -54,7 +54,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#"><img src="../assets/img/logo.png" alt="Logo" width="45%">
+                    <a class="navbar-brand" href="index.php"><img src="../assets/img/logo.png" alt="Logo" width="45%">
                     </a>
                 </div>
 
@@ -63,13 +63,13 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
 						<li>
-                            <a class="page-scroll" href="../index.php#home">Inicio</a>
+                            <a class="page-scroll" href="../index.php">Inicio</a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="./index.php#about">Conozcanos</a>
+                            <a class="page-scroll" href="../index.php#about">Conozcanos</a>
                         </li>
                         <li>
-							<a class="page-scroll" href="./index.php#contact">Contactenos</a>
+							<a class="page-scroll" href="../index.php#contact">Contactenos</a>
                         </li>
                         <li>
                             <a class="page-scroll" href="news.html">Noticias</a>
@@ -78,9 +78,9 @@
 							<li class="nav-item dropdown">
 								<a class="page-scroll nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Archivos</a>
 								<ul class="dropdown-menu">
-								  <li><a class="page-scroll dropdown-item" href="files.html">Archivos públicos</a></li>
+								  <li><a class="page-scroll dropdown-item" href="files.php">Archivos públicos</a></li>
 								  <li class="dropdown-divider"></li>
-								  <li><a class="page-scroll dropdown-item" href="records.html">Fondos</a></li>
+								  <li><a class="page-scroll dropdown-item" href="records.php">Fondos</a></li>
 								</ul>
                         	</li>
 						</li>

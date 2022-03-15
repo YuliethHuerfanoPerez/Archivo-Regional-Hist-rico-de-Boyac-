@@ -1,18 +1,3 @@
-<?php
-    setlocale(LC_TIME, 'es_ES');
-    include '../logic/controlNews.php';
-    $controlnews= new controlNews();
-    $idnew=$_POST['NewVar'];
-    if (isset($idnew)){
-        $new=$controlnews->searchNewId($idnew);    
-        $dateparts=explode("-",$new[0]['fecha']);
-        $fecha = DateTime::createFromFormat('!m', $dateparts[1]);
-        $mes = strftime("%B", $fecha->getTimestamp());
-    
-
-
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -21,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>noticia ARHB</title>
+    <title>María Rósula Vargas</title>
     <!-- =============== Bootstrap Core CSS =============== -->
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css" type="text/css">
     <!-- =============== fonts awesome =============== -->
@@ -73,13 +58,13 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
 						<li>
-                            <a class="page-scroll" href="../index.php">Inicio</a>
+                            <a class="page-scroll" href="index.php">Inicio</a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="../index.php#about">Conozcanos</a>
+                            <a class="page-scroll" href="index.php#about">Conozcanos</a>
                         </li>
                         <li>
-							<a class="page-scroll" href="../index.php#contact">Contactenos</a>
+							<a class="page-scroll" href="index.php#contact">Contactenos</a>
                         </li>
                         <li>
                             <a class="page-scroll" href="news.php">Noticias</a>
@@ -110,18 +95,58 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="classic-blog blog-single">
-                        <div class="bs-blog-img"><img alt="" src="../assets/img/blog3.JPG"></div>
+                        <div class="bs-blog-img"><img alt="fotografia Rosula Vargas " src="../assets/img/Biography/Bio_rosula.jpg" width="10%"></div>
                         <div class="bs-blog-naz">
-                            <div class="bs-blog-type"><i class="fa fa-pencil-square-o"></i></div>
-                            <div class="bs-blog-name"><a ><?php echo $new[0]['nombre']?></a></div>
-                            <div class="bs-blog-detail"><?php echo $dateparts[2]. " de ".$mes .", ".$dateparts[0]?></div>
-                            <div class="bs-blog-text"> <?php echo $new[0]['contenido']?></div> 
-                        </div>
+                            <h2>María Rósula Vargas de Castañeda</h2>
+                            <div class="bs-blog-text" style="text-align: justify;"> 
+                                <p>Nació en Pesca (Boyacá), realizó estudios de
+                                    Bachillerato en la Normal Femenina de Tunja,
+                                    Licenciada en Ciencias Sociales y Económicas de la
+                                    Universidad Pedagógica y Tecnológica de Colombia.
+                                    Magíster en Historia de la Universidad Pedagógica y
+                                    Tecnológica de Colombia. Miembro de Número de la
+                                    Academia Boyacense de Historia, Cofundadora y
+                                    Vicepresidente de la Sociedad Nariñista de Boyacá,
+                                    Miembro de la “Corporación Amor por Tunja”; Secretaria
+                                    del Centro de Estudios Femeninos de Boyacá,
+                                    Profesora de la Escuela Normal de Varones de Tunja. Ha sido
+                                    Catedrática de la Universidad Pedagógica y Tecnológica de Colombia en
+                                    el Postgrado de Archivística, en la Maestría en Historia y en la Fundación
+                                    Universitaria de Boyacá. Desde 1997 se ha venido desempeñando como
+                                    Directora del Archivo Histórico Regional de Boyacá.</p>
+                                <p>Entre sus trabajos publicados se encuentran: “La vida cotidiana del
+                                    Altiplano Cundiboyacense en la Segunda mitad del siglo XIX (Tunja-
+                                    Bogotá), “La Economía de Tunja segunda mitad del siglo XIX”, “La
+                                    medicina Popular en Tunja segunda mitad del siglo XIX”. “Imágenes y
+                                    Devociones en Tunja segunda mitad del siglo XIX”; “Magdalena Ortega y
+                                    Mesa en la vida de Antonio Nariño”; “Antonio Nariño el defensor del
+                                    Pueblo”; “La Vida Cotidiana en los Colegios de Tunja en la segunda
+                                    mitad del siglo XIX”; “La Vida Cotidiana Económica en Pesca”.</p>
+         
+                                <p>“Vida Cotidiana Religiosa en el Altiplano Cundiboyacense devociones e
+                                    imágenes”; Indumentaria y Moda de los Indígenas en los llanos
+                                    Orientales a través de los cronistas”; “Conmemoración 180 años de
+                                    Independencia Colombiana”: Fuentes documentales del Archivo Militar;
+                                    “La Vida Social y Familiar de los Indígenas en los llanos colombianos a
+                                    través de los cronistas: alimentos y bebidas”; “Informe Archivo Histórico
+                                    Regional de Boyacá, segundo semestre 2001”; “Homenaje a los
+                                    Honorables Magistrados Pescanos: Isaura Várgas Díaz y Herman Galán
+                                    Castellanos”.</p>
+                                <p><b>Historia de Pesca. Pueblo Grande “Dominio de la Fortaleza”</b>, es un
+                                    trabajo de Historia local de las mentalidades colectivas y de la vida
+                                    cotidiana, que refleja el espacio geográfico, el desenvolvimiento histórico
+                                    del pueblo, las costumbres, devociones, fiestas, diversiones y personajes
+                                    ilustres, la organización del gobierno con los primeros alcaldes Pedáneos
+                                    hasta los electos por voto popular. El aporte Historiográfico radica en
+                                    documentar con fuentes primarias en su mayor parte inéditas.</p>
+                                
+                             </div> 
+                            </div>
                     </div>
+                    <br>
                 </div>
             </div>
         </div>
-        <br>
     </section>	
 		<footer id="footer">
 		<!-- =============== container =============== -->
@@ -208,6 +233,3 @@ window.onload = function() {
 </script>
 </body>
 </html>
-<?php
-}
-?>
