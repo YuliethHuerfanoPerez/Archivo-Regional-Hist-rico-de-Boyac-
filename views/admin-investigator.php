@@ -1,3 +1,71 @@
+<?php
+    include '../logic/investigatorManagement.php';
+    #session_start();
+    $update=false;
+    $showSearch=false;
+    $investigatorManagement= new investigatorManagement();
+    $researchers = $investigatorManagement->showResearcher(); 
+    $researcher = ""; 
+
+    if (isset($_POST['add'])){
+        session_start();
+        $idResearcher = $_POST['idResearcher'];
+        $nameResearcher = $_POST['nameResearcher'];
+        $lastNameResearcher = $_POST['lastNameResearcher'];
+        $emailResearcher = $_POST['emailResearcher'];
+        $password = $_POST['password'];
+        $phone = $_POST['phone'];
+        if(empty($idResearcher) || empty($nameResearcher) || empty($lastNameResearcher) || empty($emailResearcher) || empty($password) || empty($phone)){
+            $researcher = "Credenciales invalidas, Por favor intentalo nuevamente"; 
+            echo '<script language="javascript">alert("Las credenciales son inválidas, el investigador no fue registrado");</script>';
+        }else{
+            $researcher= $investigatorManagement->addResearcher($idResearcher, $nameResearcher, $lastNameResearcher, $emailResearcher, $password, $phone);
+            echo '<script language="javascript">alert("Investigador registrado con éxito");</script>';
+        }
+    }
+    if (isset($_POST['deleteResearcher'])){
+        $delete = $investigatorManagement->deleteResearcher($_POST['idInvestigator']);
+        $researcherEmpty=$delete;
+        if($delete){
+            echo '<script language="javascript">alert("El investigador seleccionado fue eliminado con éxito");</script>';
+        }else{
+            
+        }
+    }
+    if (isset($_POST['update'])){
+        $update=true;
+        $idupdate=$_POST['idInvestigator'];
+        $newUpdate= $investigatorManagement->searchNewId($idupdate);
+        foreach($newUpdate as $i){
+            $newId= $i['id'];
+            $newname= $i['nameResearcher'];
+            $newlastName= $i['lastNameResearcher'];
+            $newemail= $i['user'];
+            $newPassword=$i['password'];
+            $newPhone=$i['celular'];
+        }
+    }
+    if (isset($_POST['search'])){
+        $showSearch=true;
+        $researcher= $investigatorManagement->searchById($_POST['identificacion']);
+    }
+    if (isset($_POST['updateResearcher'])){
+        $idResearcher=$_POST['id'];
+        $nameResearcher = $_POST['name'];
+        $lastNameResearcher = $_POST['lastName'];
+        $emailResearcher = $_POST['email'];
+        $password = $_POST['passwordR'];
+        $phone = $_POST['phone'];
+        if(empty($idResearcher) || empty($nameResearcher) || empty($lastNameResearcher) || empty($emailResearcher) || empty($password) || empty($phone)){
+            $researcherEmpty = "Credenciales invalidas, Por favor intentalo nuevamente"; 
+        }else{
+            $researcherEmpty= $investigatorManagement->uptadeResearcher($idResearcher, $nameResearcher, $lastNameResearcher, $emailResearcher, $password, $phone);
+            echo '<script language="javascript">alert("El investigador fue modificado con éxito");</script>';
+            include_once 'admin-investigator.php';
+        }
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -77,7 +145,7 @@
                 </div>
                 <!-- =============== navbar-collapse =============== -->
 
-            </div>
+           </div>
         </div>
         <!-- =============== container-fluid =============== -->
     </nav>
@@ -88,122 +156,198 @@
     <Section id="workers-pri">
         <div class="container">            
 			<div class="row">
-				    <div class="col-sm-12 izq wow fadeInDown animated" data-wow-delay=".1s">
+				
+				    <div class="col-sm-6 izq wow fadeInDown animated" data-wow-delay=".1s">
                         <div class="titleadmin"> 
                             <div class="row">
                                 <div class="col-xs-10 form-group wow fadeInUp animated">
                                     <h2>INVESTIGADORES</h2>
                                 </div>
-                                
-                            </div>  
+                                <div class="col-xs-2 form-group wow fadeInUp animated">
+                                    <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"onclick="window.location.href='admin-investigator.php'"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                           
                             
                         </div>
                         <div>
                             <form action="#" method="post">
                                 <div class="ajax-hidden">
                                     <div class="col-xs-8 form-group wow fadeInUp animated">
-                                        <label for="c_name" class="sr-only">Nombre</label>
-                                        <input type="text" placeholder="Nombre" name="name" class="form-control" id="name" required="">
+                                        <label for="c_name" class="sr-only">Identificación</label>
+                                        <input type="text" placeholder="Identificación" name="identificacion" class="form-control" id="identificacion" required="">
                                     </div>
                                     <div class="col-xs-4 form-group wow fadeInUp animated">
-                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-search"></i></button>
+                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" name="search" type="submit"><i class="fa fa-search"></i></button>
                                     </div>
                                 </div>
                                 <div class="ajax-response"></div>
                             </form>
                         </div>
-                        <div class="col-sm-6 izq wow fadeInDown animated" data-wow-delay=".1s">
-                            <form action="#" method="post">
+                        <?php
+                            if($showSearch){
+                        ?>
+                            <div class="col-sm-12 izq wow fadeInDown animated" data-wow-delay=".1s">
+                                <div class="ajax-hidden">
+                                    <div class="col-xs-12 form-group wow fadeInUp animated" style="text-align:center"> 
+                                        <label><?php echo ("Datos del investigador ".$researcher['nameResearcher']." ".$researcher['lastNameResearcher'])?></label> 
+                                    </div>
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label ><?php echo ("Usuario: ".$researcher['user'])?></label> 
+                                    </div>
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label ><?php echo ("Identificaci&oacute;n: ".$researcher['id'])?></label> 
+                                    </div>
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label ><?php echo ("Nombre: ".$researcher['nameResearcher'])?></label> 
+                                    </div>
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label ><?php echo ("Apellido: ".$researcher['lastNameResearcher'])?></label> 
+                                    </div>
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label ><?php echo ("Teléfono: ".$researcher['celular'])?></label> 
+                                    </div>
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label ><?php echo ("Contraseña: ".$researcher['password'])?></label> 
+                                    </div>
+                                    <input  name="idInvestigator" type="hidden" value="<?php echo ($researcher['id'])?>">
+                                    <div class="col-xs-4 form-group wow fadeInUp animated">
+                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit" name="deleteResearcher" ><i class="fa fa-trash" ></i></button>
+                                    </div>
+                                    <div class="col-xs-4 form-group wow fadeInUp animated">
+                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit" name="update1"><i class="fa fa-refresh"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php
+                        }else{
+                            $num=0;
+                            foreach($researchers as $i){
+                                $num++;
+                        ?>
+                        <div class="col-sm-12 izq wow fadeInDown animated" data-wow-delay=".1s">
+                            <form action="" method="POST">
                                 <br>
                                 <div class="ajax-hidden">
+                                    <div class="col-xs-12 form-group wow fadeInUp animated" style="text-align:center"> 
+                                        <label><?php echo ("Investigador N° ".$num)?></label> 
+                                    </div>
                                     <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <label >investigador 1</label> 
+                                        <label ><?php echo ("Usuario: ".$i['user'])?></label> 
+                                    </div>
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label ><?php echo ("Identificaci&oacute;n: ".$i['id'])?></label> 
+                                    </div>
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label ><?php echo ("Nombre: ".$i['nameResearcher'])?></label> 
+                                    </div>
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label ><?php echo ("Apellido: ".$i['lastNameResearcher'])?></label> 
+                                    </div>
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label ><?php echo ("Telefono: ".$i['celular'])?></label> 
+                                    </div>
+                                        <input  name="idInvestigator" type="hidden" value="<?php echo ($i['id'])?>">
+                                    <div class="col-xs-4 form-group wow fadeInUp animated">
+                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit" name="deleteResearcher" ><i class="fa fa-trash" ></i></button>
                                     </div>
                                     <div class="col-xs-4 form-group wow fadeInUp animated">
-                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-trash"></i></button>
+                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit" name="update"><i class="fa fa-refresh"></i></button>
                                     </div>
-                                   
                                 </div>
-                                <div class="ajax-response"></div>
+                                 <div class="ajax-response"></div>
                             </form>
                         </div>
-                        <div class="col-sm-6 izq wow fadeInDown animated" data-wow-delay=".1s">
-                            <form action="#" method="post">
-                                <br>
-                                <div class="ajax-hidden">
-                                    <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <label >Investigador 1</label> 
-                                    </div>
-                                    <div class="col-xs-4 form-group wow fadeInUp animated">
-                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-trash"></i></button>
-                                    </div>
-                                    
-                                </div>
-                                <div class="ajax-response"></div>
-                            </form>
-                        </div>
-                        <div class="col-sm-6 izq wow fadeInDown animated" data-wow-delay=".1s">
-                            <form action="#" method="post">
-                                <br>
-                                <div class="ajax-hidden">
-                                    <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <label >Investigador 1</label> 
-                                    </div>
-                                    <div class="col-xs-4 form-group wow fadeInUp animated">
-                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-trash"></i></button>
-                                    </div>
-                                   
-                                </div>
-                                <div class="ajax-response"></div>
-                            </form>
-                        </div>
-                        <div class="col-sm-6 izq wow fadeInDown animated" data-wow-delay=".1s">
-                            <form action="#" method="post">
-                                <br>
-                                <div class="ajax-hidden">
-                                    <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <label >Investigador 1</label> 
-                                    </div>
-                                    <div class="col-xs-4 form-group wow fadeInUp animated">
-                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-trash"></i></button>
-                                    </div>
-                                   
-                                </div>
-                                <div class="ajax-response"></div>
-                            </form>
-                        </div>
-                        <div class="col-sm-6 izq wow fadeInDown animated" data-wow-delay=".1s">
-                            <form action="#" method="post">
-                                <br>
-                                <div class="ajax-hidden">
-                                    <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <label >Investigador 1</label> 
-                                    </div>
-                                    <div class="col-xs-4 form-group wow fadeInUp animated">
-                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-trash"></i></button>
-                                    </div>
-                                   
-                                </div>
-                                <div class="ajax-response"></div>
-                            </form>
-                        </div>
-                        <div class="col-sm-6 izq wow fadeInDown animated" data-wow-delay=".1s">
-                            <form action="#" method="post">
-                                <br>
-                                <div class="ajax-hidden">
-                                    <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <label >Investigador 1</label> 
-                                    </div>
-                                    <div class="col-xs-4 form-group wow fadeInUp animated">
-                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-trash"></i></button>
-                                    </div>
-                                   
-                                </div>
-                                <div class="ajax-response"></div>
-                            </form>
-                        </div>
+                        <?php
+                            }
+                        }
+                        ?>
                       
 				    </div>
+				    <div class="col-sm-6 wow fadeInUp animated" data-wow-delay=".2s">
+                        <div class="col-xs-12 wow bounceIn animated" data-wow-delay=".1s">
+                            <form action="" method="post">
+                                <div class="ajax-hidden">
+                                    <?php
+                                        if($update){
+                                    ?>
+                                    <div class="titleadmin"> 
+                                        <h2>ACTUALIZAR</h2>
+                                    </div>
+                                    <input type="hidden" class="form-control" id="id" name="id" placeholder="Titulo" value = "<?php echo ($idupdate)?>" required="">
+                                    <div data-wow-delay=".1s" class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label for="c_email" class="sr-only">Nombre</label>
+                                        <input type="text" placeholder="Nombre" name="name" class="form-control" id="name" value = "<?php echo ($newname)?>" required="">
+                                    </div>
+                                    
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label for="c_name" class="sr-only">Apellido</label>
+                                        <input type="text" placeholder="Apellido" name="lastName" class="form-control" id="lastName" value = "<?php echo ($newlastName)?>" required="">
+                                    </div>
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label for="c_name" class="sr-only">Correo electr&oacute;nico</label>
+                                        <input type="email" placeholder="correo electr&oacute;nico" name="email" class="form-control" id="email" value = "<?php echo ($newemail)?>" required="">
+                                    </div>
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label for="c_name" class="sr-only">Telefono</label>
+                                        <input type="number" placeholder="telefono" name="phone" class="form-control" id="phone" value = "<?php echo ($newPhone)?>" required="">
+                                    </div>
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label for="c_name" class="sr-only">Contraseña</label>
+                                        <input type="password" placeholder="Contraseña" name="passwordR" class="form-control" id="passwordR" value = "<?php echo ($newPassword)?>" required="">
+                                    </div>
+                                    <div class="col-xs-6 form-group wow fadeInUp animated">
+                                        <button class="btn" id="btn-add" type="submit" name="updateResearcher">Actualizar investigador</button>
+                                    </div>
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                    <div class="ajax-response"><?php if(isset($researcherEmpty)){echo $researcherEmpty;}?></div>
+                                    </div>
+                                    <?php
+                                        }else{
+                                    ?>
+                                </div>
+                                <div class="titleadmin"> 
+                                    <h2>AGREGAR</h2>
+                                </div>
+                                <div class="ajax-hidden">
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label for="c_name" class="sr-only">Documento de identidad</label>
+                                        <input type="text" placeholder="Documento de identidad" name="idResearcher" class="form-control" id="idResearcher" required="">
+                                    </div>
+            
+                                    <div data-wow-delay=".1s" class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label for="c_email" class="sr-only">Nombre</label>
+                                        <input type="text" placeholder="Nombre" name="nameResearcher" class="form-control" id="nameResearcher"  required="">
+                                    </div>
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label for="c_name" class="sr-only">Apellido</label>
+                                        <input type="text" placeholder="Apellido" name="lastNameResearcher" class="form-control" id="lastNameResearcher" required="">
+                                    </div>
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label for="c_name" class="sr-only">Correo electr&oacute;nico</label>
+                                        <input type="email" placeholder="correo electr&oacute;nico" name="emailResearcher" class="form-control" id="emailResearcher" required="">
+                                    </div>
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label for="c_name" class="sr-only">Telefono</label>
+                                        <input type="number" placeholder="telefono" name="phone" class="form-control" id="phone" required="">
+                                    </div>
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label for="c_name" class="sr-only">Contraseña</label>
+                                        <input type="password" placeholder="Contraseña" name="password" class="form-control" id="password" required="">
+                                    </div>
+                                    <div class="col-xs-6 form-group wow fadeInUp animated">
+                                        <button class="btn" id="btn-add" type="submit" name="add">Agregar investigador</button>
+                                    </div>                                
+                                </div>
+                                <div class="ajax-response"></div>
+                            </form>
+                        </div>
+                        <?php
+                             }
+                        ?>				   
+				     </div>
+				                  
+				
 			</div>
 		</div>
     </Section>
