@@ -207,7 +207,7 @@
         </div>
         <div class="col-xs-12 wow bounceIn animated" data-wow-delay=".1s">
             
-            <form action="" method="POST">
+            <form action="" method="POST" enctype="multipart/form-data">
                 <div class="ajax-hidden">
                     <?php
                         if($update){
@@ -262,11 +262,11 @@
                         <label for="fecha" class="form-label">Fecha de publicacion:</label>
                         <input type="date" class="form-control" id="fecha" name="date" required="">
                     </div>
-                    <!-- 
+                    
                     <div class="col-xs-12 form-group wow fadeInUp animated">
                         <input type="image" class="form-control" id="imagen" alt="Imagen" name="imagen">
                     </div>
-                    -->
+                    
                     <div class="col-xs-6 form-group wow fadeInUp animated">
                         <button class="btn" id="btn-add" type="submit" name="form1">Crear</button>
                     </div>
