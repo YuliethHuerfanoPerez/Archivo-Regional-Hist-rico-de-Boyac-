@@ -1,3 +1,7 @@
+<?php
+    include '../logic/Personal.php';
+    $personal = new Personal();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -98,72 +102,68 @@
                                     <h2>FUNCIONARIOS</h2>
                                 </div>
                                 <div class="col-xs-2 form-group wow fadeInUp animated">
-                                    <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"onclick="window.location.href='admin-workers.html'"><i class="fa fa-plus"></i></button>
+                                    
+                                    <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"onclick="window.location.href='admin-workers.php'"><i class="fa fa-plus"></i></button>
                                 </div>
                             </div>
                            
                             
                         </div>
                         <div>
-                            <form action="#" method="post">
+                            <form action="../logic/controlPersonal.php" method="POST">
                                 <div class="ajax-hidden">
+                                    <h4>BUSCAR</h4>
                                     <div class="col-xs-8 form-group wow fadeInUp animated">
-                                        <label for="c_name" class="sr-only">Nombre</label>
-                                        <input type="text" placeholder="Nombre" name="name" class="form-control" id="name" required="">
+                                        <input type="number" placeholder="Cedula" name="cedula" class="form-control" id="cedula">
                                     </div>
                                     <div class="col-xs-4 form-group wow fadeInUp animated">
-                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-search"></i></button>
+                                        <button data-wow-delay=".3s" name="search" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-search"></i></button>
                                     </div>
                                 </div>
-                                <div class="ajax-response"></div>
                             </form>
                         </div>
                         <div class="col-sm-12 izq wow fadeInDown animated" data-wow-delay=".1s">
                             <form action="#" method="post">
-                                <br>
+                            <br>
                                 <div class="ajax-hidden">
-                                    <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <label >Funcionario 1</label> 
-                                    </div>
-                                    <div class="col-xs-4 form-group wow fadeInUp animated">
-                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-trash"></i></button>
-                                    </div>
-                                    <div class="col-xs-4 form-group wow fadeInUp animated">
-                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-refresh"></i></button>
-                                    </div>
+                                <table class="table">
+                                    <thead class="table-secondary" style="background-color: #1EA078;">
+                                    <tr>
+                                        <th scope="col">Cedula</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Cargo</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                            $personal -> viewUsuarios();
+                                        ?>
+                                    </tr>
+                                    </tbody>
+                                </table>                                   
                                 </div>
-                                <div class="ajax-response"></div>
                             </form>
                         </div>
                         <div class="col-sm-12 izq wow fadeInDown animated" data-wow-delay=".1s">
-                            <form action="#" method="post">
+                            <form action="../logic/controlPersonal.php" method="post">
                                 <br>
+                                
                                 <div class="ajax-hidden">
+                                    <h4>BORRAR Ó ACTUALIZAR</h4>
                                     <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <label >Funcionario 1</label> 
+                                        <input type="number" placeholder="Cedula" name="cedula" class="form-control" id="cedula">
                                     </div>
                                     <div class="col-xs-4 form-group wow fadeInUp animated">
-                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-trash"></i></button>
+                                    <button data-wow-delay=".3s" name="delete" class="btn btn-sm btn-block wow fadeInUp animated" type="submit">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
                                     </div>
                                     <div class="col-xs-4 form-group wow fadeInUp animated">
-                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-refresh"></i></button>
-                                    </div>
-                                </div>
-                                <div class="ajax-response"></div>
-                            </form>
-                        </div>
-                        <div class="col-sm-12 izq wow fadeInDown animated" data-wow-delay=".1s">
-                            <form action="#" method="post">
-                                <br>
-                                <div class="ajax-hidden">
-                                    <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <label >Funcionario 1</label> 
-                                    </div>
-                                    <div class="col-xs-4 form-group wow fadeInUp animated">
-                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-trash"></i></button>
-                                    </div>
-                                    <div class="col-xs-4 form-group wow fadeInUp animated">
-                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-refresh"></i></button>
+                                    <button data-wow-delay=".3s" name="actualizar" class="btn btn-sm btn-block wow fadeInUp animated" type="submit">
+                                        <i class="fa fa-refresh"></i>
+                                    </button>
+                                        
+                                        
                                     </div>
                                 </div>
                                 <div class="ajax-response"></div>
@@ -176,32 +176,40 @@
                             <h2>GESTIONAR</h2>
                         </div>
                         <div class="col-xs-12 wow bounceIn animated" data-wow-delay=".1s">
-                            <form action="#" method="post">
+                            <form action="../logic/controlPersonal.php" method="post">
                                 <div class="ajax-hidden">
                                     <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <label for="c_name" class="sr-only">Codig</label>
-                                        <input type="text" placeholder="Codigo" name="name" class="form-control" id="name" required="">
+                                        <input type="number" placeholder="Cedula" name="cedula" class="form-control" id="cedula" required>
                                     </div>
             
                                     <div data-wow-delay=".1s" class="col-xs-12 form-group wow fadeInUp animated">
-                                        <label for="c_email" class="sr-only">Nombre</label>
-                                        <input type="text" placeholder="Nombre" name="email" class="form-control" id="email"  required="">
+                                        <input type="text" placeholder="Nombre" name="nombre" class="form-control" id="nombre"  required>
                                     </div>
                                     <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <label for="c_name" class="sr-only">Cedula</label>
-                                        <input type="number" placeholder="Cedula" name="name" class="form-control" id="name" required="">
+                                        <input type="text" placeholder="Apellido" name="apellido" class="form-control" id="apellido" required>
+                                    </div>
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <input type="number" placeholder="Celular" name="celular" class="form-control" id="celular" required>
+                                    </div>
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <input type="text" placeholder="Corrreo@electronico.com" name="email" class="form-control" id="email">
+                                    </div>
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <input type="text" placeholder="Nombre Usuario" name="nombreUsuario" class="form-control" id="nombreUsuario" required>
+                                    </div>
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <input type="text" placeholder="Contraseña" name="contrasena" class="form-control" id="contrasena" required>
                                     </div>
                                     <div class="col-xs-12 form-group wow fadeInUp animated">
                                         
-                                        <select name="" id="">
-                                            <option value="">Cargo</option>
-                                            <option value="">Administrador</option>
-                                            <option value="">Funcionario</option>
+                                        <select name="cargo" id="" required>
+                                            <option selected>Cargo</option>
+                                            <option value='101'>Administrador</option>
+                                            <option value='102'>Funcionario</option>
                                         </select>
                                     </div>
-                                    <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit" style="background-color: #1EA078; color: white;">Añadir</button>
+                                    <input data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" value="Añadir" name="add" type="submit" style="background-color: #1EA078; color: white;">
                                 </div>
-                                <div class="ajax-response"></div>
                             </form>
                         </div>				   
 				     </div>
