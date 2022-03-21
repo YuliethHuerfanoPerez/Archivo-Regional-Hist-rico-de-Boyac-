@@ -49,13 +49,8 @@ class controlNews extends Database{
                 }
                 
             }
-        }
-            
+        }         
         return $out;
-            
-            
-
-
         }else{
             return 'No fue posible añadir la noticia';
         }
@@ -104,24 +99,40 @@ class controlNews extends Database{
         }
     }
     public function deleteNew($idNews){
-        $pictures= $this->getpictures($idNews);
         $conn=$this->connection();
-        foreach($pictures as $pic){
-            if(file_exists("../files/pictures/". $pic['sourcename'])){
-                unlink("../files/pictures/". $pic['sourcename']);
-            }
-        }
-        $deleteFiles=$conn->prepare('DELETE FROM pictures where IdNot= ?');
-        $deleteFiles->execute([$idNews]);
         $query1= $conn->prepare('DELETE FROM noticias where idNoticias= ?');
         $query1 -> execute([$idNews]);
-        if($query1){
+        $delete= $this->deletefiles($idNews);
+        if($query1 && $delete){
             return 'eliminado';
         }else{
             return 'No fue posible eliminar la noticia';
         }
     }
+    public function deletefiles($idnews){
+        $pictures= $this->getpictures($idnews);
+        if ($pictures){
+            $conn=$this->connection();
+            foreach($pictures as $pic){
+                if(file_exists("../files/pictures/". $pic['sourcename'])){
+                    unlink("../files/pictures/". $pic['sourcename']);
+                }
+            }
+            $deleteFiles=$conn->prepare('DELETE FROM pictures where IdNot= ?');
+            $deleteFiles->execute([$idnews]);
+            if ($deleteFiles){
+                return TRUE;
+            }else{
+                return FALSE;
+            }
+        }else{
+            return TRUE;
+        }
+
+        
+    }
     public function uptadeNew($idnew,$name, $description, $content, $date,$idUser,$files){
+        $this->deletefiles($idnew);
         $conn = $this->connection();
         $query1= $conn->prepare('UPDATE noticias SET nombre= ?, descripcion= ?,contenido= ?,fecha= ?,idUsuario= ? WHERE idNoticias= ?');
         $query1-> execute([$name,$description,$content,$date,$idUser,$idnew]);

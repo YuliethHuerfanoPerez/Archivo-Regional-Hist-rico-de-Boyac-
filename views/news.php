@@ -106,15 +106,13 @@
                 <?php
                     if($news){
                         for($i = 1; $i <sizeof($news)+1;$i++){
-                           #$pictures= $controlnews->getpictures($news[$i-1]["idNoticias"]);
-                           #echo $pictures;
 
                 ?>
                     
                     <div class="col-xs-12 col-sm-4 col-md-4 wow fadeInUp animated" data-wow-delay=".1s">
                         <div class="blog-img">
                             
-                            <img src="../files/pictures/2020-03-20.png"/>
+                            <img src="../assets/img/LogoAHRB.jpg"/>
                             <!--<img src="../files/pictures/2020-03-20.png"/>-->
                         </div>
                             <?php 

@@ -1,5 +1,8 @@
 <?php
     include '../logic/controlNews.php';
+    if (!isset($_SESSION)){
+        session_start(); 
+    }
     #session_start();
     $update=false;
     $controlnews= new controlNews();
@@ -7,7 +10,7 @@
 
     if (isset($_POST['form1'])){
         
-        session_start();
+        #session_start();
         $name = $_POST['title'];
         $description = $_POST["description"];
         $content = $_POST["content"];
