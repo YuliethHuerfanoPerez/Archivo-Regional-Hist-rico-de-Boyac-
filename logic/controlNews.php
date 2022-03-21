@@ -7,28 +7,60 @@ class controlNews extends Database{
 
 
     
-    public function addNews ($name, $description, $content, $autorname, $autorlastname, $date, $idUser){
-       
+    public function addNews ($name, $description, $content, $autorname, $autorlastname, $date, $idUser,$files){
         $query1= $this->connection()->prepare('SELECT idAutor FROM autor WHERE nombre = ? and apellido=?;');
         $query1 ->execute([$autorname,$autorlastname]);
         if (!$query1->rowCount()){
-            $query2 = $this->connection()->prepare('INSERT INTO autor (nombre,apellido) VALUES (?,?)');
+            $query2 = $this->connection()->prepare('INSERT INTO autor (nombre,apellido) VALUES (?,?);');
             $query2 -> execute([$autorname, $autorlastname]);
         }
-        $queryautor= $this->connection()->prepare('SELECT idAutor FROM autor WHERE nombre = ? and apellido=?');
+        $queryautor= $this->connection()->prepare('SELECT idAutor FROM autor WHERE nombre = ? and apellido=?;');
         $queryautor ->execute([$autorname,$autorlastname]);
         if($queryautor->rowCount()){
             foreach($queryautor as $i){
                 $autor= $i['idAutor'];
             } 
         }
-        $query3= $this->connection()->prepare('INSERT INTO noticias(nombre,descripcion,contenido,fecha,idAutor,idUsuario) VALUES (?,?,?,?,?,?)');
+        $query3= $this->connection()->prepare('INSERT INTO noticias(nombre,descripcion,contenido,fecha,idAutor,idUsuario) VALUES (?,?,?,?,?,?);');
         $query3-> execute([$name,$description,$content,$date,$autor,$idUser]);
         if($query3){
-            return 'Noticia añadida';
+            $out="";
+            $conne=$this->connection();
+            $QueryId=$conne->prepare('SELECT MAX(idNoticias) as id FROM noticias;');
+            $QueryId->execute();
+            $data=$QueryId->fetchAll();
+            $QueryInsertpic=$conne->prepare('INSERT INTO pictures (IdNot,sourcename) VALUES (?,?);');
+            $idNot= $data[0]["id"];
+            $target="../files/pictures";
+            foreach($files["files"]['tmp_name'] as $key => $tmp_name){
+            if( $files["files"]["name"][$key]){
+                if(!file_exists($target)){
+                   mkdir($target,0777) or die("Imposible crear el directorio");
+                }    
+                $openfolder=opendir($target);
+                $filetocharge=$target.'/'.$files["files"]["name"][$key];
+                if(move_uploaded_file($files["files"]['tmp_name'][$key],$filetocharge)){
+                    $QueryInsertpic -> execute([$idNot, $files["files"]["name"][$key]]);
+                    closedir($openfolder);
+                    $out='Noticia añadida';
+                }else{
+                    closedir($openfolder);
+                    $out ='Noticia añadida, problema al cargar archivos';
+                }
+                
+            }
+        }
+            
+        return $out;
+            
+            
+
+
         }else{
             return 'No fue posible añadir la noticia';
         }
+        
+        
     }
     public function addAutor($name,$lastname){
         $query1= $this->connection()->prepare('SELECT idAutor FROM autor WHERE nombre = ? and apellido=?;');
@@ -45,9 +77,7 @@ class controlNews extends Database{
         $query1 = $this->connection()->prepare('SELECT * FROM noticias');
         $query1 ->execute();
         if($query1-> rowCount()){
-            #foreach($query1 as $i){
-                return $query1->fetchAll();
-            #}
+            return $query1->fetchAll();
         }else{
             return false;
         }
@@ -64,9 +94,26 @@ class controlNews extends Database{
         }
 
     }
-    
+    public function getpictures($idN){
+        $query1 = $this->connection()->prepare('SELECT sourcename from pictures where IdNot = ?');
+        $query1-> execute([$idN]);
+        if($query1-> rowCount()){
+            return $query1->fetchAll();
+        }else{
+          return false;
+        }
+    }
     public function deleteNew($idNews){
-        $query1= $this->connection()->prepare('DELETE FROM noticias where idNoticias= ?');
+        $pictures= $this->getpictures($idNews);
+        $conn=$this->connection();
+        foreach($pictures as $pic){
+            if(file_exists("../files/pictures/". $pic['sourcename'])){
+                unlink("../files/pictures/". $pic['sourcename']);
+            }
+        }
+        $deleteFiles=$conn->prepare('DELETE FROM pictures where IdNot= ?');
+        $deleteFiles->execute([$idNews]);
+        $query1= $conn->prepare('DELETE FROM noticias where idNoticias= ?');
         $query1 -> execute([$idNews]);
         if($query1){
             return 'eliminado';
@@ -74,9 +121,30 @@ class controlNews extends Database{
             return 'No fue posible eliminar la noticia';
         }
     }
-    public function uptadeNew($idnew,$name, $description, $content, $date,$idUser){
-        $query1 = $this->connection()->prepare('UPDATE noticias SET nombre= ?, descripcion= ?,contenido= ?,fecha= ?,idUsuario= ? WHERE idNoticias= ?');
+    public function uptadeNew($idnew,$name, $description, $content, $date,$idUser,$files){
+        $conn = $this->connection();
+        $query1= $conn->prepare('UPDATE noticias SET nombre= ?, descripcion= ?,contenido= ?,fecha= ?,idUsuario= ? WHERE idNoticias= ?');
         $query1-> execute([$name,$description,$content,$date,$idUser,$idnew]);
+        $QueryInsertpic=$conn->prepare('INSERT INTO pictures (IdNot,sourcename) VALUES (?,?);');
+        $target="../files/pictures";
+            foreach($files["files"]['tmp_name'] as $key => $tmp_name){
+            if( $files["files"]["name"][$key]){
+                if(!file_exists($target)){
+                   mkdir($target,0777) or die("Imposible crear el directorio");
+                }    
+                $openfolder=opendir($target);
+                $filetocharge=$target.'/'.$files["files"]["name"][$key];
+                if(move_uploaded_file($files["files"]['tmp_name'][$key],$filetocharge)){
+                    $QueryInsertpic -> execute([$idnew, $files["files"]["name"][$key]]);
+                    closedir($openfolder);
+                    
+                }else{
+                    closedir($openfolder);
+                }
+                
+            }
+            }
     }
+    
 }
 ?>

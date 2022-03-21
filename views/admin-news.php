@@ -6,6 +6,7 @@
     $news = $controlnews->searchNews(); 
 
     if (isset($_POST['form1'])){
+        
         session_start();
         $name = $_POST['title'];
         $description = $_POST["description"];
@@ -14,10 +15,11 @@
         $autorlastname = $_POST["autorlastname"];
         $date = $_POST["date"];
         $idUser = $_SESSION['id'];
+
         if(empty($name) || empty($description) || empty($content) || empty($autorname) || empty($autorlastname) || empty($date)){
             $newsempty = "Credenciales invalidas, Por favor intentalo nuevamente"; 
         }else{
-            $newsempty= $controlnews->addNews($name,$description,$content,$autorname,$autorlastname,$date,$idUser);
+            $newsempty= $controlnews->addNews($name,$description,$content,$autorname,$autorlastname,$date,$idUser,$_FILES);
         }
     }
     if (isset($_POST['form2t'])){
@@ -46,7 +48,7 @@
         if(empty($name) || empty($description) || empty($content) || empty($date)){
             $newsempty = "Credenciales invalidas, Por favor intentalo nuevamente"; 
         }else{
-            $newsempty= $controlnews->uptadeNew($id,$name,$description,$content,$date,$idUser);
+            $newsempty= $controlnews->uptadeNew($id,$name,$description,$content,$date,$idUser,$_FILES);
             include_once 'admin-news.php';
         }
     }
@@ -94,7 +96,8 @@
     <!-- =============== nav =============== -->
     <nav id="mainNav" class="navbar navbar-default navbar-fixed-top" >
         <div class="container" >
-            <div class="container-fluid" style="background-color: #1EA078;"> 
+            <!--<div class="container-fluid" style="background-color: #1EA078;"> -->
+            <div class="container-fluid"> 
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -228,7 +231,17 @@
                         <label for="fecha" class="form-label">Fecha de publicacion:</label>
                         <input type="date" class="form-control" id="fecha" name="date" required="" value = "<?php echo ($newdate)?>">
                     </div>
+                    
+                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                        <input accept =".jpg,.jpeg,.png"multiple=""  alt="Imagen" type="file" className="form-control" name="files[]" id="imagen"></input>
+                    </div>
                     <!-- 
+
+                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                        <input type="file" class="form-control" id="imagen" alt="Imagen" name="imagen">
+                        <input accept =".mp4,.jpg,.jpeg,.png"multiple="multiple" type="file" className="form-control-file" name="files" id="archivo"></input>
+                    </div>
+
                     <div class="col-xs-12 form-group wow fadeInUp animated">
                         <input type="image" class="form-control" id="imagen" alt="Imagen" name="imagen">
                     </div>
@@ -264,7 +277,7 @@
                     </div>
                     
                     <div class="col-xs-12 form-group wow fadeInUp animated">
-                        <input type="image" class="form-control" id="imagen" alt="Imagen" name="imagen">
+                        <input accept =".jpg,.jpeg,.png"multiple="multiple"  alt="Imagen" type="file" className="form-control-file" name="files[]" id="imagen"></input>
                     </div>
                     
                     <div class="col-xs-6 form-group wow fadeInUp animated">

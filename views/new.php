@@ -8,6 +8,7 @@
         $dateparts=explode("-",$new[0]['fecha']);
         $fecha = DateTime::createFromFormat('!m', $dateparts[1]);
         $mes = strftime("%B", $fecha->getTimestamp());
+        $pictures=$controlnews->getpictures($idnew);
     
 
 
@@ -110,7 +111,32 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="classic-blog blog-single">
-                        <div class="bs-blog-img"><img alt="" src="../assets/img/blog3.JPG"></div>
+                        <div class="bs-blog-img">
+                            <div class="container">
+                                <div class="header-content row">
+				                    <div id="owl-demo" class="owl-carousel header1">      
+                                    <?php
+                                        if($pictures){
+                                            foreach($pictures as $pic){
+
+                                    ?>    
+                                        <div>
+				                            <div class="col-xs-12 col-sm-6 col-md-6 header-text">
+                                            <img alt="" src="<?php echo "../files/pictures/". $pic['sourcename']?>">
+                                            </div>               
+				                        </div>
+                                    <?php
+                                    }
+                                    }else{
+                                    ?>
+                                        <div class="bs-blog-img"><img alt="" src="../assets/img/LogoAHRB.jpg"></div>
+                                    <?php
+                                    }
+                                    ?>   
+				                    </div>				 
+				                </div>          
+                            </div> 
+                        </div>                   
                         <div class="bs-blog-naz">
                             <div class="bs-blog-type"><i class="fa fa-pencil-square-o"></i></div>
                             <div class="bs-blog-name"><a ><?php echo $new[0]['nombre']?></a></div>
