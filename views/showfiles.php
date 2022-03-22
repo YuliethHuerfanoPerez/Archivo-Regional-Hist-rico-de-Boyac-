@@ -1,6 +1,12 @@
+<?php
+    if($_POST['serch']){
+        echo $_POST['name'];
+        echo $_POST['category'];
+        echo $_POST['all'];
 
+    }
 
-
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -18,7 +24,7 @@
     <link rel="stylesheet" href="../assets/css/animate.min.css" type="text/css">
     <!-- =============== Custom CSS =============== -->
     <link rel="stylesheet" href="../assets/css/style.css" type="text/css">
-    <!-- =============== Owl Carousel Assets =============== -->
+    <!-- =============== Owl Carousel ../assets =============== -->
     <link href="../assets/owl-carousel/owl.carousel.css" rel="stylesheet">
     <link href="../assets/owl-carousel/owl.theme.css" rel="stylesheet">
 	
@@ -99,46 +105,29 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="classic-blog blog-single">
-                        <div class="bs-blog-naz" style="text-align: center;">
-                            <div class="titleacc">
-                                <h2>Accede a nuestro archivo</h2>
-                                
-                                <div class="bs-blog-text" style="text-align: justify;"> 
-                                    <p>Acá encontrarás imágenes digitalizadas por el Archivo Histórico Regional de Boyacá en Tunja. Desde el Archivo nos interesa que el p&uacute;blico en general acceda a documentos de relevancia hist&oacute;rica para mantener vigente la memoria patrimonial</p>
-                                    <p>¡Ya tenemos n documentos publicados, un total de nn imágenes!</p>
-                                    <p>Puedes consultarlos usando el buscador a continuación.</p>
+                        <div class="result" style="text-align: left;">
+                                <h2>Resultados de la consulta - concepto b&uacute;squeda, categor&iacute;a</h2>
+                            
+                            <i class="fa fa-list-ul" ></i>
+                            <i class="fa fa-th" aria-hidden="true"></i>
+
+                            <div class="col-12">
+                                <div class="col-sm-4"><div class="imgDoc"><img src="../assets/img/files/escritura.jpg" alt="" class="imgFile"></div>
+                                    <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut accusamus, alias quam modi consectetur quo. Labore repudiandae consequuntur sint commodi impedit accusamus corporis vel, consectetur magnam, eius tempore numquam maxime.</h3>
+                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit ratione, inventore quam numquam, maiores ducimus itaque temporibus architecto obcaecati natus repudiandae magnam amet adipisci, exercitationem sequi sunt eveniet nihil delectus!</p>
                                 </div>
-                                <br>
-                                <form action="showfiles.php" method="POST">
-                                    <div class="select">
-                                        <input type="text" class="form-control" placeholder="Buscar por nombre" name="name" aria-label="Recipient's username" aria-describedby="button-addon2">
-                                    </div>
-                                    <br>
-                                    <div class="select">
-                                    <select class="form-control" name="category" aria-label="Default select example">
-                                        <option selected value="0">Buscar por categor&iacute;a</option>
-                                        <option value="libros">Libros</option>
-                                        <option value="folletos">Folletos</option>
-                                        <option value="exposiciones">Exposiciones</option>
-                                        <option value="catalogos">Cat&aacute;logos</option>
-                                    </select>
-                                    </div>
-                                    <div class="select">
-                                    <div class="form-check">
-                                        <label class="form-check-label" for="flexCheckIndeterminate">
-                                            Mostrar todo
-                                          </label>
-                                        <input class="form-check-input" name="all" type="checkbox" value="" id="flexCheckIndeterminate">
-                                      </div>
-                                    </div>
-                                    <div class="select">
-                                        <input type="submit" class="btn btn-success" value="Buscar"  name="serch">
-                                    </div>
-                                </form>
-                               
+                                <div class="col-sm-4"><div class="imgDoc"><img src="../assets/img/files/escritura.jpg" alt="" class="imgFile"></div>
+                                    <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut accusamus, alias quam modi consectetur quo. Labore repudiandae consequuntur sint commodi impedit accusamus corporis vel, consectetur magnam, eius tempore numquam maxime.</h3>
+                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit ratione, inventore quam numquam, maiores ducimus itaque temporibus architecto obcaecati natus repudiandae magnam amet adipisci, exercitationem sequi sunt eveniet nihil delectus!</p>
+                                </div>
+                                <div class="col-sm-4"><div class="imgDoc"><img src="../assets/img/files/escritura.jpg" alt="" class="imgFile"></div>
+                                    <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut accusamus, alias quam modi consectetur quo. Labore repudiandae consequuntur sint commodi impedit accusamus corporis vel, consectetur magnam, eius tempore numquam maxime.</h3>
+                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit ratione, inventore quam numquam, maiores ducimus itaque temporibus architecto obcaecati natus repudiandae magnam amet adipisci, exercitationem sequi sunt eveniet nihil delectus!</p>
+                                    <br><br><br>
+                                </div>
+                                
                             </div>
                         </div>
-                        
                     </div>
                 </div>
             </div>

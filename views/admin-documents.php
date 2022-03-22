@@ -1,3 +1,61 @@
+<?php
+    include '../logic/controlDocuments.php';
+    if (!isset($_SESSION)){
+        session_start(); 
+    }
+    $update=false;
+    $controldocs= new controlDocuments();
+    $Docs = $controldocs->getalldocuments();
+    if (isset($_POST['add'])){
+        $name = $_POST['name'];
+        $description = $_POST["description"];
+        $date = $_POST["date"];
+        $typedoc= $_POST["typedoc"];
+        $categoria=$_POST["categoria"];
+        $idUser = $_SESSION['id'];  
+        if(empty($name) || empty($description) || empty($date) || empty($typedoc) ||$categoria=="0"|| empty($idUser)){
+            $newsempty = "Credenciales invalidas, Por favor intentalo nuevamente"; 
+        }else{
+            $newsempty= $controldocs->addDocs($name,$description,$date,$typedoc,$idUser,$_FILES,$categoria);
+        }
+    }
+    if (isset($_POST['delete'])){
+        $delete = $controldocs->deleteDoc($_POST['idDoc']);
+        $newsempty=$delete;
+    }
+    if (isset($_POST['refresh'])){
+        $update=true;
+        $idupdate=$_POST['idDoc'];
+        $newUpdate= $controldocs->searchNewId($idupdate);
+        foreach($newUpdate as $i){
+            $newname= $i['nombre'];
+            $newdesc= $i['descripcion'];
+            $newfecha= $i['fecha'];
+            $newpublic= $i['public'];
+            $newcategoria=$i['categoria'];
+        }
+    }
+
+    
+    if (isset($_POST['update'])){
+        $id=$_POST['id'];
+        $name = $_POST['name'];
+        $description = $_POST["description"];
+        $date = $_POST["date"];
+        $typedoc= $_POST["typedoc"];
+        $categoria=$_POST["categoria"];
+        $idUser = $_SESSION['id']; 
+        if(empty($name) || empty($description) ||$categoria=="0"|| empty($date) || empty($typedoc)){
+            $newsempty = "Credenciales invalidas, Por favor intentalo nuevamente"; 
+        }else{
+            $newsempty= $controldocs->updateDoc($id,$name,$description,$date,$typedoc,$idUser,$_FILES,$categoria);
+            #include_once 'admin-news.php';
+        }
+    }
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -40,7 +98,8 @@
     <!-- =============== nav =============== -->
     <nav id="mainNav" class="navbar navbar-default navbar-fixed-top" >
         <div class="container" >
-            <div class="container-fluid" style="background-color: #1EA078;"> 
+            <!--<div class="container-fluid" style="background-color: #1EA078;"> -->
+            <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -105,6 +164,8 @@
                         <div>
                             <form action="#" method="post">
                                 <div class="ajax-hidden">
+
+                               
                                     <div class="col-xs-8 form-group wow fadeInUp animated">
                                         <label for="c_name" class="sr-only">Buscar</label>
                                         <input type="text" placeholder="Nombre" name="name" class="form-control" id="name" required="">
@@ -116,66 +177,207 @@
                                 <div class="ajax-response"></div>
                             </form>
                         </div>
+                        
+                        
+                        
+                        <?php
+                            if($Docs){
+                            foreach($Docs as $i){
+                        ?>
                         <div class="col-sm-12 izq wow fadeInDown animated" data-wow-delay=".1s">
+                        
                             <form action="#" method="post">
                                 <br>
                                 <div class="ajax-hidden">
                                     <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <label >Documento 1</label> 
+                                        <label ><?php echo ($i['nombre'])?></label> 
+                                    </div>
+                                    <input name="idDoc" type="hidden" value="<?php echo ($i['idDoc'])?>">
+                                    <div class="col-xs-4 form-group wow fadeInUp animated">
+                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit" name="delete" ><i class="fa fa-trash" ></i></button>
                                     </div>
                                     <div class="col-xs-4 form-group wow fadeInUp animated">
-                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-trash"></i></button>
-                                    </div>
-                                    <div class="col-xs-4 form-group wow fadeInUp animated">
-                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-refresh"></i></button>
+                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit" name="refresh"><i class="fa fa-refresh"></i></button>
                                     </div>
                                 </div>
                                 <div class="ajax-response"></div>
                             </form>
                         </div>
-                        <div class="col-sm-12 izq wow fadeInDown animated" data-wow-delay=".1s">
-                            <form action="#" method="post">
-                                <br>
-                                <div class="ajax-hidden">
-                                    <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <label >Documento 2</label> 
-                                    </div>
-                                    <div class="col-xs-4 form-group wow fadeInUp animated">
-                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-trash"></i></button>
-                                    </div>
-                                    <div class="col-xs-4 form-group wow fadeInUp animated">
-                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-refresh"></i></button>
-                                    </div>
-                                </div>
-                                <div class="ajax-response"></div>
-                            </form>
-                        </div>
-                        <div class="col-sm-12 izq wow fadeInDown animated" data-wow-delay=".1s">
-                            <form action="#" method="post">
-                                <br>
-                                <div class="ajax-hidden">
-                                    <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <label >Documento 3</label> 
-                                    </div>
-                                    <div class="col-xs-4 form-group wow fadeInUp animated">
-                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-trash"></i></button>
-                                    </div>
-                                    <div class="col-xs-4 form-group wow fadeInUp animated">
-                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit"><i class="fa fa-refresh"></i></button>
-                                    </div>
-                                </div>
-                                <div class="ajax-response"></div>
-                            </form>
-                        </div>
-                      
+                        <?php
+                            }
+                            }else{
+                        ?>
+                        <h2>No hay documentos publicados</h2>
+                        <?php
+                            }
+                        ?>
 				    </div>
+
+
+
+
+
+
+
+
 				    <div class="col-sm-6 wow fadeInUp animated" data-wow-delay=".2s">
                         <div class="titleadmin"> 
                             <h2>GESTIONAR</h2>
                         </div>
                         <div class="col-xs-12 wow bounceIn animated" data-wow-delay=".1s">
-                            <form action="#" method="post">
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                            <form action="" method="POST" enctype="multipart/form-data">
                                 <div class="ajax-hidden">
+                                <?php
+                                    if($update){
+                                ?>
+                                <input type="hidden" class="form-control" id="id" name="id" placeholder="Titulo" value = "<?php echo ($idupdate)?>" required="">        
+                                <div data-wow-delay=".1s" class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label for="c_title" class="sr-only">Titulo</label>
+                                        <input type="text" placeholder="Nombre" name="name" class="form-control" value=<?php echo $newname; ?> required="">
+                                    </div>
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label for="d_desc" class="sr-only">descripción</label>
+                                        <textarea type="" placeholder="Descripción" name="description"  class="form-control" required=""><?php echo $newdesc; ?></textarea>
+                                    </div>
+                                    <div data-wow-delay=".1s" class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label for="d_date" class="sr-only">Fecha de puclicación</label>
+                                        <input type="date" value=<?php echo $newfecha; ?> name="date" class="form-control"  required="">
+                                    </div>
+                                    <div class="col-xs-4 form-group wow fadeInUp animated">
+                                        <div class="form-check">
+                                            <?php
+                                                if (!$newpublic == 1){
+                                            ?>
+                                            <select name="typedoc" required="">
+                                                <option value="publico">publico</option>
+                                                <option selected value="privado">privado</option>
+                                            </select>
+                                            <?php
+                                            }else{
+                                            ?>
+                                            <select name="typedoc" required="">
+                                                <option value="publico">publico</option>
+                                                <option value="privado">privado</option>
+                                            </select>
+                                            <?php
+                                            }
+                                            ?>
+                                          </div>
+                                    </div>
+
+
+                                    <div class="col-xs-4 form-group wow fadeInUp animated">
+                                        <div class="form-check">
+
+                                            <?php
+                                                if ($newcategoria == "libro"){
+                                            ?>
+                                            <select name="categoria" required="">
+                                                <option value="0">Categoria...</option>
+                                                <option selected value="libro">Libro</option>
+                                                <option value="folleto">Folletos</option>
+                                                <option value="exposiciones">Exposiciones</option>
+                                                <option value="catalogo">Catalogo</option>
+                                            </select>
+                                            <?php
+                                            }elseif($newcategoria == "folleto"){
+                                            ?>
+                                            <select name="categoria" required="">
+                                                <option value="0">Categoria...</option>
+                                                <option value="libro">Libro</option>
+                                                <option selected value="folleto">Folletos</option>
+                                                <option value="exposiciones">Exposiciones</option>
+                                                <option value="catalogo">Catalogo</option>
+                                            </select>
+                                            <?php
+                                            }elseif($newcategoria == "exposiciones"){
+                                            ?>
+                                            <select name="categoria" required="">
+                                                <option value="0">Categoria...</option>
+                                                <option value="libro">Libro</option>
+                                                <option value="folleto">Folletos</option>
+                                                <option selected value="exposiciones">Exposiciones</option>
+                                                <option value="catalogo">Catalogo</option>
+                                            </select>
+                                            <?php
+                                            }elseif($newcategoria == "catalogo"){
+                                            ?>
+                                            <select name="categoria" required="">
+                                                <option value="0">Categoria...</option>
+                                                <option value="libro">Libro</option>
+                                                <option value="folleto">Folletos</option>
+                                                <option value="exposiciones">Exposiciones</option>
+                                                <option selected value="catalogo">Catalogo</option>
+                                            </select>
+                                            <?php
+                                            }else{
+                                            ?>
+                                                <select name="categoria" required="">
+                                                <option value="0">Categoria...</option>
+                                                <option value="libro">Libro</option>
+                                                <option value="folleto">Folletos</option>
+                                                <option value="exposiciones">Exposiciones</option>
+                                                <option value="catalogo">Catalogo</option>
+                                            </select>
+                                            <?php
+                                            }
+                                            ?>
+
+
+
+                                            
+                                          </div>
+                                    </div>        
+
+
+
+
+
+
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label for="formFile" class="form-label">Archivo</label>
+                                        <input class="form-control" type="file" accept =".pdf" name="file" required="" >
+                                    </div>
+                                    <div class="col-xs-6 form-group wow fadeInUp animated">
+                                        <button type="submit" class="btn" name="update" id="btn-add">Actualizar</button>
+                                        
+                                    </div>
+
+
+                                <!--
                                     <div class="col-xs-12 form-group wow fadeInUp animated">
                                         <label for="d_name" class="sr-only">Codigo</label>
                                         <input type="text" placeholder="Codigo" name="name" class="form-control" id="d_name" required="">
@@ -195,14 +397,17 @@
                                     </div>
                                     <div class="col-xs-4 form-group wow fadeInUp animated">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="d_type" id="d_type">
-                                            <label class="form-check-label" for="d_typePub">Público</label>
+                                            <select>
+                                                <option value="0">Tipo....</option>
+                                                <option value="publico">publico</option>
+                                                <option value="privado">privado</option>
+                                            </select>
                                           </div>
                                     </div>
                                     <div class="col-xs-4 form-group wow fadeInUp animated">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="d_typePriv" id="d_typePriv">
-                                            <label class="form-check-label" for="d_typePriv">Privado</label>
+                                            
+                                            
                                           </div>
                                     </div>
                                     <div class="col-xs-12 form-group wow fadeInUp animated">
@@ -213,6 +418,74 @@
                                         <button type="button" class="btn" id="btn-add">Crear</button>
                                     </div>
                                 </div>
+                                <div class="col-xs-12 form-group wow fadeInUp animated">
+                                <div class="ajax-response"><?php #if(isset($newsempty)){echo $newsempty;}?></div>
+                                </div>
+                            -->
+                                <?php
+                                }else{
+                                ?>
+                                    <div data-wow-delay=".1s" class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label for="c_title" class="sr-only">Titulo</label>
+                                        <input type="text" placeholder="Nombre" name="name" class="form-control"  required="">
+                                    </div>
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label for="d_desc" class="sr-only">descripción</label>
+                                        <textarea type="" placeholder="Descripción" name="description" class="form-control" required=""></textarea>
+                                    </div>
+                                    <div data-wow-delay=".1s" class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label for="d_date" class="sr-only">Fecha de puclicación</label>
+                                        <input type="date"  name="date" class="form-control"  required="">
+                                    </div>
+                                    <div class="col-xs-4 form-group wow fadeInUp animated">
+                                        <div class="form-check">
+                                            <select name="typedoc" required="">
+                                                <option value="publico">publico</option>
+                                                <option value="privado">privado</option>
+                                            </select>
+                                          </div>
+                                    </div>
+
+                                    <div class="col-xs-4 form-group wow fadeInUp animated">
+                                        <div class="form-check">
+                                            <select name="categoria" required="">
+                                                <option value="0">Categoria...</option>
+                                                <option value="libro">Libro</option>
+                                                <option value="folleto">Folletos</option>
+                                                <option value="exposiciones">Exposiciones</option>
+                                                <option value="catalogo">Catalogo</option>
+                                            </select>
+                                          </div>
+                                    </div>
+
+                                    <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <label for="formFile" class="form-label">Archivo</label>
+                                        <input class="form-control" type="file" accept =".pdf" name="file" required="" >
+                                    </div>
+                                    <div class="col-xs-6 form-group wow fadeInUp animated">
+                                        <button type="submit" class="btn" name="add" id="btn-add">Crear</button>
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 form-group wow fadeInUp animated">
+                                <div class="ajax-response"><?php if(isset($newsempty)){echo $newsempty;}?></div>
+                                </div>
+
+
+
+                                <?php
+                                }
+                                ?>
+
+
+
+
+
+
+
+
+
+
                                 <div class="ajax-response"></div>
                             </form>
                         </div>				   

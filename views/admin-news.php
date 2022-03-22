@@ -99,8 +99,8 @@
     <!-- =============== nav =============== -->
     <nav id="mainNav" class="navbar navbar-default navbar-fixed-top" >
         <div class="container" >
-            <!--<div class="container-fluid" style="background-color: #1EA078;"> -->
-            <div class="container-fluid"> 
+            <div class="container-fluid" style="background-color: #1EA078;">
+            <!--<div class="container-fluid"> -->
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -179,6 +179,7 @@
                                 </form>
                             </div>
                             <?php
+                                if($news){
                                 foreach($news as $i){
                             ?>
                             <div class="col-sm-12 izq wow fadeInDown animated" data-wow-delay=".1s">
@@ -204,6 +205,11 @@
                             </div>
                             <?php
                                 }
+                            }else{
+                            ?>
+                            <h2>No hay noticias publicadas</h2>
+                            <?php
+                            }
                             ?>
                  </div>   
      </div>
