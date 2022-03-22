@@ -1,8 +1,19 @@
 <?php
+    include '../logic/controlDocuments.php';
+    $controllDocs=new controlDocuments();
     if($_POST['serch']){
-        echo $_POST['name'];
-        echo $_POST['category'];
-        echo $_POST['all'];
+        if(isset($_POST['all']) ){
+            $alldocs= $controllDocs->getpublicdocuments();
+            if($alldocs){
+                $alldocuments=true;
+            #    foreach($alldocs as $a){
+            #        echo $a['idDoc'];
+            #}
+            }else{
+                $alldocuments=false;
+            #    echo"no hay documentos";
+            }
+        }
 
     }
 
@@ -105,29 +116,49 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="classic-blog blog-single">
+
+
+
+
+                        <?php
+                            if($alldocuments){
+                       ?>
+
+
                         <div class="result" style="text-align: left;">
-                                <h2>Resultados de la consulta - concepto b&uacute;squeda, categor&iacute;a</h2>
+                                <h2>Resultados de la consulta - Todos los documentos</h2>
                             
                             <i class="fa fa-list-ul" ></i>
                             <i class="fa fa-th" aria-hidden="true"></i>
-
+                           
                             <div class="col-12">
-                                <div class="col-sm-4"><div class="imgDoc"><img src="../assets/img/files/escritura.jpg" alt="" class="imgFile"></div>
-                                    <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut accusamus, alias quam modi consectetur quo. Labore repudiandae consequuntur sint commodi impedit accusamus corporis vel, consectetur magnam, eius tempore numquam maxime.</h3>
-                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit ratione, inventore quam numquam, maiores ducimus itaque temporibus architecto obcaecati natus repudiandae magnam amet adipisci, exercitationem sequi sunt eveniet nihil delectus!</p>
+                                <?php
+                                    foreach($alldocs as $doc){
+                                ?>
+                                    <h3><?php echo $doc['nombre']?></h3>
+                                    <p><?php echo $doc['descripcion']?></p>
+                                    <form action="filepdf.php" method="POST">
+                                        <button type="submit" name="ver" value="<?php echo "../files/documents/".$doc['namefile']."#toolbar=0"?>">ver esa monda</button>
+                                    </form>
+                                    <!--<embed src="<?php #echo "../files/documents/".$doc['namefile']."#toolbar=0"?>" type="application/pdf" width="100%" height="600px" />-->
                                 </div>
-                                <div class="col-sm-4"><div class="imgDoc"><img src="../assets/img/files/escritura.jpg" alt="" class="imgFile"></div>
-                                    <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut accusamus, alias quam modi consectetur quo. Labore repudiandae consequuntur sint commodi impedit accusamus corporis vel, consectetur magnam, eius tempore numquam maxime.</h3>
-                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit ratione, inventore quam numquam, maiores ducimus itaque temporibus architecto obcaecati natus repudiandae magnam amet adipisci, exercitationem sequi sunt eveniet nihil delectus!</p>
-                                </div>
-                                <div class="col-sm-4"><div class="imgDoc"><img src="../assets/img/files/escritura.jpg" alt="" class="imgFile"></div>
-                                    <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut accusamus, alias quam modi consectetur quo. Labore repudiandae consequuntur sint commodi impedit accusamus corporis vel, consectetur magnam, eius tempore numquam maxime.</h3>
-                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit ratione, inventore quam numquam, maiores ducimus itaque temporibus architecto obcaecati natus repudiandae magnam amet adipisci, exercitationem sequi sunt eveniet nihil delectus!</p>
-                                    <br><br><br>
-                                </div>
-                                
+                                <?php
+                                    }
+                                ?>
+                                        
                             </div>
+
                         </div>
+
+
+                        <?php
+                            }
+                        ?>
+
+
+
+
+
                     </div>
                 </div>
             </div>

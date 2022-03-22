@@ -46,7 +46,7 @@ class controlDocuments extends Database{
     }
     public function getprivatedocuments(){
         $conn=$this->connection();
-        $privateDocs=$conn->prepare('SELECT * from documentos Where public=0 Order By desc;');
+        $privateDocs=$conn->prepare('SELECT * from documentos Where public=0 Order By idDoc desc;');
         $privateDocs->execute();
         if ($privateDocs->rowCount()){
             return $privateDocs->fetchAll();
@@ -56,7 +56,7 @@ class controlDocuments extends Database{
     }
     public function getpublicdocuments(){
         $conn=$this->connection();
-        $publicDocs=$conn->prepare('SELECT * from documentos Where public=1 Order By desc;');
+        $publicDocs=$conn->prepare('SELECT * from documentos Where public=1 Order By idDoc desc;');
         $publicDocs->execute();
         if ($publicDocs->rowCount()){
             return $publicDocs->fetchAll();
