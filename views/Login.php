@@ -11,7 +11,7 @@
         }else if($_SESSION['rolUser'] == "102"){
             include_once 'admin-news.php';
         }else if($_SESSION['rolUser'] == "103"){
-            include_once 'admin-workers.php';
+            include_once 'privateFiles.php';
         }     
     }else if(isset($_POST['user']) && isset($_POST['password'])){
         $user=$_POST['user'];
@@ -26,7 +26,7 @@
                 }else if($_SESSION['rolUser'] == "102"){
                     include_once 'admin-news.php';
                 }else{
-                    include_once 'admin-workers.php';
+                    include_once 'privateFiles.php';
                 }     
             }else{
               include_once 'Loginv.php';  

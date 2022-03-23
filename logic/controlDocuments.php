@@ -127,5 +127,70 @@ class controlDocuments extends Database{
             return "Fallo la actualizacion del documento";
         }
     }
+    public function getpublicdocumentsByCategory($category){
+        $conn=$this->connection();
+        $allDocs=$conn->prepare('SELECT * from documentos where categoria = ? and public=1 Order By idDoc desc;');
+        $allDocs->execute([$category]);
+        if ($allDocs->rowCount()){
+            return $allDocs->fetchAll();
+        }else{
+            return false;
+        }
+    }
+    public function getpublicdocumentsByNameAndCategory($name,$category){
+        $conn=$this->connection();
+        $allDocs=$conn->prepare('SELECT * from documentos where categoria = ? and nombre=? and public=1 Order By idDoc desc;');
+        $allDocs->execute([$category,$name]);
+        if ($allDocs->rowCount()){
+            return $allDocs->fetchAll();
+        }else{
+            return false;
+        }
+    }
+    public function getpublicdocumentsByName($name){
+        $conn=$this->connection();
+        $allDocs=$conn->prepare('SELECT * from documentos where nombre = ? and public=1 Order By idDoc desc;');
+        $allDocs->execute([$name]);
+        if ($allDocs->rowCount()){
+            return $allDocs->fetchAll();
+        }else{
+            return false;
+        }
+    }
+
+
+
+    public function getpublicdocumentsByCategoryprivate($category){
+        $conn=$this->connection();
+        $allDocs=$conn->prepare('SELECT * from documentos where categoria = ? and Order By idDoc desc;');
+        $allDocs->execute([$category]);
+        if ($allDocs->rowCount()){
+            return $allDocs->fetchAll();
+        }else{
+            return false;
+        }
+    }
+    public function getpublicdocumentsByNameAndCategoryprivate($name,$category){
+        $conn=$this->connection();
+        $allDocs=$conn->prepare('SELECT * from documentos where categoria = ? and nombre=?  Order By idDoc desc;');
+        $allDocs->execute([$category,$name]);
+        if ($allDocs->rowCount()){
+            return $allDocs->fetchAll();
+        }else{
+            return false;
+        }
+    }
+    public function getpublicdocumentsByNameprivate($name){
+        $conn=$this->connection();
+        $allDocs=$conn->prepare('SELECT * from documentos where nombre = ? Order By idDoc desc;');
+        $allDocs->execute([$name]);
+        if ($allDocs->rowCount()){
+            return $allDocs->fetchAll();
+        }else{
+            return false;
+        }
+    }
+
+
 }
 ?>

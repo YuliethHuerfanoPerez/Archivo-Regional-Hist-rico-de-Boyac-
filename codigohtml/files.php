@@ -1,39 +1,48 @@
 <?php
     include '../logic/controlDocuments.php';
     $controllDocs=new controlDocuments();
-    if($_POST['serch']){
+    $respuesta="";
+    if(isset($_POST['serch'])){
         if(isset($_POST['all']) ){
             $alldocs= $controllDocs->getpublicdocuments();
             if($alldocs){
+                $respuesta="Hemos encontrado los siguientes archivos que se ajustan a tus criterios de busqueda";
                 $alldocuments=true;
             }else{
+                $respuesta="Aun no tenemos publicados documentos que puedas consultar, lo sentimos";
                 $alldocuments=false;
             }
         }elseif(empty($_POST['name'])){
             if(!$_POST['category']=="0"){
                 $alldocs= $controllDocs->getpublicdocumentsByCategory($_POST['category']);
                 if($alldocs){
+                    $respuesta="Hemos encontrado los siguientes archivos que se ajustan a tus criterios de busqueda";
                     $alldocuments=true;
                 }else{
+                    $respuesta="No hemos encontrado archivos que se ajusten a tus criterios de busqueda";
                     $alldocuments=false;
                 }
             }else{
                 $alldocuments=false;
-                #retornar al inicio
+                $respuesta="Debes proporcionar un nombre o una categoria";
             }
             
         }elseif(!empty($_POST['name']) && $_POST['category']=="0"){
             $alldocs= $controllDocs->getpublicdocumentsByName($_POST['name']);
             if($alldocs){
+                $respuesta="Hemos encontrado los siguientes archivos que se ajustan a tus criterios de busqueda";
                 $alldocuments=true;
             }else{
+                $respuesta="No hemos encontrado archivos que se ajusten a tus criterios de busqueda";
                 $alldocuments=false;
             }
         }elseif(!empty($_POST['name']) && !$_POST['category']=="0"){
             $alldocs= $controllDocs->getpublicdocumentsByNameAndCategory($_POST['name'],$_POST['category']);
             if($alldocs){
+                $respuesta="Hemos encontrado los siguientes archivos que se ajustan a tus criterios de busqueda";
                 $alldocuments=true;
             }else{
+                $respuesta="No hemos encontrado archivos que se ajusten a tus criterios de busqueda";
                 $alldocuments=false;
             }
         }
@@ -58,7 +67,7 @@
     <link rel="stylesheet" href="../assets/css/animate.min.css" type="text/css">
     <!-- =============== Custom CSS =============== -->
     <link rel="stylesheet" href="../assets/css/style.css" type="text/css">
-    <!-- =============== Owl Carousel ../assets =============== -->
+    <!-- =============== Owl Carousel Assets =============== -->
     <link href="../assets/owl-carousel/owl.carousel.css" rel="stylesheet">
     <link href="../assets/owl-carousel/owl.theme.css" rel="stylesheet">
 	
@@ -139,21 +148,72 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="classic-blog blog-single">
+                        <div class="bs-blog-naz" style="text-align: center;">
+                            <div class="titleacc">
+                                <h2>Accede a nuestro archivo</h2>
+                                
+                                <div class="bs-blog-text" style="text-align: justify;"> 
+                                    <p>Acá encontrarás imágenes digitalizadas por el Archivo Histórico Regional de Boyacá en Tunja. Desde el Archivo nos interesa que el p&uacute;blico en general acceda a documentos de relevancia hist&oacute;rica para mantener vigente la memoria patrimonial</p>
+                                    <p>¡Ya tenemos n documentos publicados, un total de nn imágenes!</p>
+                                    <p>Puedes consultarlos usando el buscador a continuación.</p>
+                                </div>
+                                <br>
+                                <form action="" method="POST">
+                                    <div class="select">
+                                        <input type="text" class="form-control" placeholder="Buscar por nombre" name="name" aria-label="Recipient's username" aria-describedby="button-addon2">
+                                    </div>
+                                    <br>
+                                    <div class="select">
+                                    <select class="form-control" name="category" aria-label="Default select example">
+                                        <option selected value="0">Buscar por categor&iacute;a</option>
+                                        <option value="libro">Libros</option>
+                                        <option value="folleto">Folletos</option>
+                                        <option value="exposiciones">Exposiciones</option>
+                                        <option value="catalogo">Cat&aacute;logos</option>
+                                    </select>
+                                    </div>
+                                    <div class="select">
+                                    <div class="form-check">
+                                        <label class="form-check-label" for="flexCheckIndeterminate">
+                                            Mostrar todo
+                                          </label>
+                                        <input class="form-check-input" name="all" type="checkbox" value="" id="flexCheckIndeterminate">
+                                      </div>
+                                    </div>
+                                    <div class="select">
+                                        <input type="submit" class="btn btn-success" value="Buscar"  name="serch">
+                                    </div>
+                                </form>
+                               <?php
+                               if($respuesta){
+                                   ?>
+                                   <p><?php echo $respuesta;?></p>
+                                   <?php
+                               }
+                               ?>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
 
-
-
-
+    <section>	
+        <div class="container marg50">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="classic-blog blog-single">
                         <?php
+                        if(isset($alldocuments)){
                             if($alldocuments){
                        ?>
-
-
                         <div class="result" style="text-align: left;">
                                 <h2>Resultados de la consulta - Todos los documentos</h2>
-                            
                             <i class="fa fa-list-ul" ></i>
                             <i class="fa fa-th" aria-hidden="true"></i>
-                           
                             <div class="col-12">
                                 <?php
                                     foreach($alldocs as $doc){
@@ -163,25 +223,16 @@
                                     <form action="filepdf.php" method="POST">
                                         <button type="submit" name="ver" value="<?php echo "../files/documents/".$doc['namefile']."#toolbar=0"?>">ver esa monda</button>
                                     </form>
-                                    <!--<embed src="<?php #echo "../files/documents/".$doc['namefile']."#toolbar=0"?>" type="application/pdf" width="100%" height="600px" />-->
                                 </div>
                                 <?php
                                     }
-                                ?>
-                                        
+                                ?>      
                             </div>
-
                         </div>
-
-
                         <?php
                             }
+                        }
                         ?>
-
-
-
-
-
                     </div>
                 </div>
             </div>

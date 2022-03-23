@@ -105,7 +105,7 @@
                                 <div class="ajax-hidden">
                                     <div class="col-xs-12 col-sm-6 col-sm-offset-3 form-group wow fadeInUp animated">
                                         <label for="c_user" class="sr-only">Usuario</label>
-                                        <input type="text" placeholder="Usuario" name="user" class="form-control" id="user" required>
+                                        <input type="email" placeholder="Usuario" name="user" class="form-control" id="user" required>
                                     </div>
             
                                     <div data-wow-delay=".1s" class="col-xs-6 col-sm-6 col-sm-offset-3 form-group wow fadeInUp animated">

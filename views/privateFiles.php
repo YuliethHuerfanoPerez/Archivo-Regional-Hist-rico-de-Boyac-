@@ -1,6 +1,55 @@
+<?php
+    include '../logic/controlDocuments.php';
+    $controllDocs=new controlDocuments();
+    $respuesta="";
+    if(isset($_POST['serch'])){
+        if(isset($_POST['all']) ){
+            $alldocs= $controllDocs->getprivatedocuments();
+            if($alldocs){
+                $respuesta="Hemos encontrado los siguientes archivos que se ajustan a tus criterios de busqueda";
+                $alldocuments=true;
+            }else{
+                $respuesta="Aun no tenemos publicados documentos que puedas consultar, lo sentimos";
+                $alldocuments=false;
+            }
+        }elseif(empty($_POST['name'])){
+            if(!$_POST['category']=="0"){
+                $alldocs= $controllDocs->getpublicdocumentsByCategoryprivate($_POST['category']);
+                if($alldocs){
+                    $respuesta="Hemos encontrado los siguientes archivos que se ajustan a tus criterios de busqueda";
+                    $alldocuments=true;
+                }else{
+                    $respuesta="No hemos encontrado archivos que se ajusten a tus criterios de busqueda";
+                    $alldocuments=false;
+                }
+            }else{
+                $alldocuments=false;
+                $respuesta="Debes proporcionar un nombre o una categoria";
+            }
+            
+        }elseif(!empty($_POST['name']) && $_POST['category']=="0"){
+            $alldocs= $controllDocs->getpublicdocumentsByNameprivate($_POST['name']);
+            if($alldocs){
+                $respuesta="Hemos encontrado los siguientes archivos que se ajustan a tus criterios de busqueda";
+                $alldocuments=true;
+            }else{
+                $respuesta="No hemos encontrado archivos que se ajusten a tus criterios de busqueda";
+                $alldocuments=false;
+            }
+        }elseif(!empty($_POST['name']) && !$_POST['category']=="0"){
+            $alldocs= $controllDocs->getpublicdocumentsByNameAndCategoryprivate($_POST['name'],$_POST['category']);
+            if($alldocs){
+                $respuesta="Hemos encontrado los siguientes archivos que se ajustan a tus criterios de busqueda";
+                $alldocuments=true;
+            }else{
+                $respuesta="No hemos encontrado archivos que se ajusten a tus criterios de busqueda";
+                $alldocuments=false;
+            }
+        }
 
+    }
 
-
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -84,7 +133,7 @@
                         	</li>
 						</li>
                         <li>
-                            <a class="page-scroll" href="login.php">Iniciar Sesion</a>
+                        <a href="../logic/logout.php" class="page-scroll">Cerrar Sesión</a>
                         </li>
                     </ul>
                 </div>
@@ -109,7 +158,7 @@
                                     <p>Puedes consultarlos usando el buscador a continuación.</p>
                                 </div>
                                 <br>
-                                <form action="showfiles.php" method="POST">
+                                <form action="" method="POST">
                                     <div class="select">
                                         <input type="text" class="form-control" placeholder="Buscar por nombre" name="name" aria-label="Recipient's username" aria-describedby="button-addon2">
                                     </div>
@@ -117,10 +166,10 @@
                                     <div class="select">
                                     <select class="form-control" name="category" aria-label="Default select example">
                                         <option selected value="0">Buscar por categor&iacute;a</option>
-                                        <option value="libros">Libros</option>
-                                        <option value="folletos">Folletos</option>
+                                        <option value="libro">Libros</option>
+                                        <option value="folleto">Folletos</option>
                                         <option value="exposiciones">Exposiciones</option>
-                                        <option value="catalogos">Cat&aacute;logos</option>
+                                        <option value="catalogo">Cat&aacute;logos</option>
                                     </select>
                                     </div>
                                     <div class="select">
@@ -135,10 +184,55 @@
                                         <input type="submit" class="btn btn-success" value="Buscar"  name="serch">
                                     </div>
                                 </form>
-                               
+                               <?php
+                               if($respuesta){
+                                   ?>
+                                   <p><?php echo $respuesta;?></p>
+                                   <?php
+                               }
+                               ?>
                             </div>
                         </div>
                         
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <section>	
+        <div class="container marg50">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="classic-blog blog-single">
+                        <?php
+                        if(isset($alldocuments)){
+                            if($alldocuments){
+                       ?>
+                        <div class="result" style="text-align: left;">
+                                <h2>Resultados de la consulta - Todos los documentos</h2>
+                            <i class="fa fa-list-ul" ></i>
+                            <i class="fa fa-th" aria-hidden="true"></i>
+                            <div class="col-12">
+                                <?php
+                                    foreach($alldocs as $doc){
+                                ?>
+                                    <h3><?php echo $doc['nombre']?></h3>
+                                    <p><?php echo $doc['descripcion']?></p>
+                                    <form action="filepdf.php" method="POST">
+                                        <button type="submit" name="ver" value="<?php echo "../files/documents/".$doc['namefile']."#toolbar=0"?>">ver esa monda</button>
+                                    </form>
+                                </div>
+                                <?php
+                                    }
+                                ?>      
+                            </div>
+                        </div>
+                        <?php
+                            }
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
