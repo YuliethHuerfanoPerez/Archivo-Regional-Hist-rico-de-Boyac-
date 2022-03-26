@@ -69,7 +69,7 @@ class controlNews extends Database{
         } 
     }
     public function searchNews(){
-        $query1 = $this->connection()->prepare('SELECT * FROM noticias');
+        $query1 = $this->connection()->prepare('SELECT * FROM noticias order by idNoticias desc;');
         $query1 ->execute();
         if($query1-> rowCount()){
             return $query1->fetchAll();

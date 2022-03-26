@@ -9,7 +9,7 @@
         if($_SESSION['rolUser'] == "101"){
             include_once 'admin-news.php';
         }else if($_SESSION['rolUser'] == "102"){
-            include_once 'admin-news.php';
+            include_once 'personal-news.php';
         }else if($_SESSION['rolUser'] == "103"){
             include_once 'privateFiles.php';
         }     
@@ -24,7 +24,7 @@
                 if($_SESSION['rolUser'] == "101"){
                     include_once 'admin-news.php';
                 }else if($_SESSION['rolUser'] == "102"){
-                    include_once 'admin-news.php';
+                    include_once 'personal-news.php';
                 }else{
                     include_once 'privateFiles.php';
                 }     

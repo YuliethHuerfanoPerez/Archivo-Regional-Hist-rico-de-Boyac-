@@ -202,7 +202,7 @@
     
 
     <section>	
-        <div class="container marg50">
+        <div class="container marg50" id="about">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="classic-blog blog-single">
@@ -212,8 +212,6 @@
                        ?>
                         <div class="result" style="text-align: left;">
                                 <h2>Resultados de la consulta - Todos los documentos</h2>
-                            <i class="fa fa-list-ul" ></i>
-                            <i class="fa fa-th" aria-hidden="true"></i>
                             <div class="col-12">
                                 <?php
                                     foreach($alldocs as $doc){
@@ -221,8 +219,9 @@
                                     <h3><?php echo $doc['nombre']?></h3>
                                     <p><?php echo $doc['descripcion']?></p>
                                     <form action="filepdf.php" method="POST">
-                                        <button type="submit" name="ver" value="<?php echo "../files/documents/".$doc['namefile']."#toolbar=0"?>">ver esa monda</button>
+                                        <button type="submit" name="ver" class="btn btn-success" id="btn-moreText" value="<?php echo "../files/documents/".$doc['namefile']."#toolbar=0"?>">Ver texto</button>
                                     </form>
+                                    <h2></h2>
                                 </div>
                                 <?php
                                     }

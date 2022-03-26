@@ -134,7 +134,7 @@
                             <h3><?php echo $news[$i-1]['nombre']?></h3>
                             <p><?php echo $news[$i-1]['descripcion']?></p>
                             <form action="new.php" method="POST">
-                                <button data-wow-delay=".3s" class="btn btn-primary btn-lg btn-ornge  wow bounceIn animated"  id="news" name="NewVar" type="submit" value="<?php echo $news[$i-1]['idNoticias']?>">Ingresar</button>
+                                <button data-wow-delay=".3s" class="btn btn-primary btn-lg btn-ornge  wow bounceIn animated"  id="news" name="NewVar" type="submit" value="<?php echo $news[$i-1]['idNoticias']?>">Ver Más</button>
                             </form>
                         </div>
                     </div>

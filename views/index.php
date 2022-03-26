@@ -229,7 +229,7 @@
 						del Archivo Nacional de Colombia, creado el 17 de enero de 1868.</p>
 
 						<p>
-							<a href="reseña.php">
+							<a href="resena.php">
 								<div class="btn btn-primary btn-lg btn-ornge wow bounceIn animated" data-wow-delay="1s"><i class="hbtn"></i> <span >Ver mas</span></i></div>
 							</a>
 						</p>
