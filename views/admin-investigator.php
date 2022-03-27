@@ -16,18 +16,22 @@
         $phone = $_POST['phone'];
         $newPassword = $investigatorManagement->generatePassword();
         $passHash = password_hash($newPassword, PASSWORD_BCRYPT);
-        if(empty($idResearcher) || empty($nameResearcher) || empty($lastNameResearcher) || empty($emailResearcher) || empty($passHash) || empty($phone)){
+        if(empty($idResearcher) || empty($nameResearcher) || empty($lastNameResearcher) || empty($emailResearcher) || empty($newPassword) || empty($phone)){
             $researcher = "Credenciales invalidas, Por favor intentalo nuevamente"; 
             echo '<script language="javascript">alert("Las credenciales son inválidas, el investigador no fue registrado");</script>';
         }else{
-            $researcher= $investigatorManagement->addResearcher($idResearcher, $nameResearcher, $lastNameResearcher, $emailResearcher, $passHash, $phone);
-            echo '<script language="javascript">alert("Investigador registrado con éxito");</script>';
+            if($investigatorManagement->searchByUser($emailResearcher)){
+                echo '<script language="javascript">alert("El correo ya está registrado, no se puede agregar este investigador");</script>';
+            }else{
+                $researcher= $investigatorManagement->addResearcher($idResearcher, $nameResearcher, $lastNameResearcher, $emailResearcher, $passHash, $phone);
+                echo '<script language="javascript">alert("Investigador registrado con éxito");</script>';
+                $direccionrespuesta = "yulieth.huerfano@uptc.edu.co";
+                $nombrerespuesta = "Archivo Historico Regional de Boyaca";
+                $texto = 'Su cuenta en el Archivo Hist&oacute;rico Regional de Boyac&aacute; ha sido creada exitosamente, sus credenciales de acceso son:'."\n".'contraseña-> '.$newPassword."\n".'usuario-> '.$emailResearcher.'No olvide cambiar su contraseña al acceder en el apartado Cambiar contraseña.';
+                $texto2 = "Cuenta creada con éxito";
+                $investigatorManagement->sendMail($emailResearcher, $nameResearcher, $direccionrespuesta, $nombrerespuesta, $texto, $texto2);
+            }
         }
-        $direccionrespuesta = "yulieth.huerfano@uptc.edu.co";
-        $nombrerespuesta = "Archivo Historico Regional de Boyaca";
-        $texto = 'Su cuenta en el Archivo Hist&oacute;rico Regional de Boyac&aacute; ha sido creada exitosamente, sus credenciales de acceso son:'."\n".'contraseña-> '.$newPassword."\n".'usuario-> '.$emailResearcher;
-        $texto2 = "Cuenta creada con éxito";
-        $investigatorManagement->sendMail($emailResearcher, $nameResearcher, $direccionrespuesta, $nombrerespuesta, $texto, $texto2);
     }
     if (isset($_POST['deleteResearcher'])){
         $delete = $investigatorManagement->deleteResearcher($_POST['idInvestigator']);
@@ -144,8 +148,7 @@
                             <a class="page-scroll" href="admin-workers.php">Personal</a>
                         </li>
                         <li>
-                        
-                            <a href="../logic/logout.php" class="page-scroll">Cerrar Sesión</a>
+                            <a class="page-scroll" href="../logic/logout.php">Cerrar sesión</a>
                         </li>
                     </ul>
                 </div>

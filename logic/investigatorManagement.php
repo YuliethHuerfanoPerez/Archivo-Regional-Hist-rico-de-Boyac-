@@ -70,6 +70,19 @@ class investigatorManagement extends Database{
         }
 
     }
+    public function searchByUser($user){
+        if (!empty($user)){
+            $query = $this->connection()->prepare('SELECT * FROM Researcher where user= ?');
+            $query ->execute([$user]);
+            $registry = $query->fetch();
+            if($query-> rowCount()){
+               return $registry;
+            }else{
+               return false;
+            }
+        }
+
+    }
     public function uptadeResearcher($id, $name, $lastName, $email, $password, $phone){
         $query = $this->connection()->prepare('UPDATE Researcher SET nameResearcher=?,lastNameResearcher=?,user=?,password=?,celular=? WHERE id= ?');
         $query-> execute([$name, $lastName, $email, $password, $phone, $id]);
