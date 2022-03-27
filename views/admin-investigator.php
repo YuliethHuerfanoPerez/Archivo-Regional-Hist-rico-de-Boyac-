@@ -13,15 +13,21 @@
         $nameResearcher = $_POST['nameResearcher'];
         $lastNameResearcher = $_POST['lastNameResearcher'];
         $emailResearcher = $_POST['emailResearcher'];
-        $password = $_POST['password'];
         $phone = $_POST['phone'];
-        if(empty($idResearcher) || empty($nameResearcher) || empty($lastNameResearcher) || empty($emailResearcher) || empty($password) || empty($phone)){
+        $newPassword = $investigatorManagement->generatePassword();
+        $passHash = password_hash($newPassword, PASSWORD_BCRYPT);
+        if(empty($idResearcher) || empty($nameResearcher) || empty($lastNameResearcher) || empty($emailResearcher) || empty($passHash) || empty($phone)){
             $researcher = "Credenciales invalidas, Por favor intentalo nuevamente"; 
             echo '<script language="javascript">alert("Las credenciales son inválidas, el investigador no fue registrado");</script>';
         }else{
-            $researcher= $investigatorManagement->addResearcher($idResearcher, $nameResearcher, $lastNameResearcher, $emailResearcher, $password, $phone);
+            $researcher= $investigatorManagement->addResearcher($idResearcher, $nameResearcher, $lastNameResearcher, $emailResearcher, $passHash, $phone);
             echo '<script language="javascript">alert("Investigador registrado con éxito");</script>';
         }
+        $direccionrespuesta = "yulieth.huerfano@uptc.edu.co";
+        $nombrerespuesta = "Archivo Historico Regional de Boyaca";
+        $texto = 'Su cuenta en el Archivo Hist&oacute;rico Regional de Boyac&aacute; ha sido creada exitosamente, sus credenciales de acceso son:'."\n".'contraseña-> '.$newPassword."\n".'usuario-> '.$emailResearcher;
+        $texto2 = "Cuenta creada con éxito";
+        $investigatorManagement->sendMail($emailResearcher, $nameResearcher, $direccionrespuesta, $nombrerespuesta, $texto, $texto2);
     }
     if (isset($_POST['deleteResearcher'])){
         $delete = $investigatorManagement->deleteResearcher($_POST['idInvestigator']);
@@ -330,10 +336,6 @@
                                     <div class="col-xs-12 form-group wow fadeInUp animated">
                                         <label for="c_name" class="sr-only">Telefono</label>
                                         <input type="number" placeholder="telefono" name="phone" class="form-control" id="phone" required="">
-                                    </div>
-                                    <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <label for="c_name" class="sr-only">Contraseña</label>
-                                        <input type="password" placeholder="Contraseña" name="password" class="form-control" id="password" required="">
                                     </div>
                                     <div class="col-xs-6 form-group wow fadeInUp animated">
                                         <button class="btn" id="btn-add" type="submit" name="add">Agregar investigador</button>
