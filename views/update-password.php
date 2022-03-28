@@ -229,7 +229,8 @@ $ManageNewPassword= new manageNewPassword();
 $user = $_POST['user'];
 $password = $_POST['password'];
 $passwordCheck = $_POST['passwordnew'];
-$passHash = password_hash($password, PASSWORD_BCRYPT);
+#$passHash = password_hash($password, PASSWORD_BCRYPT);
+$passHash = md5($passwordCheck);
 if(empty($password) || empty($passwordCheck) || empty($user)){
     echo '<script language="javascript">alert("Los campos no pueden estar vacíos");</script>';
 }else{

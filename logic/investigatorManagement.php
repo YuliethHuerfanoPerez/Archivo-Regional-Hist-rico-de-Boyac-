@@ -4,7 +4,7 @@ include_once '../db/database.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'C:\xampp\composer\vendor\autoload.php';
+#require 'C:\xampp\composer\vendor\autoload.php';
 
 class investigatorManagement extends Database{
 

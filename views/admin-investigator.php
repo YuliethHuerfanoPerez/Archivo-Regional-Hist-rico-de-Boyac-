@@ -15,7 +15,9 @@
         $emailResearcher = $_POST['emailResearcher'];
         $phone = $_POST['phone'];
         $newPassword = $investigatorManagement->generatePassword();
-        $passHash = password_hash($newPassword, PASSWORD_BCRYPT);
+        echo $newPassword;
+        $passHash  = md5($newPassword);
+        #$passHash = password_hash($newPassword, PASSWORD_BCRYPT);
         if(empty($idResearcher) || empty($nameResearcher) || empty($lastNameResearcher) || empty($emailResearcher) || empty($newPassword) || empty($phone)){
             $researcher = "Credenciales invalidas, Por favor intentalo nuevamente"; 
             echo '<script language="javascript">alert("Las credenciales son inválidas, el investigador no fue registrado");</script>';

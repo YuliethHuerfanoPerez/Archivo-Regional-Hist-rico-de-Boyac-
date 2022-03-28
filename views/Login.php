@@ -26,7 +26,8 @@
                 }else if($_SESSION['rolUser'] == "102"){
                     include_once 'personal-news.php';
                 }else{
-                    include_once 'privateFiles.php';
+                    #include_once 'privateFiles.php';
+                    include_once 'investigator-files.php';
                 }     
             }else{
               include_once 'Loginv.php';  
