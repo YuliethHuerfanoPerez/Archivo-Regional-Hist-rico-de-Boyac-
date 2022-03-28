@@ -29,7 +29,7 @@
                 $nombrerespuesta = "Archivo Historico Regional de Boyaca";
                 $texto = 'Su cuenta en el Archivo Hist&oacute;rico Regional de Boyac&aacute; ha sido creada exitosamente, sus credenciales de acceso son:'."\n".'contraseña-> '.$newPassword."\n".'usuario-> '.$emailResearcher.'No olvide cambiar su contraseña al acceder en el apartado Cambiar contraseña.';
                 $texto2 = "Cuenta creada con éxito";
-                $investigatorManagement->sendMail($emailResearcher, $nameResearcher, $direccionrespuesta, $nombrerespuesta, $texto, $texto2);
+              //  $investigatorManagement->sendMail($emailResearcher, $nameResearcher, $direccionrespuesta, $nombrerespuesta, $texto, $texto2);
             }
         }
     }
@@ -47,11 +47,11 @@
         $idupdate=$_POST['idInvestigator'];
         $newUpdate= $investigatorManagement->searchNewId($idupdate);
         foreach($newUpdate as $i){
-            $newId= $i['id'];
-            $newname= $i['nameResearcher'];
-            $newlastName= $i['lastNameResearcher'];
-            $newemail= $i['user'];
-            $newPassword=$i['password'];
+            $newId= $i['cedula'];
+            $newname= $i['nombre'];
+            $newlastName= $i['apellido'];
+            $newemail= $i['email'];
+            $newPassword=$i['contraseña'];
             $newPhone=$i['celular'];
         }
     }
@@ -116,11 +116,11 @@
         </div>
     </div>
     <!-- =============== nav =============== -->
-    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top" >
+    <!--<nav id="mainNav" class="navbar navbar-default navbar-fixed-top" >
         <div class="container" >
             <div class="container-fluid" style="background-color: #1EA078;"> 
                 <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
+                <!--div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
@@ -133,7 +133,7 @@
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
 
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <!--<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
 						<li>
                             <a class="page-scroll" href="admin-news.php">Noticias</a>
@@ -154,10 +154,10 @@
                 </div>
                 <!-- =============== navbar-collapse =============== -->
 
-           </div>
+          <!-- </div>
         </div>
         <!-- =============== container-fluid =============== -->
-    </nav>
+    <!--</nav>-->
     <BR></BR>
     <BR></BR>
     <BR></BR>
@@ -199,27 +199,24 @@
                             <div class="col-sm-12 izq wow fadeInDown animated" data-wow-delay=".1s">
                                 <div class="ajax-hidden">
                                     <div class="col-xs-12 form-group wow fadeInUp animated" style="text-align:center"> 
-                                        <label><?php echo ("Datos del investigador ".$researcher['nameResearcher']." ".$researcher['lastNameResearcher'])?></label> 
+                                        <label><?php echo ("Datos del investigador ".$researcher['nombre']." ".$researcher['apellido'])?></label> 
                                     </div>
                                     <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <label ><?php echo ("Usuario: ".$researcher['user'])?></label> 
+                                        <label ><?php echo ("Usuario: ".$researcher['email'])?></label> 
                                     </div>
                                     <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <label ><?php echo ("Identificaci&oacute;n: ".$researcher['id'])?></label> 
+                                        <label ><?php echo ("Identificaci&oacute;n: ".$researcher['cedula'])?></label> 
                                     </div>
                                     <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <label ><?php echo ("Nombre: ".$researcher['nameResearcher'])?></label> 
+                                        <label ><?php echo ("Nombre: ".$researcher['nombre'])?></label> 
                                     </div>
                                     <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <label ><?php echo ("Apellido: ".$researcher['lastNameResearcher'])?></label> 
+                                        <label ><?php echo ("Apellido: ".$researcher['apellido'])?></label> 
                                     </div>
                                     <div class="col-xs-12 form-group wow fadeInUp animated">
                                         <label ><?php echo ("Teléfono: ".$researcher['celular'])?></label> 
                                     </div>
-                                    <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <label ><?php echo ("Contraseña: ".$researcher['password'])?></label> 
-                                    </div>
-                                    <input  name="idInvestigator" type="hidden" value="<?php echo ($researcher['id'])?>">
+                                    <input  name="idInvestigator" type="hidden" value="<?php echo ($researcher['cedula'])?>">
                                     <div class="col-xs-4 form-group wow fadeInUp animated">
                                         <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit" name="deleteResearcher" ><i class="fa fa-trash" ></i></button>
                                     </div>
@@ -242,21 +239,21 @@
                                         <label><?php echo ("Investigador N° ".$num)?></label> 
                                     </div>
                                     <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <label ><?php echo ("Usuario: ".$i['user'])?></label> 
+                                        <label ><?php echo ("Usuario: ".$i['email'])?></label> 
                                     </div>
                                     <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <label ><?php echo ("Identificaci&oacute;n: ".$i['id'])?></label> 
+                                        <label ><?php echo ("Identificaci&oacute;n: ".$i['cedula'])?></label> 
                                     </div>
                                     <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <label ><?php echo ("Nombre: ".$i['nameResearcher'])?></label> 
+                                        <label ><?php echo ("Nombre: ".$i['nombre'])?></label> 
                                     </div>
                                     <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <label ><?php echo ("Apellido: ".$i['lastNameResearcher'])?></label> 
+                                        <label ><?php echo ("Apellido: ".$i['apellido'])?></label> 
                                     </div>
                                     <div class="col-xs-12 form-group wow fadeInUp animated">
                                         <label ><?php echo ("Telefono: ".$i['celular'])?></label> 
                                     </div>
-                                        <input  name="idInvestigator" type="hidden" value="<?php echo ($i['id'])?>">
+                                        <input  name="idInvestigator" type="hidden" value="<?php echo ($i['cedula'])?>">
                                     <div class="col-xs-4 form-group wow fadeInUp animated">
                                         <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit" name="deleteResearcher" ><i class="fa fa-trash" ></i></button>
                                     </div>
