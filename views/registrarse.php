@@ -95,17 +95,27 @@
                             <div class="timg2"><img src="../assets/img/logo.png" style="max-width: 20%;"/></div>
                             <br>
                         
-                            <form  action="" method="POST">
+                            <form  action="../logic/solicitud.php" method="POST">
                                 <div class="ajax-hidden">
-                                    <div data-wow-delay=".1s" class="col-xs-8 col-sm-8 col-sm-offset-2 form-group wow fadeInUp animated">
+                                    <div  data-wow-delay=".1s" class="col-xs-8 col-sm-3 col-sm-offset-2 form-group wow fadeInUp animated">
+                                        <select class="form-control" name="typeDoc" id="typeDoc" >
+                                            
+                                            <option value="CC">CC - Cedula de ciudadania</option>
+                                            <option value="CE">CE - Cedula de extranjeria</option>
+                                            <option value="NIP">NIP - Numero de identificacion personal</option>
+                                            <option value="TI">TI - Tarjeta de identidad</option>
+                                            <option value="PAP">PAP - Pasaporte</option>
+                                        </select>
+                                    </div>
+                                    <div data-wow-delay=".1s" class="col-xs-8 col-sm-5 col-sm-offset-0 form-group wow fadeInUp animated">
                                         <label for="c_cedula" class="sr-only">Cedula</label>
                                         <input type="number" placeholder="Cedula" name="cedula" class="form-control" id="cedula"  required>
                                     </div>
-                                    <div class="col-xs-4 col-sm-4 col-sm-offset-2 form-group wow fadeInUp animated">
+                                    <div class="col-xs-8 col-sm-4 col-sm-offset-2 form-group wow fadeInUp animated">
                                         <label for="c_name" class="sr-only">Nombre</label>
                                         <input type="text" placeholder="Nombre" name="name" class="form-control" id="name" required>
                                     </div>
-                                    <div class="col-xs-4 col-sm-4 col-sm-offset-0 form-group wow fadeInUp animated">
+                                    <div class="col-xs-8 col-sm-4 col-sm-offset-0 form-group wow fadeInUp animated">
                                         <label for="c_lastname" class="sr-only">Apellidos</label>
                                         <input type="text" placeholder="Apellidos" name="lastname" class="form-control" id="lastname"  required>
                                     </div>
@@ -117,10 +127,6 @@
                                         <label for="c_email" class="sr-only">Correo electronico</label>
                                         <input type="email" placeholder="Correo electornico" name="email" class="form-control" id="email"  required>
                                     </div>
-                                    <div data-wow-delay=".1s" class="col-xs-8 col-sm-8 col-sm-offset-2 form-group wow fadeInUp animated">
-                                        <label for="c_user" class="sr-only">Usuario</label>
-                                        <input type="user" placeholder="Usuario" name="user" class="form-control" id="user"  required>
-                                    </div>
                                     <div data-wow-delay=".1s" class="col-xs-8 col-sm8 col-sm-offset-2 form-group wow fadeInUp animated">
                                         <label for="c_password" class="sr-only">Contraseña</label>
                                         <input type="password" placeholder="Contraseña" name="password" class="form-control" id="password"  required>
@@ -130,7 +136,7 @@
                                         <input type="password" placeholder="Repita la contraseña" name="password1" class="form-control" id="password1"  required>
                                     </div>
                                     <div  data-wow-delay=".1s" class="col-xs-8 col-sm-8 col-sm-offset-2 form-group wow fadeInUp animated">
-                                        <select class="form-control" id="type">
+                                        <select class="form-control" name="type" id="type" >
                                             <option selected>Tipo de usuario</option>
                                             <option value="101">Administrador</option>
                                             <option value="102">Funcionario</option>
