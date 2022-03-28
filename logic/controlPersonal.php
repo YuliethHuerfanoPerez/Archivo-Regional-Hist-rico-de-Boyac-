@@ -61,8 +61,7 @@
             <th scope="col">Apellido</th>
             <th scope="col">Celular</th>
             <th scope="col">Correo</th>
-            <th scope="col">Nombre Usuario</th>
-            <th scope="col">Contraseña</th>
+            <!-- <th scope="col">Contraseña</th> -->
             <th scope="col">Cargo</th>
           </tr>
         </thead>
@@ -87,8 +86,7 @@
             <th scope="col">Apellido</th>
             <th scope="col">Celular</th>
             <th scope="col">Correo</th>
-            <th scope="col">Nombre Usuario</th>
-            <th scope="col">Contraseña</th>
+            <!-- <th scope="col">Contraseña</th> -->
             <th scope="col">Cargo</th>
           </tr>
         </thead>
@@ -142,25 +140,18 @@
                                         <input type="number" placeholder="Celular" name="celular" class="form-control" id="celular" value="<?php echo $mostrar['celular'];?>">
                                     </div>
                                     <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <input type="text" placeholder="Corrreo@electronico.com" name="email" class="form-control" value="<?php echo $mostrar['email'];?>">
-                                    </div>
-                                    <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <input type="text" placeholder="Nombre Usuario" name="nombreUsuario" class="form-control"  value="<?php echo $mostrar['nombreUsuario'];?>">
-                                    </div>
-                                    <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <input type="text" placeholder="Contraseña" name="contrasena" class="form-control"value="<?php echo $mostrar['contraseña'];?>">
+                                        <input type="email" placeholder="Corrreo@electronico.com" name="email" class="form-control" value="<?php echo $mostrar['email'];?>">
                                     </div>
                                     <div class="col-xs-12 form-group wow fadeInUp animated">
                                         
-                                        <select name="cargo" id="">
-                                            <option selected>
-                                            <?php 
+                                        <select name="cargo" id="" required>
+                                            <option selected <?php 
                                               if($mostrar['cargo'] == '101'){
                                                 echo 'Administrador';
                                               }else{
                                                 echo 'Funcionario';
                                               }
-                                              ?>
+                                              ?>>
                                             </option>
                                             <option value='101'>Administrador</option>
                                             <option value='102'>Funcionario</option>
@@ -189,10 +180,10 @@
         $apellido = $_POST['apellido'];
         $celular = $_POST['celular'];
         $email = $_POST['email'];
-        $nombreUsuario = $_POST['nombreUsuario'];
-        $contrasena = $_POST['contrasena'];
+        // $nombreUsuario = $_POST['nombreUsuario'];
+        // $contrasena = $_POST['contrasena'];
         $cargo = $_POST['cargo'];
-        $personal->modifyUsuario($nombre,$apellido,$celular,$email,$nombreUsuario,$contrasena,$cargo,$cedula);
+        $personal->modifyUsuario($nombre,$apellido,$celular,$email,$cargo,$cedula);
       ?>
       <div class="alert" role="alert" style="background-color: #1EA078;">
         <h5 style="color: white;">El usuario con cedula: <?php echo $cedula; ?> se actualizo Satisfactoriamente!</h5>

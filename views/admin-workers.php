@@ -143,6 +143,7 @@
                                 </table>                                   
                                 </div>
                             </form>
+                            
                         </div>
                         <div class="col-sm-12 izq wow fadeInDown animated" data-wow-delay=".1s">
                             <form action="../logic/controlPersonal.php" method="post">
@@ -192,14 +193,11 @@
                                         <input type="number" placeholder="Celular" name="celular" class="form-control" id="celular" required>
                                     </div>
                                     <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <input type="text" placeholder="Corrreo@electronico.com" name="email" class="form-control" id="email">
+                                        <input type="email" placeholder="Corrreo@electronico.com" name="email" class="form-control" id="email">
                                     </div>
-                                    <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <input type="text" placeholder="Nombre Usuario" name="nombreUsuario" class="form-control" id="nombreUsuario" required>
-                                    </div>
-                                    <div class="col-xs-12 form-group wow fadeInUp animated">
-                                        <input type="text" placeholder="Contraseña" name="contrasena" class="form-control" id="contrasena" required>
-                                    </div>
+                                    <!-- <div class="col-xs-12 form-group wow fadeInUp animated">
+                                        <input type="text" placeholder="Contraseña" name="contrasena" class="form-control" id="contrasena" disabled>
+                                    </div> -->
                                     <div class="col-xs-12 form-group wow fadeInUp animated">
                                         
                                         <select name="cargo" id="" required>
@@ -213,7 +211,7 @@
                             </form>
                         </div>				   
 				     </div>
-				                  
+                                 
 				
 			</div>
 		</div>
