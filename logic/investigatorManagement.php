@@ -1,10 +1,6 @@
 <?php
 
 include_once '../db/database.php';
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-#require 'C:\xampp\composer\vendor\autoload.php';
 
 class investigatorManagement extends Database{
 
@@ -89,34 +85,46 @@ class investigatorManagement extends Database{
         $query-> execute([$name, $lastName, $email, $password, $phone, $id]);
     }
 
-    function sendMail($direccionenvio, $nombreenvio, $direccionrespuesta, $nombrerespuesta, $texto, $texto2){
+    function sendMail($contrasena,$direccion,$name){
         /*Esta funcion para que funcione, requiere tener instalado en el servidor php la clase phpmailer para que funcione correctamente*/
-        $mail=new PHPMailer(true);
-        $mail->IsSMTP(); 
-        $mail->IsHTML(true);
-        $mail->SMTPAuth = true; // requiere usuario y contraseña
-        $mail->SMTPSecure = ""; // tipo de seguridad
-        $mail->Host = "smtp.gmail.com"; // servidor smtp de envio de correo
-        $mail->Port = 587; // puerto de salida
-        $mail->Username = "yulieth.huerfano@uptc.edu.co"; // usuario
-        $mail->Password = "CristinaHuerfano072501"; // contraseña
-        $mail->From = "yulieth.huerfano@uptc.edu.co"; // direccion de quien envia
-        $mail->FromName = "Archivo Historico Regional de Boyaca"; //nombre del emisor
-        $mail->Subject = "Confirmacion de creacion de cuenta de investigador"; //asunto
-        $mail->Body = $texto; //mensaje
-        $mail->MsgHTML = $texto;
-        $mail->AltBody = $texto;
-        $mail->Altbody = $texto2; //mensaje si no se puede leer como html
-        $mail->WordWrap = 50; 
-        $mail->AddAddress($direccionenvio, $nombreenvio); // a quien se envia
-        $mail->AddReplyTo($direccionrespuesta, $nombrerespuesta); //respuesta
+        $destino=$direccion;
+    
+        $cuerpo = '
+        
+        <!DOCTYPE html>
+        <html>
+        <head>
+         <title> Confirmación cuenta</title>
+         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>  
+           </head>
+           <body>
+           <h1>Su cuenta para el archivo historico regional se Boyacá se ha creado exitosamente</h1>
+           <p>Para poder acceder por medio de la pagina web use las siguientes credenciales:</p>
+           <p>Correo: '.$direccion.'</p>
+           <p>Contraseña: '.$contrasena.'</p>
+           <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+           </html>';
+    
+        //para el envío en formato HTML
+        $headers  = "MIME-Version: 1.0\r\n";
+        $headers .= "Content-type: text/html; charset=UTF-8\r\n";
+    
+        //dirección del remitente
+        $headers .= "From: ".$name." <"."jhonaparicio2000@hotmail.com".">\r\n";
+    
+        //Una Dirección de respuesta, si queremos que sea distinta que la del remitente
+        $headers .= "Reply-To: "."jhonaparicio2000@hotmail.com"."\r\n";
+    
+        mail($destino,"Solicitud archivo historico regional",$cuerpo,$headers);
+
         //$mail->SMTPDebug = true;
-        if(!$mail->Send()) 
-        {
-        echo "Error en el envio: " . $mail->ErrorInfo;
-        } else {
-        echo "<P>Mensaje enviado correctamente</P>";
-        }
+        //if(!$mail->Send()) 
+        //{
+        //echo "Error en el envio: " . $mail->ErrorInfo;
+        //} else {
+        //echo "<P>Mensaje enviado correctamente</P>";
+        //}
     }
 
 }

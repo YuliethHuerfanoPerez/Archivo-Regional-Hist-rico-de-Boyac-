@@ -15,7 +15,7 @@
         $emailResearcher = $_POST['emailResearcher'];
         $phone = $_POST['phone'];
         $newPassword = $investigatorManagement->generatePassword();
-        echo $newPassword;
+        //echo $newPassword;
         $passHash  = md5($newPassword);
         #$passHash = password_hash($newPassword, PASSWORD_BCRYPT);
         if(empty($idResearcher) || empty($nameResearcher) || empty($lastNameResearcher) || empty($emailResearcher) || empty($newPassword) || empty($phone)){
@@ -27,11 +27,11 @@
             }else{
                 $researcher= $investigatorManagement->addResearcher($idResearcher, $nameResearcher, $lastNameResearcher, $emailResearcher, $passHash, $phone);
                 echo '<script language="javascript">alert("Investigador registrado con éxito");</script>';
-                $direccionrespuesta = "yulieth.huerfano@uptc.edu.co";
+                
                 $nombrerespuesta = "Archivo Historico Regional de Boyaca";
                 $texto = 'Su cuenta en el Archivo Hist&oacute;rico Regional de Boyac&aacute; ha sido creada exitosamente, sus credenciales de acceso son:'."\n".'contraseña-> '.$newPassword."\n".'usuario-> '.$emailResearcher.'No olvide cambiar su contraseña al acceder en el apartado Cambiar contraseña.';
                 $texto2 = "Cuenta creada con éxito";
-              //  $investigatorManagement->sendMail($emailResearcher, $nameResearcher, $direccionrespuesta, $nombrerespuesta, $texto, $texto2);
+                $investigatorManagement->sendMail($newPassword,$emailResearcher,$nameResearcher);
             }
         }
     }
@@ -58,8 +58,13 @@
         }
     }
     if (isset($_POST['search'])){
-        $showSearch=true;
+        
         $researcher= $investigatorManagement->searchById($_POST['identificacion']);
+        if($researcher!=null){
+            $showSearch=true;
+        }else{
+            echo '<script language="javascript">alert("El investigador con el id: '.$_POST['identificacion'].' No existe");</script>';
+        }
     }
     if (isset($_POST['updateResearcher'])){
         $idResearcher=$_POST['id'];
