@@ -58,13 +58,37 @@
         }
     }
     if (isset($_POST['search'])){
-        
-        $researcher= $investigatorManagement->searchById($_POST['identificacion']);
+        $idToSearch = $_POST['identificacion'];
+        $researcher= $investigatorManagement->searchById($idToSearch);
         if($researcher!=null){
             $showSearch=true;
         }else{
             echo '<script language="javascript">alert("El investigador con el id: '.$_POST['identificacion'].' No existe");</script>';
         }
+    }
+    if (isset($_POST['deleteResearcher1'])){
+        echo '<script language="javascript">alert("El investigador con el id: '.$idToSearch.'");</script>';
+        $delete = $investigatorManagement->deleteResearcher($_POST['idInvestigator1']);
+        $researcherEmpty=$delete;
+        if($delete){
+            echo '<script language="javascript">alert("El investigador seleccionado fue eliminado con éxito");</script>';
+        }else{
+            
+        }
+    }
+    if (isset($_POST['update1'])){
+        $update=true;
+        $idupdate=$_POST['idInvestigator1'];
+        $newUpdate= $investigatorManagement->searchNewId($idupdate);
+        foreach($newUpdate as $i){
+            $newId= $i['cedula'];
+            $newname= $i['nombre'];
+            $newlastName= $i['apellido'];
+            $newemail= $i['email'];
+            $newPassword=$i['contraseña'];
+            $newPhone=$i['celular'];
+        }
+
     }
     if (isset($_POST['updateResearcher'])){
         $idResearcher=$_POST['id'];
@@ -204,6 +228,7 @@
                             if($showSearch){
                         ?>
                             <div class="col-sm-12 izq wow fadeInDown animated" data-wow-delay=".1s">
+                            <form action="" method="POST">
                                 <div class="ajax-hidden">
                                     <div class="col-xs-12 form-group wow fadeInUp animated" style="text-align:center"> 
                                         <label><?php echo ("Datos del investigador ".$researcher['nombre']." ".$researcher['apellido'])?></label> 
@@ -223,14 +248,15 @@
                                     <div class="col-xs-12 form-group wow fadeInUp animated">
                                         <label ><?php echo ("Teléfono: ".$researcher['celular'])?></label> 
                                     </div>
-                                    <input  name="idInvestigator" type="hidden" value="<?php echo ($researcher['cedula'])?>">
+                                    <input  name="idInvestigator1" type="hidden" value="<?php echo ($researcher['cedula'])?>">
                                     <div class="col-xs-4 form-group wow fadeInUp animated">
-                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit" name="deleteResearcher" ><i class="fa fa-trash" ></i></button>
+                                        <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit" name="deleteResearcher1" ><i class="fa fa-trash" ></i></button>
                                     </div>
                                     <div class="col-xs-4 form-group wow fadeInUp animated">
                                         <button data-wow-delay=".3s" class="btn btn-sm btn-block wow fadeInUp animated" type="submit" name="update1"><i class="fa fa-refresh"></i></button>
                                     </div>
                                 </div>
+                            </form>
                             </div>
                         <?php
                         }else{
